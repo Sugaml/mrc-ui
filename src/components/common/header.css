@@ -1,0 +1,14 @@
+.header-parent{
+    display: flex;
+    justify-content: space-between;
+    color:white; 
+    background-color: #ed017f;
+    padding: 0.5rem;
+    align-items: center;
+}
+
+
+.header-child1 img{
+    width: 5rem;
+    height: auto;
+}
