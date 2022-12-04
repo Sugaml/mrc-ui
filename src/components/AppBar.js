@@ -155,8 +155,11 @@ export const ResponsiveAppBar = ({ children }) => {
                 </Menu>
               </Box>
               <Box sx={{ flexGrow: 0 }}>
-                <Typography variant="contained" sx={{ pr: 5, color: 'red' }}>
+                <Typography variant="contained" sx={{ pr: 2, color: 'red' }}>
                   <Link to="/online" style={{ color: '#FFF', textDecoration: 'none' }} >Online Form</Link>
+                </Typography>
+                <Typography variant="contained" sx={{ pr: 3, color: 'red' }}>
+                  <Link to="/billing" style={{ color: '#FFF', textDecoration: 'none' }} >Billing</Link>
                 </Typography>
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>

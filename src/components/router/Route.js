@@ -11,8 +11,9 @@ import { CourseChoice } from '../CourseChoice';
 import {CustomizedSnackbars} from '../SnackBar'
 import { ForgotPassword } from '../ForgotPassword';
 import { PaymentPopup } from '../PaymentPopup';
-
-
+import { Billing } from '../Billing';
+import {KhaltiPayment} from '../KhaltiPayment';
+ 
 
 const Router = () => {
   return (
@@ -20,11 +21,12 @@ const Router = () => {
       <Routes>
         <Route path='/' element={<SignIn />} />
         <Route path='/signup' element={<SignUp/>}/>
-        <Route index path='/billing' element={<PaymentPopup />} />
+        
         <Route path='/forgot_password' element={<ForgotPassword />} />
         <Route element={<PrivateRoute />}>
         <Route index path='/home' element={<Home />} />
         <Route  path='/online' element={<EnrollForm />} /> 
+        <Route index path='/billing' element={<KhaltiPayment />} />
         <Route path='/coursechoice' element={CourseChoice}/>
         <Route index path='/courses' element={<Course />} />
         
