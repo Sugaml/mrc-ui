@@ -3,7 +3,7 @@ import * as types from "../constant/actionTypes";
 import { postStudentFileInfo } from "../services/login";
 
 
-const studentfileInfo = () => ({
+const studentFileInfo = () => ({
   type: types.STUDENT_FILE_INFO,
 });
 
@@ -17,7 +17,7 @@ const studentFileInfoFailure = () => ({
 });
 
 
-export const studentEducationInfoAction= (studentFileInfoData) => async (dispatch) => {
+export const studentFileInfoAction= (studentFileInfoData) => async (dispatch) => {
   try{
     dispatch(studentFileInfo());
     const response = await postStudentFileInfo(studentFileInfoData, "student/file");

@@ -2,7 +2,11 @@ import * as React from 'react';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
+import { useFormik } from "formik";
 import { FormButton } from './FormButton';
+import { useDispatch, useSelector } from "react-redux";
+import { studentFileInfoAction } from '../action/studentfile';
+import * as Yup from 'yup';
 
 
 export const FileInfo = ({
@@ -11,6 +15,53 @@ export const FileInfo = ({
     handleBack,
     handleNext,
     steps }) => {
+        const handleNext3 = () => {
+            setActiveStep(activeStep + 1);
+        };
+        const studentFileInfo = useSelector((state) => state.StudenFileInfo.studentFileInfo);
+        console.log("state loading file",studentFileInfo)
+        const dispatch = useDispatch();
+    
+        const formik = useFormik({
+            initialValues: {
+                seeTranscript: "",
+                seeCharacter: "",
+                marksheet:"",
+                character:"",
+                migration:"",
+                photo:"",
+                signature:"",
+            },
+    
+            validationSchema: Yup.object({
+                seeTranscript: Yup.string().required("required SEE marksheet"),
+                seeCharacter: Yup.string().required("required SEE character certificate"),
+                marksheet:Yup.string().required("required Certificate marksheet"),
+                character:Yup.string().required("required Certificate character"),
+                migration:Yup.string().required("required Certificate migration"),
+                photo: Yup.string().required("required student photo"),
+                signature: Yup.string().required("required student signature"),
+            }),
+    
+            onSubmit: (handleNext) => {
+                console.log('Inside address onsubmit.....')
+                const studentFileInfoData= {
+                    "see_transcript":formik.values.seeTranscript,
+                    "see_character":formik.values.seeCharacter,
+                    "certificate_transcript":formik.values.marksheet,
+                    "certificate_character":formik.values.character,
+                    "certificate_migration":formik.values.migration,
+                    "citizenship_front":"",
+                    "citizenship_back":"",
+                    "photo":"",
+                    "signatue":"",
+                    "student_id":"1"
+                    }
+                console.log(studentFileInfoData)
+                handleNext3();
+                dispatch(studentFileInfoAction(studentFileInfoData))
+            }
+        });
     return (
         <React.Fragment>
             <Grid container spacing={3}>
