@@ -3,7 +3,7 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import { useFormik } from "formik";
-import { FormButton } from './FormButton';
+import Button from '@mui/material/Button';
 import { useDispatch, useSelector } from "react-redux";
 import { studentFileInfoAction } from '../action/studentfile';
 import * as Yup from 'yup';
@@ -15,11 +15,12 @@ export const FileInfo = ({
     handleBack,
     handleNext,
     steps }) => {
-        const handleNext3 = () => {
+        const handleSuccess = () => {
             setActiveStep(activeStep + 1);
         };
-        const studentFileInfo = useSelector((state) => state.StudenFileInfo.studentFileInfo);
-        console.log("state loading file",studentFileInfo)
+        // const studentFileInfo = useSelector((state) => state.StudenFileInfo.studentFileInfo);
+        const studentInfo = useSelector((state) => state.StudentInfo.studentInfo);
+        // console.log("state loading file",studentFileInfo)
         const dispatch = useDispatch();
     
         const formik = useFormik({
@@ -55,15 +56,16 @@ export const FileInfo = ({
                     "citizenship_back":"",
                     "photo":"",
                     "signatue":"",
-                    "student_id":"1"
+                    "student_id":studentInfo.data.ID,
                     }
                 console.log(studentFileInfoData)
-                handleNext3();
+                handleSuccess();
                 dispatch(studentFileInfoAction(studentFileInfoData))
             }
         });
     return (
-        <React.Fragment>
+        <form onSubmit={formik.handleSubmit}>
+            <div>
             <Grid container spacing={3}>
                 <Grid item xs={12} >
                     <Typography variant="h6" gutterBottom>
@@ -71,13 +73,18 @@ export const FileInfo = ({
                     </Typography>
                     <TextField
                         required
-                        id="seemarksheet"
-                        name="seemarksheet"
+                        id="seeTranscript"
+                        name="seeTranscript"
                         fullWidth
                         autoComplete="given-name"
                         accept="image/*"
                         multiple type="file"
                         variant="outlined"
+                        value={formik.values.seeTranscript}
+                        error={formik.touched.seeTranscript && formik.errors.seeTranscript ? true : false}
+                        helperText={formik.errors.seeTranscript}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
                     />
                 </Grid>
                 <Grid item xs={12} >
@@ -86,13 +93,18 @@ export const FileInfo = ({
                     </Typography>
                     <TextField
                         required
-                        id="seecharacter"
-                        name="seecharacter"
+                        id="seeCharacter"
+                        name="seeCharacter"
                         fullWidth
                         autoComplete="given-name"
                         accept="image/*"
                         multiple type="file"
                         variant="outlined"
+                        value={formik.values.seeCharacter}
+                        error={formik.touched.seeCharacter && formik.errors.seeCharacter ? true : false}
+                        helperText={formik.errors.seeCharacter}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
                     />
                 </Grid>
                 <Grid item xs={12} >
@@ -108,6 +120,11 @@ export const FileInfo = ({
                         accept="image/*"
                         multiple type="file"
                         variant="outlined"
+                        value={formik.values.marksheet}
+                        error={formik.touched.marksheet && formik.errors.marksheet ? true : false}
+                        helperText={formik.errors.marksheet}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
                     />
                 </Grid>
                 <Grid item xs={12} >
@@ -123,6 +140,11 @@ export const FileInfo = ({
                         accept="image/*"
                         multiple type="file"
                         variant="outlined"
+                        value={formik.values.character}
+                        error={formik.touched.character && formik.errors.character ? true : false}
+                        helperText={formik.errors.character}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
                     />
                 </Grid>
                 <Grid item xs={12} >
@@ -138,6 +160,11 @@ export const FileInfo = ({
                         accept="image/*"
                         multiple type="file"
                         variant="outlined"
+                        value={formik.values.migration}
+                        error={formik.touched.migration && formik.errors.migration ? true : false}
+                        helperText={formik.errors.migration}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
                     />
                 </Grid>
                 <Grid item xs={12} >
@@ -153,6 +180,11 @@ export const FileInfo = ({
                         accept="image/*"
                         multiple type="file"
                         variant="outlined"
+                        value={formik.values.photo}
+                        error={formik.touched.photo && formik.errors.photo ? true : false}
+                        helperText={formik.errors.photo}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
                     />
                 </Grid>
                 <Grid item xs={12} >
@@ -161,23 +193,36 @@ export const FileInfo = ({
                     </Typography>
                     <TextField
                         required
-                        id="photo"
-                        name="photo"
+                        id="signature"
+                        name="signature"
                         fullWidth
                         autoComplete="given-name"
                         accept="image/*"
                         multiple type="file"
                         variant="outlined"
+                        value={formik.values.signature}
+                        error={formik.touched.signature && formik.errors.signature ? true : false}
+                        helperText={formik.errors.signature}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
                     />
                 </Grid>
-                <Grid item sx={{ display: 'flex', justifyContent: 'flex-end' }} xs={12} >
-                    <FormButton
-                        activeStep={activeStep}
-                        handleBack={handleBack}
-                        handleNext={handleNext}
-                        steps={steps} />
-                </Grid>
+                <Grid item sx={{ display: 'flex', justifyContent: 'flex-end' }} xs={12}>
+                        {activeStep !== 0 && (
+                            <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
+                                Back
+                            </Button>
+                        )}
+                        <Button
+                            type='submit'
+                            variant="contained"
+                            sx={{ mt: 3, ml: 1 }}
+                        >
+                            {activeStep === steps.length - 1 ? 'Submit' : 'Next'}
+                        </Button>
+                    </Grid>
             </Grid>
-        </React.Fragment>
+            </div>
+        </form>
     );
 }

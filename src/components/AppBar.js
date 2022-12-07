@@ -37,7 +37,7 @@ const pages = [
   }
 ];
 
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Profile', 'Account', 'Billing', 'Logout'];
 const programs = [
   {
     name: 'Bachelor of Inforamtion and Communication Technology',
@@ -81,6 +81,12 @@ export const ResponsiveAppBar = ({ children }) => {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const handleSettingMenu = (handleKeys) =>(event)=> {
+    setAnchorElUser(null);
+    if (!handleKeys) return
+    navigate("/"+handleKeys.toLowerCase())
   };
 
   const handleOpenProgramsMenu=(event)=>{
@@ -183,7 +189,7 @@ export const ResponsiveAppBar = ({ children }) => {
                   onClose={handleCloseUserMenu}
                 >
                   {settings.map((setting) => (
-                    <MenuItem key={setting} onClick={handleCloseUserMenu} >
+                    <MenuItem key={setting} onClick={handleSettingMenu(setting)} >
                       <Typography textAlign="center">{setting}</Typography>
                     </MenuItem>
                   ))}

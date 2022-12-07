@@ -10,9 +10,8 @@ import { BictCourse } from '../BictCourse';
 import { CourseChoice } from '../CourseChoice';
 import {CustomizedSnackbars} from '../SnackBar'
 import { ForgotPassword } from '../ForgotPassword';
-import { PaymentPopup } from '../PaymentPopup';
-import { Billing } from '../Billing';
 import {KhaltiPayment} from '../KhaltiPayment';
+import { Profile } from '../Profile';
  
 
 const Router = () => {
@@ -21,10 +20,12 @@ const Router = () => {
       <Routes>
         <Route path='/' element={<SignIn />} />
         <Route path='/signup' element={<SignUp/>}/>
+        <Route path='/logout' element={<SignUp/>}/>
         
         <Route path='/forgot_password' element={<ForgotPassword />} />
         <Route element={<PrivateRoute />}>
         <Route index path='/home' element={<Home />} />
+        <Route path='/profile' element={<Profile/>}/>
         <Route  path='/online' element={<EnrollForm />} /> 
         <Route index path='/billing' element={<KhaltiPayment />} />
         <Route path='/coursechoice' element={CourseChoice}/>

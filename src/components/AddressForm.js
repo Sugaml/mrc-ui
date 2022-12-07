@@ -20,57 +20,59 @@ export const AddressForm = (
         setActiveStep(activeStep + 1);
     };
     const studentAddressInfo = useSelector((state) => state.StudentAddressInfo.studentAddressInfo);
-    console.log("state address loading ",studentAddressInfo)
+    const studentInfo = useSelector((state) => state.StudentInfo.studentInfo);
+    console.log("student log in address ::", studentInfo)
+    console.log("state address loading ", studentAddressInfo)
     const dispatch = useDispatch();
 
     const formik = useFormik({
         initialValues: {
             provience: "",
             district: "",
-            municipality:"",
-            street:"",
-            wardNum:"",
-            houseNumber:"",
+            municipality: "",
+            street: "",
+            wardNum: "",
+            houseNumber: "",
 
-            tprovience:"",
+            tprovience: "",
             tdistrict: "",
-            tmunicipality:"",
-            tstreet:"",
-            twardNum:"",
-            thouseNumber:"",
+            tmunicipality: "",
+            tstreet: "",
+            twardNum: 0,
+            thouseNumber: "",
         },
 
         validationSchema: Yup.object({
             provience: Yup.string().required("please select provience"),
             district: Yup.string().required("please select district"),
-            municipality:Yup.string().required("please select municipality"),
-            street:Yup.string().required("required street"),
-            wardNum:Yup.string().required("required ward number"),
+            municipality: Yup.string().required("please select municipality"),
+            street: Yup.string().required("required street"),
+            wardNum: Yup.number().required("required ward number"),
             tprovience: Yup.string().required("please select county"),
             tdistrict: Yup.string().required("please select state"),
-            tmunicipality:Yup.string().required("please select municipality"),
-            tstreet:Yup.string().required("required street"),
-            twardNum:Yup.string().required("required ward number"),
+            tmunicipality: Yup.string().required("please select municipality"),
+            tstreet: Yup.string().required("required street"),
+            twardNum: Yup.number().required("required ward number"),
         }),
 
         onSubmit: (handleNext) => {
             console.log('Inside address onsubmit.....')
-            const studetAddressInfoData={
-                "provience":formik.values.provience,
-                "district":formik.values.district,
-                "municipality":formik.values.municipality,
-                "street":formik.values.street,
-                "ward_number":formik.values.wardNum,
-                "house_number":formik.values.house_number,
-                "tprovience":formik.values.tprovience,
-                "tdistrict":formik.values.tdistrict,
-                "tmunicipality":formik.values.tmunicipality,
-                "tstreet":formik.values.tstreet,
-                "tward_number":formik.values.twardNum,
-                "thouse_number":formik.values.thouse_number,
-                "student_id":"1"
+            const studetAddressInfoData = {
+                "provience": formik.values.provience,
+                "district": formik.values.district,
+                "municipality": formik.values.municipality,
+                "street": formik.values.street,
+                "ward_number": parseInt(formik.values.wardNum),
+                "house_number": formik.values.house_number,
+                "tprovience": formik.values.tprovience,
+                "tdistrict": formik.values.tdistrict,
+                "tmunicipality": formik.values.tmunicipality,
+                "tstreet": formik.values.tstreet,
+                "tward_number": parseInt(formik.values.twardNum.number),
+                "thouse_number": formik.values.thouse_number,
+                "student_id": studentInfo.data.ID,
             }
-            console.log("student address info:",studetAddressInfoData)
+            console.log("student address info:", studetAddressInfoData)
             handleNextEducation();
             dispatch(studentAddressInfoAction(studetAddressInfoData))
         }
@@ -84,7 +86,7 @@ export const AddressForm = (
                 <Grid container spacing={3}>
                     <Grid item xs={12} sm={6}>
                         <Typography variant="h6" gutterBottom>
-                           Provience
+                            Provience
                         </Typography>
                         <TextField
                             required
@@ -218,7 +220,7 @@ export const AddressForm = (
                     </Grid>
                     <Grid item xs={12} sm={6}>
                         <Typography variant="h6" gutterBottom>
-                          District
+                            District
                         </Typography>
                         <TextField
                             required
@@ -315,9 +317,8 @@ export const AddressForm = (
                         <Button
                             type='submit'
                             variant="contained"
-                            onClick={handleNext}
                             sx={{ mt: 3, ml: 1 }}
-                            disabled={!formik.values.provience || !formik.values.district 
+                            disabled={!formik.values.provience || !formik.values.district
                             }
                         >
                             {activeStep === steps.length - 1 ? 'Submit' : 'Next'}
