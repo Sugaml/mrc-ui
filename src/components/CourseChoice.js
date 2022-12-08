@@ -137,8 +137,7 @@ export const CourseChoice = () => {
 //   const allCourses = useSelector((state) => state.Courses.courses);
   React.useEffect(()=>{
     dispatch(getAllCourses())
-  },[])
-  
+  },[dispatch])
   const allCourses = useSelector((state) => state.Courses.courses);
    console.log(allCourses)
 
