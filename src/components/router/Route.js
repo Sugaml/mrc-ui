@@ -26,9 +26,9 @@ const Router = () => {
         <Route element={<PrivateRoute />}>
         <Route index path='/home' element={<Home />} />
         <Route path='/profile' element={<Profile/>}/>
-        <Route  path='/online' element={<EnrollForm />} /> 
+        <Route  path='/enroll' element={<EnrollForm />} /> 
         <Route index path='/billing' element={<KhaltiPayment />} />
-        <Route path='/coursechoice' element={CourseChoice}/>
+        <Route path='/online' element={<CourseChoice/>}/>
         <Route index path='/courses' element={<Course />} />
         
         <Route path='/menu' element={<BictCourse />} />

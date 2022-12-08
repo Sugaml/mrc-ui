@@ -31,3 +31,7 @@ export const postRequest =  (requestLoginData, url) => {
   export const postPaymentVerify =  (paymentVerifyData, url) => {
     return  axios.post(`${process.env.REACT_APP_API}/${url}`, paymentVerifyData);
   };
+
+  export const getListCourses =  (header, url) => {
+    return  axios.get(`${process.env.REACT_APP_API}/${url}`);
+  };

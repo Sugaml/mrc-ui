@@ -289,7 +289,7 @@ export const StudentInfo = ({
                     <Button
                         type='submit'
                         variant="contained"
-                        sx={{ mt: 3, ml: 1 }}
+                        sx={{ mt: 3, ml: 1,float:'right' }}
                         disabled={!formik.values.firstName || !formik.values.lastName || !formik.values.gender ||
                             !formik.values.email || !formik.values.mobileNum || !formik.values.parentName
                             || !formik.values.parentRelation || !formik.values.dob || !formik.values.religion ||

@@ -41,7 +41,9 @@ export const KhaltiPayment = () => {
     });
     let config = {
         // replace this key with yours
-        // ::"live_public_key_1a35555e5f0f45b695f94a0f357d99f0"
+      
+        
+        // "publicKey":"live_public_key_1a35555e5f0f45b695f94a0f357d99f0",
         "publicKey": "test_public_key_b048b45bdccb43ba818968273ffd49c4",
         "productIdentity": "123",
         "productName": "Drogon",
@@ -70,7 +72,7 @@ export const KhaltiPayment = () => {
 
     const openPaymentGateway = () => {
         let checkout = new KhaltiCheckout(config);
-        checkout.show({ amount: 1000 });
+        checkout.show({ amount: 300000 });
         
     }
 

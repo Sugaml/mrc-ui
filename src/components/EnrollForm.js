@@ -16,7 +16,7 @@ import { StudentRegister } from './StudentRegister'
 import { StudentLogin } from './StudentLogin'
 import { CourseChoice } from './CourseChoice'
 
-const steps = [ 'Applicant Info', 'Address Info', 'Education Info', 'File Attach'];
+const steps = [ 'General Info', 'Address Info', 'Academic Info', 'Document Attach'];
 
 function getStepContent(activeStep,setActiveStep, steps, handleBack, handleNext) {
   switch (activeStep) {

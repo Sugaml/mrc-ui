@@ -4,9 +4,16 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import { useFormik } from "formik";
 import Button from '@mui/material/Button';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 import { useDispatch, useSelector } from "react-redux";
 import { studentAddressInfoAction } from '../action/studentaddress';
 import * as Yup from 'yup';
+import Proviences from '../json/Proviences';
+import Districts from '../json/Districts';
+import Municipalities from '../json/Municipalities';
 
 export const AddressForm = (
     {
@@ -19,6 +26,10 @@ export const AddressForm = (
     const handleNextEducation = () => {
         setActiveStep(activeStep + 1);
     };
+    const [proviences] = React.useState(Proviences)
+    const [districts] = React.useState(Districts)
+    const [municipalities]=React.useState(Municipalities)
+
     const studentAddressInfo = useSelector((state) => state.StudentAddressInfo.studentAddressInfo);
     const studentInfo = useSelector((state) => state.StudentInfo.studentInfo);
     console.log("student log in address ::", studentInfo)
@@ -88,58 +99,85 @@ export const AddressForm = (
                         <Typography variant="h6" gutterBottom>
                             Provience
                         </Typography>
-                        <TextField
-                            required
-                            id="provience"
-                            name="provience"
-                            label="provience"
-                            value={formik.values.provience}
-                            fullWidth
-                            error={formik.touched.provience && formik.errors.provience ? true : false}
-                            autoComplete="given-name"
-                            variant="outlined"
-                            helperText={formik.errors.provience}
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                        />
+                        <FormControl fullWidth sx={{ m: 0 }} size="large">
+                            <InputLabel id="demo-select-small">Provience</InputLabel>
+                            <Select
+                                labelId="provience"
+                                id="provience"
+                                name="provience"
+                                value={formik.values.provience}
+                                label="Select Provience"
+                                onChange={formik.handleChange}
+                                error={formik.touched.provience && formik.errors.provience ? true : false}
+                                onBlur={formik.handleBlur}
+                                helperText={formik.errors.provience}
+                            >
+                                <MenuItem value="select">
+                                    <em>Select Provience</em>
+                                </MenuItem>
+                                {proviences.proviences.map((item) => (
+                                    <MenuItem value={item.Provinces} > {item.Provinces}</MenuItem>
+                                ))}
+                            </Select>
+                            {formik.touched.gender && formik.errors.gender ? <p style={{ color: '#d32f2f', fontWeight: '400', fontSize: '0.75rem' }}>{formik.errors.gender}</p> : null}
+                        </FormControl>
                     </Grid>
+
                     <Grid item xs={12} sm={6}>
                         <Typography variant="h6" gutterBottom>
                             District
                         </Typography>
-                        <TextField
-                            required
-                            id="district"
-                            name="district"
-                            label="District"
-                            value={formik.values.district}
-                            fullWidth
-                            error={formik.touched.district && formik.errors.district ? true : false}
-                            autoComplete="given-name"
-                            variant="outlined"
-                            helperText={formik.errors.district}
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                        />
+                        <FormControl fullWidth sx={{ m: 0 }} size="large">
+                            <InputLabel id="demo-select-small">District</InputLabel>
+                            <Select
+                                labelId="district"
+                                id="district"
+                                name="district"
+                                value={formik.values.district}
+                                label="Select District"
+                                onChange={formik.handleChange}
+                                error={formik.touched.district && formik.errors.district ? true : false}
+                                onBlur={formik.handleBlur}
+                                helperText={formik.errors.district}
+                            >
+                                <MenuItem value="select">
+                                    <em>Select District</em>
+                                </MenuItem>
+                                {districts.data.filter(district => district.Province === formik.values.provience).map(filteredData => (
+                                    <MenuItem value={filteredData.Name} > {filteredData.Name}</MenuItem>
+                                ))}
+                            </Select>
+                            {formik.touched.gender && formik.errors.gender ? <p style={{ color: '#d32f2f', fontWeight: '400', fontSize: '0.75rem' }}>{formik.errors.gender}</p> : null}
+                        </FormControl>
                     </Grid>
+
                     <Grid item xs={12} sm={6}>
                         <Typography variant="h6" gutterBottom>
                             Rural/Municipality
                         </Typography>
-                        <TextField
-                            required
-                            id="municipality"
-                            name="municipality"
-                            label="Rural/Municipality"
-                            value={formik.values.municipality}
-                            fullWidth
-                            error={formik.touched.municipality && formik.errors.municipality ? true : false}
-                            autoComplete="family-name"
-                            variant="outlined"
-                            helperText={formik.errors.municipality}
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                        />
+                        <FormControl fullWidth sx={{ m: 0 }} size="large">
+                            <InputLabel id="demo-select-small">Rural/Municipality</InputLabel>
+                            <Select
+                                labelId="municipality"
+                                id="municipality"
+                                name="municipality"
+                                value={formik.values.municipality}
+                                label="Select Rural/Municipality"
+                                fullWidth
+                                onChange={formik.handleChange}
+                                error={formik.touched.municipality && formik.errors.municipality ? true : false}
+                                onBlur={formik.handleBlur}
+                                helperText={formik.errors.municipality}
+                            >
+                                <MenuItem value="select">
+                                    <em>Select  Rural/Municipality</em>
+                                </MenuItem>
+                                {municipalities.data.filter(municipalitie => municipalitie.District === formik.values.district).map(filterData => (
+                                    <MenuItem value={filterData.Name} > {filterData.Name}</MenuItem>
+                                ))}
+                            </Select>
+                            {formik.touched.gender && formik.errors.gender ? <p style={{ color: '#d32f2f', fontWeight: '400', fontSize: '0.75rem' }}>{formik.errors.gender}</p> : null}
+                        </FormControl>
                     </Grid>
                     <Grid item xs={12} sm={6}>
                         <Typography variant="h6" gutterBottom>
@@ -199,62 +237,92 @@ export const AddressForm = (
                     Temporary Address
                 </Typography>
                 <Grid container spacing={3}>
-                    <Grid item xs={12} sm={6}>
+                <Grid item xs={12} sm={6}>
                         <Typography variant="h6" gutterBottom>
                             Provience
                         </Typography>
-                        <TextField
-                            required
-                            id="tprovience"
-                            name="tprovience"
-                            label="Provience"
-                            value={formik.values.tprovience}
-                            fullWidth
-                            error={formik.touched.tprovience && formik.errors.tcountry ? true : false}
-                            autoComplete="given-name"
-                            variant="outlined"
-                            helperText={formik.errors.tcountry}
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                        />
+                        <FormControl fullWidth sx={{ m: 0 }} size="large">
+                            <InputLabel id="demo-select-small">Provience</InputLabel>
+                            <Select
+                                required
+                                labelId="tprovience"
+                                id="tprovience"
+                                name="tprovience"
+                                value={formik.values.tprovience}
+                                label="Select tprovience"
+                                onChange={formik.handleChange}
+                                error={formik.touched.tprovience && formik.errors.tprovience ? true : false}
+                                onBlur={formik.handleBlur}
+                                helperText={formik.errors.tprovience}
+                            >
+                                <MenuItem value="select">
+                                    <em>Select Provience</em>
+                                </MenuItem>
+                                {proviences.proviences.map((item) => (
+                                    <MenuItem value={item.Provinces} > {item.Provinces}</MenuItem>
+                                ))}
+                            </Select>
+                            {formik.touched.gender && formik.errors.gender ? <p style={{ color: '#d32f2f', fontWeight: '400', fontSize: '0.75rem' }}>{formik.errors.gender}</p> : null}
+                        </FormControl>
                     </Grid>
+
                     <Grid item xs={12} sm={6}>
                         <Typography variant="h6" gutterBottom>
                             District
                         </Typography>
-                        <TextField
-                            required
-                            id="tdistrict"
-                            name="tdistrict"
-                            label="District"
-                            value={formik.values.tdistrict}
-                            fullWidth
-                            error={formik.touched.tdistrict && formik.errors.tdistrict ? true : false}
-                            autoComplete="given-name"
-                            variant="outlined"
-                            helperText={formik.errors.tdistrict}
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                        />
+                        <FormControl fullWidth sx={{ m: 0 }} size="large">
+                            <InputLabel id="demo-select-small">District</InputLabel>
+                            <Select
+                                required
+                                labelId="tdistrict"
+                                id="tdistrict"
+                                name="tdistrict"
+                                value={formik.values.tdistrict}
+                                label="Select tdistrict"
+                                onChange={formik.handleChange}
+                                error={formik.touched.tdistrict && formik.errors.tdistrict ? true : false}
+                                onBlur={formik.handleBlur}
+                                helperText={formik.errors.tdistrict}
+                            >
+                                <MenuItem value="select">
+                                    <em>Select District</em>
+                                </MenuItem>
+                                {districts.data.filter(district => district.Province === formik.values.tprovience).map(filteredData => (
+                                    <MenuItem value={filteredData.Name} > {filteredData.Name}</MenuItem>
+                                ))}
+                            </Select>
+                            {formik.touched.gender && formik.errors.gender ? <p style={{ color: '#d32f2f', fontWeight: '400', fontSize: '0.75rem' }}>{formik.errors.gender}</p> : null}
+                        </FormControl>
                     </Grid>
+
                     <Grid item xs={12} sm={6}>
                         <Typography variant="h6" gutterBottom>
                             Rural/Municipality
                         </Typography>
-                        <TextField
-                            required
-                            id="tmunicipality"
-                            name="tmunicipality"
-                            label="Rural/Municipality"
-                            value={formik.values.tmunicipality}
-                            fullWidth
-                            error={formik.touched.tmunicipality && formik.errors.tmunicipality ? true : false}
-                            autoComplete="family-name"
-                            variant="outlined"
-                            helperText={formik.errors.tmunicipality}
-                            onChange={formik.handleChange}
-                            onBlur={formik.handleBlur}
-                        />
+                        <FormControl fullWidth sx={{ m: 0 }} size="large">
+                            <InputLabel id="demo-select-small">Rural/Municipality</InputLabel>
+                            <Select
+                                required
+                                labelId="tmunicipality"
+                                id="tmunicipality"
+                                name="tmunicipality"
+                                value={formik.values.tmunicipality}
+                                label="Select Rural/tmunicipality"
+                                fullWidth
+                                onChange={formik.handleChange}
+                                error={formik.touched.tmunicipality && formik.errors.tmunicipality ? true : false}
+                                onBlur={formik.handleBlur}
+                                helperText={formik.errors.tmunicipality}
+                            >
+                                <MenuItem value="select">
+                                    <em>Select  Rural/Municipality</em>
+                                </MenuItem>
+                                {municipalities.data.filter(municipalitie => municipalitie.District === formik.values.tdistrict).map(filterData => (
+                                    <MenuItem value={filterData.Name} > {filterData.Name}</MenuItem>
+                                ))}
+                            </Select>
+                            {formik.touched.gender && formik.errors.gender ? <p style={{ color: '#d32f2f', fontWeight: '400', fontSize: '0.75rem' }}>{formik.errors.gender}</p> : null}
+                        </FormControl>
                     </Grid>
                     <Grid item xs={12} sm={6}>
                         <Typography variant="h6" gutterBottom>
@@ -326,6 +394,6 @@ export const AddressForm = (
                     </Grid>
                 </Grid>
             </div>
-        </form>
+        </form >
     );
 }

@@ -14,7 +14,6 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { useNavigate } from "react-router-dom";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Footer } from './Footer';
 
 
 const mdTheme = createTheme();
@@ -224,7 +223,6 @@ export const ResponsiveAppBar = ({ children }) => {
             {children}
           </Box>
         </Box>
-        <Footer />
       </ThemeProvider>
     </div >
   );
