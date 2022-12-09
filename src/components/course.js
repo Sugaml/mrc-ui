@@ -216,6 +216,7 @@ export const Course = () => {
                     ))}
                 </Grid>
             </Container>
+            <Footer/>
         </div>
     )
 }

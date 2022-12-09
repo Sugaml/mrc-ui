@@ -1,6 +1,6 @@
 import ToastConfig from "../components/toast/Toast";
 import * as types from "../constant/actionTypes";
-import { postStuInfo } from "../services/login";
+import { postStuInfo } from "../services/student";
 
 
 const stuInfo = () => ({
@@ -17,10 +17,10 @@ const stuInfoFailure = () => ({
 });
 
 
-export const studentInfoAction= (studentInfoData) => async (dispatch) => {
+export const studentInfoAction= (token,studentInfoData) => async (dispatch) => {
   try{
     dispatch(stuInfo());
-    const response = await postStuInfo(studentInfoData, "student_info");
+    const response = await postStuInfo(token,studentInfoData, "student_info");
     if (response){
       dispatch(stuInfoSuccess(response));
       ToastConfig.success("Successfully added student information.")

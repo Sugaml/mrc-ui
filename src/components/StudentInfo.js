@@ -23,8 +23,8 @@ export const StudentInfo = ({
     const handleNextAddress = () => {
         setActiveStep(activeStep + 1);
     };
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const studentInfo = useSelector((state) => state.StudentInfo.student);
-    console.log("state loading ",studentInfo)
     const dispatch = useDispatch();
 
     const formik = useFormik({
@@ -45,10 +45,10 @@ export const StudentInfo = ({
             lastName: Yup.string().max(15, "Must be 15 character or less").required("Required"),
             gender: Yup.string().required("Required"),
             email: Yup.string().email('Invalid Email').required(),
-            mobileNum: Yup.number().required(),
+            mobileNum: Yup.number().required("required mobile number").test('len', 'Must be 10 digit', val => val && val.toString().length === 10 ),
             parentName: Yup.string().max(15, "Must be 15 character or less").required("Required"),
             parentRelation: Yup.string().max(15, "Must be 15 character or less").required("Required"),
-            parentNumber: Yup.number().required(),
+            parentNumber:Yup.number().required("required mobile number").test('len', 'Must be 10 digit', val => val && val.toString().length === 10 ),
             dob: Yup.string().required(),
             religion: Yup.string().max(15, "Must be 15 character or less").required()
         }),
@@ -67,7 +67,7 @@ export const StudentInfo = ({
             }
             console.log(studetInfoData)
             handleNextAddress();
-            dispatch(studentInfoAction(studetInfoData))
+            dispatch(studentInfoAction(isAuthenticated,studetInfoData))
         }
     });
 

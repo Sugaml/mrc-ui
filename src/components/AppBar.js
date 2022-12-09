@@ -13,7 +13,9 @@ import { Link } from 'react-router-dom'
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { getUserAction } from '../action/user';
 
 
 const mdTheme = createTheme();
@@ -55,6 +57,18 @@ const programs = [
 export const ResponsiveAppBar = ({ children }) => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [anchorElPrograms, setAnchorElPrograms] = React.useState(null);
+  const dispatch = useDispatch();
+
+  const token = useSelector((state) => state.auth.isAuthenticated);
+  console.log("token :: ",token)
+const user = useSelector((state) => state.UserInfo.user);
+  // const [items, setItems] = useState([]);
+    React.useEffect(()=>{
+      if (!user){
+      dispatch(getUserAction(token))
+      }
+    },[dispatch,token,user])
+  console.log("user data",user.data)
 
   const navigate =useNavigate();
 
@@ -168,7 +182,7 @@ export const ResponsiveAppBar = ({ children }) => {
                 </Typography>
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                    <Avatar alt={user.data.firstname} src="/static/images/avatar/2.jpg" />
                   </IconButton>
                 </Tooltip>
                <Menu

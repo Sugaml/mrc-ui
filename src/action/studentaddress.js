@@ -1,6 +1,6 @@
 import ToastConfig from "../components/toast/Toast";
 import * as types from "../constant/actionTypes";
-import { postStudentAddressInfo } from "../services/login";
+import { postStudentAddressInfo } from "../services/student";
 
 
 const studentAddressInfo = () => ({
@@ -15,7 +15,6 @@ const studentAddressSuccess = (response) => ({
 const studentAddressInfoFailure = () => ({
   type: types.STUDENT_ADDRESS_INFO_FAILURE,
 });
-
 
 export const studentAddressInfoAction= (studentAddressInfoData) => async (dispatch) => {
   try{

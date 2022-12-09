@@ -8,6 +8,8 @@ import StudentAddressInfo from "./reducer/student_address";
 import StudentEducationInfo from "./reducer/student_education";
 import StudentFileInfo from "./reducer/student_file";
 import Courses from "./reducer/courses";
+import StudentGeneral from "./reducer/student_general";
+import UserInfo from "./reducer/user";
 
 
 const rootReducer = combineReducers({
@@ -20,6 +22,8 @@ const rootReducer = combineReducers({
   PaymentInitiateInfo:PaymentInitiateInfo,
   PaymentVerifyInfo:PaymentVerifyInfo,
   Courses:Courses,
+  StudentGeneral:StudentGeneral,
+  UserInfo:UserInfo,
 });
 
 export default rootReducer;

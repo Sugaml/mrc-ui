@@ -1,6 +1,6 @@
 import ToastConfig from "../components/toast/Toast";
 import * as types from "../constant/actionTypes";
-import { postStudentEducationInfo } from "../services/login";
+import { postStudentEducationInfo } from "../services/student";
 
 
 const studentEducationInfo = () => ({

@@ -12,14 +12,25 @@ const getCoursesSuccess = (response) => ({
     payload: response
   });
 
+  const getCoursesFailure = () => ({
+    type: types.GETCOURSESFAILURE,
+  });
+
 export const getAllCourses= () => async (dispatch) => {
   try {
+    dispatch(getCourses());
     const response = await getListCourses("", "courses");
     console.log('......',response.data)
+    if (response){
     await dispatch(getCoursesSuccess(response));
     ToastConfig.success("Successfully get courses.")
+    }else{
+      dispatch(getCoursesFailure());
+      ToastConfig.error("Filed to load courses")
+    }
   } catch (error) {
     console.log("error in fetch all courses",error);
+    dispatch(getCoursesFailure());
     ToastConfig.error(error.message)
   }
 };
