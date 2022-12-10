@@ -60,9 +60,9 @@ export const Profile=()=> {
       >
         <Tab label="General Information" {...a11yProps(0)} />
         <Tab label="Address Information" {...a11yProps(1)} />
-        <Tab label="Course Inforamtion" {...a11yProps(2)} />
+        <Tab label="Course Information" {...a11yProps(2)} />
         <Tab label="Fee Information" {...a11yProps(3)} />
-        <Tab label="Education Inforamtion" {...a11yProps(4)} />
+        <Tab label="Academic Information" {...a11yProps(4)} />
       </Tabs>
       <TabPanel value={value} index={0}>
        <StudentGeneral/>

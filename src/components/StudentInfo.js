@@ -206,7 +206,7 @@ export const StudentInfo = ({
                     </Grid>
                     <Grid item xs={12} sm={6}>
                         <Typography variant="h6" gutterBottom>
-                            Patent Relation
+                            Parent Relation
                         </Typography>
                         <TextField
                             required
