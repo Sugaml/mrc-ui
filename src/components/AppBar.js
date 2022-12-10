@@ -60,28 +60,28 @@ export const ResponsiveAppBar = ({ children }) => {
   const dispatch = useDispatch();
 
   const token = useSelector((state) => state.auth.isAuthenticated);
-  console.log("token :: ",token)
-const user = useSelector((state) => state.UserInfo.user);
-  // const [items, setItems] = useState([]);
-    React.useEffect(()=>{
-      if (!user){
-      dispatch(getUserAction(token))
-      }
-    },[dispatch,token,user])
-  console.log("user data",user.data)
+  console.log("token :: ", token)
+  const user = useSelector((state) => state.UserInfo.user);
+  console.log("user :: ", user)
 
-  const navigate =useNavigate();
+  React.useEffect(() => {
+    dispatch(getUserAction(token))
+  }, [dispatch, token])
+
+  console.log("user data", user.data)
+
+  const navigate = useNavigate();
 
   const handleStepContent = (step) => () => {
     console.log(step)
     switch (step) {
-      case 0: 
+      case 0:
         return navigate("/home");
       // case 1:  
       //   return navigate("/home");
       // case 2: 
       //   return navigate("/home")
-      case 3: 
+      case 3:
         return navigate("/courses")
       default:
         return navigate("/menu")
@@ -96,17 +96,17 @@ const user = useSelector((state) => state.UserInfo.user);
     setAnchorElUser(null);
   };
 
-  const handleSettingMenu = (handleKeys) =>(event)=> {
+  const handleSettingMenu = (handleKeys) => (event) => {
     setAnchorElUser(null);
     if (!handleKeys) return
-    navigate("/"+handleKeys.toLowerCase())
+    navigate("/" + handleKeys.toLowerCase())
   };
 
-  const handleOpenProgramsMenu=(event)=>{
+  const handleOpenProgramsMenu = (event) => {
     setAnchorElPrograms(event.currentTarget);
   }
 
-  const handleCloseProgramsMenu=()=>{
+  const handleCloseProgramsMenu = () => {
     setAnchorElPrograms(null);
   }
 
@@ -143,20 +143,20 @@ const user = useSelector((state) => state.UserInfo.user);
                     {data.page}
                   </Button>
                 ))}
-                 <Button
-                    onClick={handleOpenProgramsMenu}
-                    sx={{ my: 2, color: 'white', display: 'block' }}
-                  >
-                   Programs
-                  </Button>
-                  <Menu
+                <Button
+                  onClick={handleOpenProgramsMenu}
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                  Programs
+                </Button>
+                <Menu
                   sx={{ mt: '45px' }}
                   id="menu-appbar"
                   anchorEl={anchorElPrograms}
                   anchorOrigin={{
                     vertical: 'top',
                     horizontal: 'right',
-                  }} 
+                  }}
                   keepMounted
                   transformOrigin={{
                     vertical: 'top',
@@ -167,7 +167,7 @@ const user = useSelector((state) => state.UserInfo.user);
                 >
                   {programs.map((program) => (
                     <MenuItem key={program} onClick={handleCloseProgramsMenu}
-                    onMouseEnter={(e) => e.target.style.color = 'blue'} >
+                      onMouseEnter={(e) => e.target.style.color = 'blue'} >
                       <NavLink to={program.path} >{program.name} </NavLink>
                     </MenuItem>
                   ))}
@@ -182,17 +182,17 @@ const user = useSelector((state) => state.UserInfo.user);
                 </Typography>
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar alt={user.data.firstname} src="/static/images/avatar/2.jpg" />
+                    <Avatar alt={user.firstname} src="/static/images/avatar/2.jpg" />
                   </IconButton>
                 </Tooltip>
-               <Menu
+                <Menu
                   sx={{ mt: '45px' }}
                   id="menu-appbar"
                   anchorEl={anchorElUser}
                   anchorOrigin={{
                     vertical: 'top',
                     horizontal: 'right',
-                  }} 
+                  }}
                   keepMounted
                   transformOrigin={{
                     vertical: 'top',

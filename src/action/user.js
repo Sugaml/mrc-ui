@@ -22,7 +22,7 @@ export const getStudentGeneralAction= (token) => async (dispatch) => {
     const response = await getStudentGeneral(token, "student/general-info");
     if (response){
       console.log("general info",response.data)
-      await dispatch(getStudentInfoSuccess(response));
+      await dispatch(getStudentInfoSuccess(response.data));
       ToastConfig.success("Successfully get student general.")
     }else{
       dispatch(getStudentInfoFailure());
@@ -55,7 +55,7 @@ export const getUserAction= (token) => async (dispatch) => {
     const response = await getUser(token, "user");
     if (response){
       console.log("general info",response.data)
-      await dispatch(getUserSuccess(response));
+      await dispatch(getUserSuccess(response.data));
       ToastConfig.success("Successfully get user")
     }else{
       dispatch(getUserFailure());
