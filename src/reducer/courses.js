@@ -1,7 +1,7 @@
 import * as types from "../constant/actionTypes";
 
 const INITIAL_STATE = {
-  courses: "",
+  courses:[],
   fetchingCourse:false
 };
 
@@ -14,7 +14,7 @@ function Courses(state = INITIAL_STATE, action) {
         fetchingCourse: true,
       };
     case types.GETCOURSESSUCCESS:
-        console.log('testing === ', payload)
+      console.log("success course :: ",payload)
       return {
         ...state,
         courses:payload

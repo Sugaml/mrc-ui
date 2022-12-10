@@ -10,6 +10,7 @@ import StudentFileInfo from "./reducer/student_file";
 import Courses from "./reducer/courses";
 import StudentGeneral from "./reducer/student_general";
 import UserInfo from "./reducer/user";
+import CurrentCourse from "./reducer/current_course";
 
 
 const rootReducer = combineReducers({
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   PaymentInitiateInfo:PaymentInitiateInfo,
   PaymentVerifyInfo:PaymentVerifyInfo,
   Courses:Courses,
+  CurrentCourse:CurrentCourse,
   StudentGeneral:StudentGeneral,
   UserInfo:UserInfo,
 });

@@ -60,18 +60,13 @@ export const ResponsiveAppBar = ({ children }) => {
   const dispatch = useDispatch();
 
   const token = useSelector((state) => state.auth.isAuthenticated);
-  console.log("token :: ", token)
   const user = useSelector((state) => state.UserInfo.user);
-  console.log("user :: ", user)
 
   React.useEffect(() => {
     dispatch(getUserAction(token))
   }, [dispatch, token])
 
-  console.log("user data", user.data)
-
   const navigate = useNavigate();
-
   const handleStepContent = (step) => () => {
     console.log(step)
     switch (step) {

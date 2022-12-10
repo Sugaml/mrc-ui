@@ -23,10 +23,12 @@ export const StudentInfo = ({
     const handleNextAddress = () => {
         setActiveStep(activeStep + 1);
     };
-    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-    const studentInfo = useSelector((state) => state.StudentInfo.student);
     const dispatch = useDispatch();
 
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+    const studentInfo = useSelector((state) => state.StudentInfo.student);
+    const course = useSelector((state) => state.CurrentCourse.course);
+    
     const formik = useFormik({
         initialValues: {
             firstName: "",
@@ -64,6 +66,7 @@ export const StudentInfo = ({
                 "parent_name":formik.values.parentName,
                 "parent_mobile":formik.values.parentNumber,
                 "parent_relation":formik.values.parentRelation,
+                "cid":course.ID,
             }
             console.log(studetInfoData)
             handleNextAddress();
