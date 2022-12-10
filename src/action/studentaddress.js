@@ -1,6 +1,6 @@
 import ToastConfig from "../components/toast/Toast";
 import * as types from "../constant/actionTypes";
-import { postStudentAddressInfo } from "../services/student";
+import { getCurrentAddress, postStudentAddressInfo } from "../services/student";
 
 
 const studentAddressInfo = () => ({
@@ -31,6 +31,38 @@ export const studentAddressInfoAction= (studentAddressInfoData) => async (dispat
   catch (error) {
       console.log("error save student address",error);
       dispatch(studentAddressInfoFailure());
+      ToastConfig.error(error.error)
+    }
+};
+
+const getAddressInfo = () => ({
+  type: types.GET_CURRENT_ADDRESS,
+});
+
+const getAddressSuccess = (response) => ({
+  type: types.GET_CURRENT_ADDRESS_SUCCESS,
+  payload: response,
+});
+
+const getAddressInfoFailure = () => ({
+  type: types.GET_CURRENT_ADDRESS_FAILURE,
+});
+
+export const getAddress= (token,id) => async (dispatch) => {
+  try{
+    dispatch(getAddressInfo());
+    const response = await getCurrentAddress(token, "student/"+id+"/address");
+    if (response){
+      dispatch(getAddressSuccess(response.data));
+      ToastConfig.success("Successfully get student address.")
+    }else{
+      dispatch(getAddressInfoFailure());
+      ToastConfig.error("Filed to load student address.")
+    }
+  }
+  catch (error) {
+      console.log("error save student address",error);
+      dispatch(getAddressInfoFailure());
       ToastConfig.error(error.error)
     }
 };

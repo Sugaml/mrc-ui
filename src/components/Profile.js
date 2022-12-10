@@ -5,6 +5,8 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { StudentGeneral } from './StudentGeneral';
+import { AddressInformation } from './AddressInformation';
+import { CourseInformation } from './CourseInformation';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -68,16 +70,16 @@ export const Profile=()=> {
        <StudentGeneral/>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Address Information
+      <AddressInformation/>
       </TabPanel>
       <TabPanel value={value} index={2}>
-       Course Inforamtion
+       <CourseInformation/>
       </TabPanel>
       <TabPanel value={value} index={3}>
-        Fee Inforamtion
+        Academic Information
       </TabPanel>
       <TabPanel value={value} index={4}>
-        Education Information
+        Document Information
       </TabPanel>
     </Box>
   );

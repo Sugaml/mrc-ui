@@ -11,6 +11,16 @@ import axios from 'axios';
         );
   };
 
+  export const getCurrentAddress = (token, url) => {
+    const config = {
+        headers: { Authorization: `basic ${token}` }
+    };
+        return axios.get(
+            `${process.env.REACT_APP_API}/${url}`,
+            config
+            );
+    };
+
   export const postStudentAddressInfo =  (studentAddressInfoData, url) => {
     return  axios.post(`${process.env.REACT_APP_API}/${url}`, studentAddressInfoData);
   };
