@@ -1,23 +1,24 @@
 import * as types from "../constant/actionTypes";
 
 const INITIAL_STATE = {
-  studentGeneral: null,
+  currentStudent: null,
   isStudentGeneral:false
 };
 
 function StudentGeneral(state = INITIAL_STATE, action) {
   const { type, payload } = action;
   switch (type) {
-    case types.GETSTUDENTGENERAL:
+    case types.GET_STUDENT_GENERAL:
       return {
         ...state,
+        currentStudent: null,
         isStudentGeneral: true,
       };
-    case types.GETSTUDENTGENERALSUCCESS:
-        console.log('testing === ', payload)
+    case types.GET_STUDENT_GENERAL_SUCCESS:
       return {
         ...state,
-        studentGeneral:payload
+        currentStudent:payload,
+        isStudentGeneral:true,
       }
     default:
       return state;

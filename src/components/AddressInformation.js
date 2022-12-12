@@ -8,7 +8,7 @@ export const AddressInformation = () => {
   const dispatch = useDispatch();
 
   const token = useSelector((state) => state.auth.isAuthenticated);
-  const student = useSelector((state) => state.StudentGeneral.studentGeneral);
+  const student = useSelector((state) => state.StudentGeneral.currentStudent);
   const address = useSelector((state) => state.CurrentAddress.address);
   console.log("token :: ",token)
     React.useEffect(()=>{
@@ -16,7 +16,7 @@ export const AddressInformation = () => {
     },[dispatch,token,student])
   console.log("address :: ",address)
   return (
-    <div>
+   student && address && !!address.ID && <div>
       <Typography variant="h6" gutterBottom sx={{ pt: 2 }}>Student Address Inforamtion</Typography>
       <Divider/>
       <Typography variant="h6" gutterBottom sx={{ pt: 2, mb: 3 }}>Permanent Address Inforamtion</Typography>

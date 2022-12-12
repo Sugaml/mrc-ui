@@ -4,16 +4,16 @@ import { getStudentGeneral,getUser } from "../services/user";
 
 
 const getStudentGeneralInfo = () => ({
-  type: types.GETSTUDENTGENERAL,
+  type: types.GET_STUDENT_GENERAL,
 });
 
 const getStudentInfoSuccess = (response) => ({
-    type: types.GETSTUDENTGENERALSUCCESS,
+    type: types.GET_STUDENT_GENERAL_SUCCESS,
     payload: response
   });
 
   const getStudentInfoFailure = () => ({
-    type: types.GETSTUDENTGENERALFAILURE,
+    type: types.GET_STUDENT_GENERAL_FAILURE,
   });
 
 export const getStudentGeneralAction= (token) => async (dispatch) => {

@@ -7,12 +7,12 @@ export const CourseInformation = () => {
   const dispatch = useDispatch();
 
   const token = useSelector((state) => state.auth.isAuthenticated);
-  const student = useSelector((state) => state.StudentGeneral.studentGeneral);
+  const student = useSelector((state) => state.StudentGeneral.currentStudent);
     React.useEffect(()=>{
       dispatch(getStudentGeneralAction(token))
     },[dispatch,token])
   return (
-    <div>
+   student && student.ID && !!student.ID && student.course && student.course.ID && <div>
       <Typography variant="h6" gutterBottom sx={{ pt: 2}} >Course Inforamtion</Typography>
       <Typography>Course :: {student.course.name} </Typography>
       <Typography>Duration :: {student.course.duration} </Typography>
