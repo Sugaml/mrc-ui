@@ -19,7 +19,7 @@ export const StudentGeneral = () => {
   return (
     student && !!student.ID && <div>
     <Typography>Student General Inforamtion</Typography>
-    <Avatar sizes='150' alt={student.first_name} src="/static/images/avatar/2.jpg" />
+    <Avatar sizes='150' alt={student.first_name} src="https://www.w3schools.com/howto/img_avatar.png" />
     <Typography>Student Name :: {student.first_name} {student.last_name}</Typography>
     <Typography>Gender :: {student.gender} </Typography>
     <Typography>Date of Birth:: {student.dob} </Typography>
