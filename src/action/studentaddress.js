@@ -21,7 +21,7 @@ export const studentAddressInfoAction= (studentAddressInfoData) => async (dispat
     dispatch(studentAddressInfo());
     const response = await postStudentAddressInfo(studentAddressInfoData, "student/address");
     if (response){
-      dispatch(studentAddressSuccess(response));
+      dispatch(studentAddressSuccess(response.data));
       ToastConfig.success("Successfully saved student address.")
     }else{
       dispatch(studentAddressInfoFailure());

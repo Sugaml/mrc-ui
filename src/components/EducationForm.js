@@ -19,10 +19,9 @@ export const EducationForm = (
     const handleNextDocument = () => {
         setActiveStep(activeStep + 1);
     };
-    const studentEducationInfo = useSelector((state) => state.StudentEducationInfo.student);
     const studentInfo = useSelector((state) => state.StudentInfo.studentInfo);
 
-    console.log("state education loading ", studentEducationInfo)
+    console.log("state education loading ", studentInfo)
     const dispatch = useDispatch();
 
     const formik = useFormik({
@@ -68,7 +67,7 @@ export const EducationForm = (
                     "gpa": formik.values.gpa,
                     "completed_year": formik.values.passedYear,
                     "remarks": formik.values.remarks,
-                    "student_id": studentInfo.data.ID,
+                    "student_id": studentInfo.ID,
                 },
                 {
                     "institute_name": formik.values.cname,
@@ -79,7 +78,7 @@ export const EducationForm = (
                     "gpa": formik.values.cgpa,
                     "completed_year": formik.values.cpassedYear,
                     "remarks": formik.values.cremarks,
-                    "student_id": studentInfo.data.ID,
+                    "student_id": studentInfo.ID,
                 },
             ]
             console.log(studetEducationInfoData)

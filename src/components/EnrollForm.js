@@ -12,9 +12,6 @@ import { AddressForm } from './AddressForm';
 import { StudentInfo } from './StudentInfo';
 import { FileInfo } from './FileInfo';
 import { EducationForm } from './EducationForm';
-import { StudentRegister } from './StudentRegister'
-import { StudentLogin } from './StudentLogin'
-import { CourseChoice } from './CourseChoice'
 
 const steps = [ 'General Info', 'Address Info', 'Academic Info', 'Document Attach'];
 

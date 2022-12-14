@@ -1,12 +1,12 @@
 import * as React from 'react';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import TextField from '@mui/material/TextField';
-import { useFormik } from "formik";
 import Button from '@mui/material/Button';
+import Box from "@material-ui/core/Box";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { studentFileInfoAction } from '../action/studentfile';
-import * as Yup from 'yup';
+import { Divider } from '@mui/material';
 
 
 export const FileInfo = ({
@@ -15,213 +15,319 @@ export const FileInfo = ({
     handleBack,
     handleNext,
     steps }) => {
-        const handleSuccess = () => {
-            setActiveStep(activeStep + 1);
-        };
-        // const studentFileInfo = useSelector((state) => state.StudenFileInfo.studentFileInfo);
-        const studentInfo = useSelector((state) => state.StudentInfo.studentInfo);
-        // console.log("state loading file",studentFileInfo)
-        const dispatch = useDispatch();
-    
-        const formik = useFormik({
-            initialValues: {
-                seeTranscript: "",
-                seeCharacter: "",
-                marksheet:"",
-                character:"",
-                migration:"",
-                photo:"",
-                signature:"",
-            },
-    
-            validationSchema: Yup.object({
-                seeTranscript: Yup.string().required("required SEE marksheet"),
-                seeCharacter: Yup.string().required("required SEE character certificate"),
-                marksheet:Yup.string().required("required Certificate marksheet"),
-                character:Yup.string().required("required Certificate character"),
-                migration:Yup.string().required("required Certificate migration"),
-                photo: Yup.string().required("required student photo"),
-                signature: Yup.string().required("required student signature"),
-            }),
-    
-            onSubmit: (handleNext) => {
-                console.log('Inside address onsubmit.....')
-                const studentFileInfoData= {
-                    "see_transcript":formik.values.seeTranscript,
-                    "see_character":formik.values.seeCharacter,
-                    "certificate_transcript":formik.values.marksheet,
-                    "certificate_character":formik.values.character,
-                    "certificate_migration":formik.values.migration,
-                    "citizenship_front":"",
-                    "citizenship_back":"",
-                    "photo":"",
-                    "signatue":"",
-                    "student_id":studentInfo.data.ID,
-                    }
-                console.log(studentFileInfoData)
-                handleSuccess();
-                dispatch(studentFileInfoAction(studentFileInfoData))
+    const handleSuccess = () => {
+        setActiveStep(activeStep + 1);
+    };
+    const studentInfo = useSelector((state) => state.StudentInfo.studentInfo);
+    console.log("state loading file",studentInfo)
+    const dispatch = useDispatch();
+    const [selectedImage, setSelectedImage] = useState(null);
+    const [imageUrl, setImageUrl] = useState(null);
+    const [seeTranscript, setSEETranscript] = useState(null);
+    const [seeTranscriptUrl, setSEETranscriptUrl] = useState(null);
+    const [seeCharacter, setSEECharacter] = useState(null);
+    const [seeCharacterUrl, setSEECharacterUrl] = useState(null);
+    const [marksheet, setMarksheet] = useState(null);
+    const [marksheetUrl, setMarksheetUrl] = useState(null);
+    const [character, setCharacter] = useState(null);
+    const [characterUrl, setCharacterUrl] = useState(null);
+    const [migration, setMigration] = useState(null);
+    const [migrationUrl, setMigrationUrl] = useState(null);
+    const [signature, setSignature] = useState(null);
+    const [signatureUrl, setSignatureUrl] = useState(null);
+
+    useEffect(() => {
+        if (selectedImage) {
+            console.log(selectedImage)
+            setImageUrl(URL.createObjectURL(selectedImage));
+        }
+        if (seeTranscript){
+            setSEETranscriptUrl(URL.createObjectURL(seeTranscript));
+        }
+        if (seeCharacter){
+            setSEECharacterUrl(URL.createObjectURL(seeCharacter));
+        }
+        if (marksheet){
+            setMarksheetUrl(URL.createObjectURL(marksheet));
+        }
+        if (character){
+            setCharacterUrl(URL.createObjectURL(character));
+        }
+        if (migration){
+            setMigrationUrl(URL.createObjectURL(migration));
+        }
+        if (signature){
+            setSignatureUrl(URL.createObjectURL(signature));
+        }
+    }, [selectedImage,seeTranscript,seeCharacter,marksheet,character,migration,signature]);
+    console.log(seeTranscriptUrl,imageUrl)
+
+    const handleDocumentAction = (id) => {
+            console.log('Inside address onsubmit.....')
+            const studentDocumentData = {
+                "photo": imageUrl,
+                "see_transcript":seeTranscriptUrl ,
+                "see_character": seeCharacterUrl,
+                "certificate_transcript":marksheetUrl,
+                "certificate_character": characterUrl,
+                "certificate_migration": migrationUrl,
+                "citizenship_front": "",
+                "citizenship_back": "",
+                "signatue":signatureUrl,
+                "student_id": id,
             }
-        });
+            console.log(studentDocumentData)
+            handleSuccess();
+            dispatch(studentFileInfoAction(studentDocumentData))
+        }
+
     return (
-        <form onSubmit={formik.handleSubmit}>
+        <form >
             <div>
-            <Grid container spacing={3}>
-                <Grid item xs={12} >
-                    <Typography variant="h6" gutterBottom>
-                        SEE Marksheet/GradeSheet
-                    </Typography>
-                    <TextField
-                        required
-                        id="seeTranscript"
-                        name="seeTranscript"
-                        fullWidth
-                        autoComplete="given-name"
-                        accept="image/*"
-                        multiple type="file"
-                        variant="outlined"
-                        value={formik.values.seeTranscript}
-                        error={formik.touched.seeTranscript && formik.errors.seeTranscript ? true : false}
-                        helperText={formik.errors.seeTranscript}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                    />
-                </Grid>
-                <Grid item xs={12} >
-                    <Typography variant="h6" gutterBottom>
-                        SEE Character Certificate
-                    </Typography>
-                    <TextField
-                        required
-                        id="seeCharacter"
-                        name="seeCharacter"
-                        fullWidth
-                        autoComplete="given-name"
-                        accept="image/*"
-                        multiple type="file"
-                        variant="outlined"
-                        value={formik.values.seeCharacter}
-                        error={formik.touched.seeCharacter && formik.errors.seeCharacter ? true : false}
-                        helperText={formik.errors.seeCharacter}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                    />
-                </Grid>
-                <Grid item xs={12} >
-                    <Typography variant="h6" gutterBottom>
-                        +2 Marksheet/GradeSheet
-                    </Typography>
-                    <TextField
-                        required
-                        id="marksheet"
-                        name="marksheet"
-                        fullWidth
-                        autoComplete="given-name"
-                        accept="image/*"
-                        multiple type="file"
-                        variant="outlined"
-                        value={formik.values.marksheet}
-                        error={formik.touched.marksheet && formik.errors.marksheet ? true : false}
-                        helperText={formik.errors.marksheet}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                    />
-                </Grid>
-                <Grid item xs={12} >
-                    <Typography variant="h6" gutterBottom>
-                        +2 Character Certificate
-                    </Typography>
-                    <TextField
-                        required
-                        id="character"
-                        name="character"
-                        fullWidth
-                        autoComplete="given-name"
-                        accept="image/*"
-                        multiple type="file"
-                        variant="outlined"
-                        value={formik.values.character}
-                        error={formik.touched.character && formik.errors.character ? true : false}
-                        helperText={formik.errors.character}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                    />
-                </Grid>
-                <Grid item xs={12} >
-                    <Typography variant="h6" gutterBottom>
-                        +2 Migration Certificate
-                    </Typography>
-                    <TextField
-                        required
-                        id="migration"
-                        name="migration"
-                        fullWidth
-                        autoComplete="given-name"
-                        accept="image/*"
-                        multiple type="file"
-                        variant="outlined"
-                        value={formik.values.migration}
-                        error={formik.touched.migration && formik.errors.migration ? true : false}
-                        helperText={formik.errors.migration}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                    />
-                </Grid>
-                <Grid item xs={12} >
-                    <Typography variant="h6" gutterBottom>
-                        PP Size Photo
-                    </Typography>
-                    <TextField
-                        required
-                        id="photo"
-                        name="photo"
-                        fullWidth
-                        autoComplete="given-name"
-                        accept="image/*"
-                        multiple type="file"
-                        variant="outlined"
-                        value={formik.values.photo}
-                        error={formik.touched.photo && formik.errors.photo ? true : false}
-                        helperText={formik.errors.photo}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                    />
-                </Grid>
-                <Grid item xs={12} >
-                    <Typography variant="h6" gutterBottom>
-                        Student Signature
-                    </Typography>
-                    <TextField
-                        required
-                        id="signature"
-                        name="signature"
-                        fullWidth
-                        autoComplete="given-name"
-                        accept="image/*"
-                        multiple type="file"
-                        variant="outlined"
-                        value={formik.values.signature}
-                        error={formik.touched.signature && formik.errors.signature ? true : false}
-                        helperText={formik.errors.signature}
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                    />
-                </Grid>
-                <Grid item sx={{ display: 'flex', justifyContent: 'flex-end' }} xs={12}>
+                <Grid container spacing={3}>
+                    <Grid item xs={6}  >
+                        <div style={{ paddingTop: '30px', height: '200px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                            <Typography variant="h6" gutterBottom>
+                               Student Photo
+                            </Typography>
+                            <input
+                                accept="image/*"
+                                type="file"
+                                id="select-image"
+                                style={{ display: "none", height: "150px" }}
+                                onChange={(e) => setSelectedImage(e.target.files[0])}
+                            />
+                            <label htmlFor="select-image">
+                                <Button style={{ height: '50px' }} variant="contained" color="primary" component="span">
+                                    Upload Photo
+                                </Button>
+                            </label>
+                        </div>
+                    </Grid>
+                    <div style={{ paddingTop: '30px', height: '100px', justifyContent: 'center' }}>
+                        <Grid item xs={6} md={9} >
+                            {imageUrl && selectedImage && (
+                                <Box mt={2} textAlign="center">
+                                    <Typography variant="h6" gutterBottom>
+                                        Preview
+                                    </Typography>
+                                    <img src={imageUrl} alt={selectedImage.name} height="150px" />
+                                </Box>
+                            )}
+                        </Grid>
+                    </div>
+
+                    <Grid item xs={6} >
+                        <div style={{ paddingTop: '30px', height: '200px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                            <Typography variant="h6" gutterBottom>
+                                SEE GradeSheet
+                            </Typography>
+                            <input
+                                accept="image/*"
+                                type="file"
+                                id="select-sgradesheet"
+                                style={{ display: "none", height: "150px" }}
+                                onChange={(e) => setSEETranscript(e.target.files[0])}
+                            />
+                            <label htmlFor="select-sgradesheet">
+                                <Button style={{ height: '50px' }} variant="contained" color="primary" component="span">
+                                    Upload SEE Marksheet
+                                </Button>
+                            </label>
+                        </div>
+                    </Grid>
+                    <div style={{ paddingTop: '30px', height: '100px', justifyContent: 'center' }}>
+                        <Grid item xs={6}  >
+                            {seeTranscriptUrl && seeTranscript && (
+                                <Box mt={2} textAlign="center">
+                                    <Typography variant="h6" gutterBottom>
+                                        Preview
+                                    </Typography>
+                                    <img src={seeTranscriptUrl} alt={seeTranscript.name} height="150px" />
+                                </Box>
+                            )}
+                        </Grid>
+                    </div>
+
+                    <Grid item xs={6} >
+                        <div style={{ paddingTop: '30px', height: '200px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                            <Typography variant="h6" gutterBottom>
+                                SEE Character
+                            </Typography>
+                            <input
+                                accept="image/*"
+                                type="file"
+                                id="select-character"
+                                style={{ display: "none", height: "150px" }}
+                                onChange={(e) => setSEECharacter(e.target.files[0])}
+                            />
+                            <label htmlFor="select-character">
+                                <Button style={{ height: '50px' }} variant="contained" color="primary" component="span">
+                                    Upload SEE Character
+                                </Button>
+                            </label>
+                        </div>
+                    </Grid>
+                   
+                    <div style={{ paddingTop: '30px', height: '100px', justifyContent: 'center' }}>
+                        <Grid item xs={6}>
+                        {seeCharacterUrl && seeCharacter && (
+                                <Box mt={2} textAlign="center">
+                                     <Typography variant="h6" gutterBottom>
+                                        Preview
+                                    </Typography>
+                                    <img src={seeCharacterUrl} alt={seeCharacter.name} height="150px" />
+                                </Box>
+                            )}
+                        </Grid>
+                    </div>
+                   
+
+                    <Grid item xs={6} >
+                        <div style={{ paddingTop: '30px', height: '200px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                            <Typography variant="h6" gutterBottom>
+                                Certificate GradeSheet
+                            </Typography>
+                            <input
+                                accept="image/*"
+                                type="file"
+                                id="select-cgradesheet"
+                                style={{ display: "none", height: "150px" }}
+                                onChange={(e) => setMarksheet(e.target.files[0])}
+                            />
+                            <label htmlFor="select-cgradesheet">
+                                <Button style={{ height: '50px' }} variant="contained" color="primary" component="span">
+                                    Upload Certificate GradeSheet
+                                </Button>
+                            </label>
+                        </div>
+                    </Grid>
+                    <div style={{ paddingTop: '30px', height: '100px', justifyContent: 'center' }}>
+                        <Grid item xs={6}  >
+                            {marksheetUrl && marksheet && (
+                                <Box mt={2} textAlign="center">
+                                    <Typography variant="h6" gutterBottom>
+                                        Preview
+                                    </Typography>
+                                    <img src={marksheetUrl} alt={marksheet.name} height="150px" />
+                                </Box>
+                            )}
+                        </Grid>
+                    </div>
+
+                    <Grid item xs={6} >
+                        <div style={{ paddingTop: '30px', height: '200px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                            <Typography variant="h6" gutterBottom>
+                                Certificate Character
+                            </Typography>
+                            <input
+                                accept="image/*"
+                                type="file"
+                                id="select-ccharacter"
+                                style={{ display: "none", height: "150px" }}
+                                onChange={(e) => setCharacter(e.target.files[0])}
+                            />
+                            <label htmlFor="select-ccharacter">
+                                <Button style={{ height: '50px' }} variant="contained" color="primary" component="span">
+                                    Upload Certificate Character
+                                </Button>
+                            </label>
+                        </div>
+                    </Grid>
+                    <div style={{ paddingTop: '30px', height: '100px', justifyContent: 'center' }}>
+                        <Grid item xs={6}  >
+                            {characterUrl && character && (
+                                <Box mt={2} textAlign="center">
+                                    <Typography variant="h6" gutterBottom>
+                                        Preview
+                                    </Typography>
+                                    <img src={characterUrl} alt={character.name} height="150px" />
+                                </Box>
+                            )}
+                        </Grid>
+                        <Divider/>
+                    </div>
+
+                    <Grid item xs={6} >
+                        <div style={{ paddingTop: '30px', height: '200px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                            <Typography variant="h6" gutterBottom>
+                                Certificate Migration
+                            </Typography>
+                            <input
+                                accept="image/*"
+                                type="file"
+                                id="select-migration"
+                                style={{ display: "none", height: "150px" }}
+                                onChange={(e) => setMigration(e.target.files[0])}
+                            />
+                            <label htmlFor="select-migration">
+                                <Button style={{ height: '50px' }} variant="contained" color="primary" component="span">
+                                    Upload Certificate Migration
+                                </Button>
+                            </label>
+                        </div>
+                    </Grid>
+                    <div style={{ paddingTop: '30px', height: '100px', justifyContent: 'center' }}>
+                        <Grid item xs={6}  >
+                            {migrationUrl && migration && (
+                                <Box mt={2} textAlign="center">
+                                    <Typography variant="h6" gutterBottom>
+                                        Preview
+                                    </Typography>
+                                    <img src={migrationUrl} alt={migration.name} height="150px" />
+                                </Box>
+                            )}
+                        </Grid>
+                    </div>
+                    
+                    <Grid item xs={6} >
+                        <div style={{ paddingTop: '30px', height: '200px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                            <Typography variant="h6" gutterBottom>
+                                Student Signature
+                            </Typography>
+                            <input
+                                accept="image/*"
+                                type="file"
+                                id="select-signature"
+                                style={{ display: "none", height: "150px" }}
+                                onChange={(e) => setSignature(e.target.files[0])}
+                            />
+                            <label htmlFor="select-signature">
+                                <Button style={{ height: '50px' }} variant="contained" color="primary" component="span">
+                                    Upload Student Signature
+                                </Button>
+                            </label>
+                        </div>
+                    </Grid>
+                    <div style={{ paddingTop: '30px', height: '100px', justifyContent: 'center' }}>
+                        <Grid item xs={6}  >
+                            {signatureUrl && signature && (
+                                <Box mt={2} textAlign="center">
+                                    <Typography variant="h6" gutterBottom>
+                                        Preview
+                                    </Typography>
+                                    <img src={signatureUrl} alt={signature.name} height="150px" />
+                                </Box>
+                            )}
+                        </Grid>
+                    </div> 
+                   
+                    <Grid item sx={{ display: 'flex', justifyContent: 'flex-end' }} xs={12}>
                         {activeStep !== 0 && (
                             <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
-                                Back
+                              Back
                             </Button>
                         )}
                         <Button
                             type='submit'
                             variant="contained"
+                            onClick={handleDocumentAction(studentInfo.ID)}
                             sx={{ mt: 3, ml: 1 }}
                         >
                             {activeStep === steps.length - 1 ? 'Submit' : 'Next'}
                         </Button>
                     </Grid>
-            </Grid>
+                </Grid>
             </div>
         </form>
     );

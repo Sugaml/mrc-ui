@@ -12,6 +12,7 @@ import {CustomizedSnackbars} from '../SnackBar'
 import { ForgotPassword } from '../ForgotPassword';
 import {KhaltiPayment} from '../KhaltiPayment';
 import { Profile } from '../Profile';
+import { FeeInformation } from '../FeeInformation';
  
 
 const Router = () => {
@@ -26,6 +27,7 @@ const Router = () => {
         <Route element={<PrivateRoute />}>
         <Route index path='/home' element={<Home />} />
         <Route path='/profile' element={<Profile/>}/>
+        <Route path='/account' element={<FeeInformation/>}/>
         <Route  path='/enroll' element={<EnrollForm />} /> 
         <Route index path='/billing' element={<KhaltiPayment />} />
         <Route path='/online' element={<CourseChoice/>}/>

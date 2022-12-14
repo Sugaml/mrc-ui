@@ -7,6 +7,8 @@ import Box from '@mui/material/Box';
 import { StudentGeneral } from './StudentGeneral';
 import { AddressInformation } from './AddressInformation';
 import { CourseInformation } from './CourseInformation';
+import { DocumentInformation } from './DocumentInformation';
+import { AcademicInformation } from './AcademicInformation';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -63,8 +65,8 @@ export const Profile=()=> {
         <Tab label="General Information" {...a11yProps(0)} />
         <Tab label="Address Information" {...a11yProps(1)} />
         <Tab label="Course Information" {...a11yProps(2)} />
-        <Tab label="Fee Information" {...a11yProps(3)} />
-        <Tab label="Academic Information" {...a11yProps(4)} />
+        <Tab label="Academic Information" {...a11yProps(3)} />
+        <Tab label="Document Information" {...a11yProps(4)} />
       </Tabs>
       <TabPanel value={value} index={0}>
        <StudentGeneral/>
@@ -76,10 +78,10 @@ export const Profile=()=> {
        <CourseInformation/>
       </TabPanel>
       <TabPanel value={value} index={3}>
-        Academic Information
+        <AcademicInformation/>
       </TabPanel>
       <TabPanel value={value} index={4}>
-        Document Information
+        <DocumentInformation/>
       </TabPanel>
     </Box>
   );

@@ -32,26 +32,26 @@ const pages = [
   //   page: 'Notice',
   //   indexs: 2
   // },
-  {
-    page: 'Courses',
-    indexs: 3
-  }
+  // {
+  //   page: 'Courses',
+  //   indexs: 3
+  // }
 ];
 
 const settings = ['Profile', 'Account', 'Billing', 'Logout'];
 const programs = [
   {
-    name: 'Bachelor of Inforamtion and Communication Technology',
+    name: 'BICT',
     path: '/menu'
   },
-  // {
-  //   name: 'Bachelor of Inforamtion Management',
-  //   path: '/menu'
-  // }
-  // , {
-  //   name: 'Bachelor of Computer Application (BCA)',
-  //   path: '/menu'
-  // },
+  {
+    name: 'BIM',
+    path: '/menu'
+  }
+  , {
+    name: 'BSc.CSIT',
+    path: '/menu'
+  },
 ];
 
 export const ResponsiveAppBar = ({ children }) => {
@@ -145,7 +145,7 @@ export const ResponsiveAppBar = ({ children }) => {
                   Programs
                 </Button>
                 <Menu
-                  sx={{ mt: '45px' }}
+                  sx={{ mt: '45px'}}
                   id="menu-appbar"
                   anchorEl={anchorElPrograms}
                   anchorOrigin={{
@@ -162,8 +162,8 @@ export const ResponsiveAppBar = ({ children }) => {
                 >
                   {programs.map((program) => (
                     <MenuItem key={program} onClick={handleCloseProgramsMenu}
-                      onMouseEnter={(e) => e.target.style.color = 'blue'} >
-                      <NavLink to={program.path} >{program.name} </NavLink>
+                      onMouseEnter={(e) => e.target.style.color = 'blue' } >
+                      <Link to={program.path} style={{  color: '#000', textDecoration: 'none' }} >{program.name}</Link>
                     </MenuItem>
                   ))}
                 </Menu>
