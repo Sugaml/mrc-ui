@@ -13,27 +13,33 @@ import { ForgotPassword } from '../ForgotPassword';
 import {KhaltiPayment} from '../KhaltiPayment';
 import { Profile } from '../Profile';
 import { FeeInformation } from '../FeeInformation';
+import PublicRoute from './publicRouting';
  
 
 const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<SignIn />} />
-        <Route path='/signup' element={<SignUp/>}/>
-        <Route path='/logout' element={<SignUp/>}/>
         
+        <Route element={<PublicRoute />}>
+        <Route path='/' element={<Home />} />
+        <Route path='/signup' element={<SignUp/>}/>
+        <Route path='/signin' element={<SignIn />} />
         <Route path='/forgot_password' element={<ForgotPassword />} />
+        <Route path='/menu' element={<BictCourse />} />
+        <Route path='/logout' element={<Home/>}/>
+        </Route>
+
         <Route element={<PrivateRoute />}>
-        <Route index path='/home' element={<Home />} />
+        <Route  path='/home' element={<Home />} />
+        <Route path='/menu' element={<BictCourse />} />
         <Route path='/profile' element={<Profile/>}/>
         <Route path='/account' element={<FeeInformation/>}/>
+
         <Route  path='/enroll' element={<EnrollForm />} /> 
         <Route index path='/billing' element={<KhaltiPayment />} />
         <Route path='/online' element={<CourseChoice/>}/>
         <Route index path='/courses' element={<Course />} />
-        
-        <Route path='/menu' element={<BictCourse />} />
         <Route path='/snack' element={<CustomizedSnackbars />} />
         </Route>
       </Routes>
