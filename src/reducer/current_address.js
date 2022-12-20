@@ -11,7 +11,7 @@ function CurrentAddress(state = INITIAL_STATE, action) {
     case types.GET_CURRENT_ADDRESS:
       return {
         ...state,
-        isCurrentCourse: true,
+        isCurrentAddress: true,
       };
     case types.GET_CURRENT_ADDRESS_SUCCESS:
       console.log("success current address :: ",payload)

@@ -12,6 +12,7 @@ import StudentGeneral from "./reducer/student_general";
 import UserInfo from "./reducer/user";
 import CurrentCourse from "./reducer/current_course";
 import CurrentAddress from "./reducer/current_address";
+import CurrentDocument from "./reducer/current_document";
 
 
 const rootReducer = combineReducers({
@@ -28,6 +29,7 @@ const rootReducer = combineReducers({
   CurrentAddress:CurrentAddress,
   StudentGeneral:StudentGeneral,
   UserInfo:UserInfo,
+  CurrentDocument:CurrentDocument,
 });
 
 export default rootReducer;

@@ -60,25 +60,27 @@ export const FileInfo = ({
             setSignatureUrl(URL.createObjectURL(signature));
         }
     }, [selectedImage,seeTranscript,seeCharacter,marksheet,character,migration,signature]);
-    console.log(seeTranscriptUrl,imageUrl)
+    console.log("Image Url :: ",seeTranscriptUrl,imageUrl)
 
-    const handleDocumentAction = (id) => {
+    const handleDocumentAction = (e)=> (id) => {
             console.log('Inside address onsubmit.....')
-            const studentDocumentData = {
-                "photo": imageUrl,
-                "see_transcript":seeTranscriptUrl ,
-                "see_character": seeCharacterUrl,
-                "certificate_transcript":marksheetUrl,
-                "certificate_character": characterUrl,
-                "certificate_migration": migrationUrl,
-                "citizenship_front": "",
-                "citizenship_back": "",
-                "signatue":signatureUrl,
-                "student_id": id,
+            if (studentInfo) {
+                const studentDocumentData = {
+                    "photo": imageUrl,
+                    "see_transcript":seeTranscriptUrl ,
+                    "see_character": seeCharacterUrl,
+                    "certificate_transcript":marksheetUrl,
+                    "certificate_character": characterUrl,
+                    "certificate_migration": migrationUrl,
+                    "citizenship_front": "",
+                    "citizenship_back": "",
+                    "signatue":signatureUrl,
+                    "student_id": studentInfo.ID,
+                }
+                console.log("Document Data ::",studentDocumentData)
+                handleSuccess();
+                dispatch(studentFileInfoAction(studentDocumentData))
             }
-            console.log(studentDocumentData)
-            handleSuccess();
-            dispatch(studentFileInfoAction(studentDocumentData))
         }
 
     return (
@@ -321,7 +323,7 @@ export const FileInfo = ({
                         <Button
                             type='submit'
                             variant="contained"
-                            onClick={handleDocumentAction(studentInfo.ID)}
+                            onClick={handleDocumentAction()}
                             sx={{ mt: 3, ml: 1 }}
                         >
                             {activeStep === steps.length - 1 ? 'Submit' : 'Next'}

@@ -22,7 +22,7 @@ export const studentInfoAction= (token,studentInfoData) => async (dispatch) => {
     dispatch(stuInfo());
     const response = await postStuInfo(token,studentInfoData, "student_info");
     if (response){
-      dispatch(stuInfoSuccess(response));
+      dispatch(stuInfoSuccess(response.data));
       ToastConfig.success("Successfully added student information.")
     }else{
       dispatch(stuInfoFailure());

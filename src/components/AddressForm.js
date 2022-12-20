@@ -81,7 +81,7 @@ export const AddressForm = (
                 "tstreet": formik.values.tstreet,
                 "tward_number": parseInt(formik.values.twardNum.number),
                 "thouse_number": formik.values.thouse_number,
-                "student_id": studentInfo.data.ID,
+                "student_id": studentInfo.ID,
             }
             console.log("student address info:", studetAddressInfoData)
             handleNextEducation();
