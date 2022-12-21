@@ -10,7 +10,7 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { AddressForm } from './AddressForm';
 import { StudentInfo } from './StudentInfo';
-import { FileInfo } from './FileInfo';
+import { DocumentForm } from './DocumentForm';
 import { EducationForm } from './EducationForm';
 
 const steps = [ 'General Info', 'Address Info', 'Academic Info', 'Document Attach'];
@@ -42,7 +42,7 @@ function getStepContent(activeStep,setActiveStep, steps, handleBack, handleNext)
       steps={steps}
       />;
     case 3:
-      return <FileInfo
+      return <DocumentForm
       activeStep={activeStep}
       setActiveStep={setActiveStep}
       handleBack={handleBack}

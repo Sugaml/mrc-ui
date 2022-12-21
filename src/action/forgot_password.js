@@ -22,7 +22,7 @@ export const fotgotPasswordAction= (fotgotPasswordData) => async (dispatch) => {
     dispatch(forgotPassword());
     const response = await postForgotPassword(fotgotPasswordData, "user/forgot-password");
     if (response){
-      dispatch(forgotPasswordSuccess(response));
+      dispatch(forgotPasswordSuccess(response.data));
       ToastConfig.success("Successfully sent email.")
     }else{
       dispatch(forgotPasswordFailure());

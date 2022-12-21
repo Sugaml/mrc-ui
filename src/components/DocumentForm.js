@@ -9,7 +9,7 @@ import { studentFileInfoAction } from '../action/studentfile';
 import { Divider } from '@mui/material';
 
 
-export const FileInfo = ({
+export const DocumentForm = ({
     activeStep,
     setActiveStep,
     handleBack,

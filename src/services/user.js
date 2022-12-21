@@ -19,3 +19,11 @@ export const getUser = (token, url) => {
             config
             );
 };
+
+
+export const postresetPassword =  (payload, url) => {
+    return  axios.post(
+        `${process.env.REACT_APP_API}/${url}`,
+        payload,
+        );
+};

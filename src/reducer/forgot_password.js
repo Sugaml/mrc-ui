@@ -30,4 +30,4 @@ function ForgotPassword(state = INITIAL_FORGOT_PASSWORD_STATE, action) {
   }
 }
 
-export default StudentInfo;
+export default ForgotPassword;

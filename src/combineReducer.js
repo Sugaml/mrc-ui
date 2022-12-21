@@ -13,6 +13,7 @@ import UserInfo from "./reducer/user";
 import CurrentCourse from "./reducer/current_course";
 import CurrentAddress from "./reducer/current_address";
 import CurrentDocument from "./reducer/current_document";
+import ResetPassword from "./reducer/reset_password";
 
 
 const rootReducer = combineReducers({
@@ -30,6 +31,7 @@ const rootReducer = combineReducers({
   StudentGeneral:StudentGeneral,
   UserInfo:UserInfo,
   CurrentDocument:CurrentDocument,
+  ResetPassword:ResetPassword,
 });
 
 export default rootReducer;

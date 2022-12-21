@@ -14,6 +14,8 @@ import {KhaltiPayment} from '../KhaltiPayment';
 import { Profile } from '../Profile';
 import { FeeInformation } from '../FeeInformation';
 import PublicRoute from './publicRouting';
+import { IconUpload } from '../IconUpload';
+import { ResetPassword } from '../ResetPassword';
  
 
 const Router = () => {
@@ -21,12 +23,14 @@ const Router = () => {
     <BrowserRouter>
       <Routes>
         
+        <Route path='/resetpassword/:id' element={<ResetPassword/>}/>
+        <Route path='/signup' element={<SignUp/>}/>
         <Route element={<PublicRoute />}>
         <Route path='/' element={<Home />} />
-        <Route path='/signup' element={<SignUp/>}/>
         <Route path='/signin' element={<SignIn />} />
         <Route path='/forgot_password' element={<ForgotPassword />} />
         <Route path='/menu' element={<BictCourse />} />
+        <Route  path="/upload" element={<IconUpload/>}/>
         <Route path='/logout' element={<Home/>}/>
         </Route>
 

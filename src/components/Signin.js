@@ -15,7 +15,8 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useDispatch, useSelector } from "react-redux";
 import { auth } from "../action/auth";
 import { Navigate } from "react-router-dom";
-
+import { useFormik } from "formik";
+import * as Yup from 'yup';
 
 function Copyright(props) {
   return (
@@ -33,43 +34,29 @@ function Copyright(props) {
 const theme = createTheme();
 
 export const SignIn=() =>{
-const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-const dispatch = useDispatch();
-const [userName, setUserName] = useState("");
-const [password, setPassword] = useState("");
-const [err, setErr] = useState(false);
+  const dispatch = useDispatch();
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
-const handleUserName = (e) => {
-    setErr(false);
-    setUserName(e.target.value);
-  };
+  const formik = useFormik({
+    initialValues: {
+      email:"",
+      password:"",
+    },
+    validationSchema: Yup.object({
+      email: Yup.string().email('invalid email address').required("required email address"),
+      password: Yup.string().max(20, "must be 20 character or less").required("required password"),
+    }),
 
-  const handleUserPassword = (e) => {
-    setErr(false);
-    setPassword(e.target.value);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-    handleLoginApi();
-  };
-
-  const handleLoginApi = () => {
-    const dataLoginRequest= {
-        username: userName,
-        password: password
+    onSubmit: () => {
+      const dataLoginRequest = {
+        "username":formik.values.email,
+        "password":formik.values.password,
+      }
+      console.log(dataLoginRequest)
+      dispatch(auth( dataLoginRequest));
     }
-    if (!dataLoginRequest.username&&!dataLoginRequest.password){
-        return
-    }
-    console.log(dataLoginRequest)
-    dispatch(auth( dataLoginRequest));
-}
+  });
+
 if (isAuthenticated) return <Navigate to="/home" />;
 
   return (
@@ -90,37 +77,54 @@ if (isAuthenticated) return <Navigate to="/home" />;
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              value={userName}
-              onChange={handleUserName}
-              label="Email Address"
-              name="email"
-              error={err}
-              autoComplete="email"
-              autoFocus
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              value={password}
-              onChange={handleUserPassword}
-              error={err}
-              autoComplete="current-password"
-            />
-            <FormControlLabel
+          <Box sx={{ mt: 1 }}>
+          <form onSubmit={formik.handleSubmit}>
+            <Grid container spacing={2}>
+            <Grid item xs={12}>
+                <Typography variant="body1" gutterBottom>
+                  Email
+                </Typography>
+                <TextField
+                  required
+                  id="email"
+                  name="email"
+                  label="Email"
+                  value={formik.values.email}
+                  fullWidth
+                  error={formik.touched.email && formik.errors.email ? true : false}
+                  autoComplete="given-name"
+                  variant="outlined"
+                  helperText={formik.errors.email}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <Typography variant="body1" gutterBottom>
+                  Password
+                </Typography>
+                <TextField
+                  required
+                  id="password"
+                  name="password"
+                  label="password"
+                  value={formik.values.password}
+                  fullWidth
+                  error={formik.touched.password && formik.errors.password ? true : false}
+                  autoComplete="given-name"
+                  variant="outlined"
+                  helperText={formik.errors.password}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                />
+              </Grid>
+              <Grid item xs={6}>
+              <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
+            </Grid>
+            <Grid item xs={12}>
             <Button
               type="submit"
               fullWidth
@@ -129,6 +133,7 @@ if (isAuthenticated) return <Navigate to="/home" />;
             >
               Sign In
             </Button>
+            </Grid>
             <Grid container>
               <Grid item xs>
                 <Link href="/forgot_password" variant="body2">
@@ -141,6 +146,8 @@ if (isAuthenticated) return <Navigate to="/home" />;
                 </Link>
               </Grid>
             </Grid>
+              </Grid>
+          </form>
           </Box>
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />
