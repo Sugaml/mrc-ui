@@ -12,6 +12,8 @@ import MenuItem from '@mui/material/MenuItem';
 import ListItemText from '@mui/material/ListItemText';
 import MenuList from '@mui/material/MenuList';
 import Divider from '@mui/material/Divider';
+import { Footer } from './Footer';
+import { useNavigate } from "react-router-dom";
 
 
 const tiers = [
@@ -128,6 +130,12 @@ const tiers = [
 
 
 export const Course = () => {
+    const navigate =useNavigate();
+    
+    const handleEnroll=()=>{
+        return navigate("/online");
+    }
+
     return (
         <div>
             <Container disableGutters maxWidth="xl" component="main" sx={{ pt: 2, pb: 6 }}>
@@ -199,7 +207,7 @@ export const Course = () => {
                                     </MenuList>
                                 </CardContent>
                                 <CardActions>
-                                    <Button fullWidth variant={tier.buttonVariant}>
+                                    <Button fullWidth onClick={handleEnroll} variant={tier.buttonVariant}>
                                         {tier.buttonText}
                                     </Button>
                                 </CardActions>
@@ -208,6 +216,7 @@ export const Course = () => {
                     ))}
                 </Grid>
             </Container>
+            <Footer/>
         </div>
     )
 }

@@ -23,10 +23,12 @@ export const StudentInfo = ({
     const handleNextAddress = () => {
         setActiveStep(activeStep + 1);
     };
-    const studentInfo = useSelector((state) => state.StudentInfo.student);
-    console.log("state loading ",studentInfo)
     const dispatch = useDispatch();
 
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+    const studentInfo = useSelector((state) => state.StudentInfo.student);
+    const course = useSelector((state) => state.CurrentCourse.course);
+    
     const formik = useFormik({
         initialValues: {
             firstName: "",
@@ -45,10 +47,10 @@ export const StudentInfo = ({
             lastName: Yup.string().max(15, "Must be 15 character or less").required("Required"),
             gender: Yup.string().required("Required"),
             email: Yup.string().email('Invalid Email').required(),
-            mobileNum: Yup.number().required(),
+            mobileNum: Yup.number().required("required mobile number").test('len', 'Must be 10 digit', val => val && val.toString().length === 10 ),
             parentName: Yup.string().max(15, "Must be 15 character or less").required("Required"),
             parentRelation: Yup.string().max(15, "Must be 15 character or less").required("Required"),
-            parentNumber: Yup.number().required(),
+            parentNumber:Yup.number().required("required mobile number").test('len', 'Must be 10 digit', val => val && val.toString().length === 10 ),
             dob: Yup.string().required(),
             religion: Yup.string().max(15, "Must be 15 character or less").required()
         }),
@@ -64,10 +66,11 @@ export const StudentInfo = ({
                 "parent_name":formik.values.parentName,
                 "parent_mobile":formik.values.parentNumber,
                 "parent_relation":formik.values.parentRelation,
+                "cid":course.ID,
             }
             console.log(studetInfoData)
             handleNextAddress();
-            dispatch(studentInfoAction(studetInfoData))
+            dispatch(studentInfoAction(isAuthenticated,studetInfoData))
         }
     });
 
@@ -206,7 +209,7 @@ export const StudentInfo = ({
                     </Grid>
                     <Grid item xs={12} sm={6}>
                         <Typography variant="h6" gutterBottom>
-                            Patent Relation
+                            Parent Relation
                         </Typography>
                         <TextField
                             required
@@ -289,7 +292,7 @@ export const StudentInfo = ({
                     <Button
                         type='submit'
                         variant="contained"
-                        sx={{ mt: 3, ml: 1 }}
+                        sx={{ mt: 3, ml: 1,float:'right' }}
                         disabled={!formik.values.firstName || !formik.values.lastName || !formik.values.gender ||
                             !formik.values.email || !formik.values.mobileNum || !formik.values.parentName
                             || !formik.values.parentRelation || !formik.values.dob || !formik.values.religion ||

@@ -12,6 +12,7 @@ import ContentPaste from '@mui/icons-material/ContentPaste';
 import Cloud from '@mui/icons-material/Cloud';
 import Grid from '@mui/material/Grid';
 import Container from '@mui/material/Container';
+import { Footer } from './Footer';
 
 
 const tiers = [
@@ -117,6 +118,7 @@ export const Menu = () => {
           </Paper>
         </Grid>
       </Container>
+      <Footer/>
     </div>
   );
 }

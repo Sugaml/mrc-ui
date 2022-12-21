@@ -3,6 +3,8 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { MainFeaturedPost } from './MainFeature';
+import { Footer } from './Footer';
+
 
 const theme = createTheme();
 
@@ -47,6 +49,7 @@ export const Home = () => {
                     </Typography>
                 </Container>
             </ThemeProvider>
+            <Footer />
         </div>
     )
 }

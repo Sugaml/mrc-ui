@@ -13,8 +13,9 @@ import { Link } from 'react-router-dom'
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Footer } from './Footer';
+import { getUserAction } from '../action/user';
 
 
 const mdTheme = createTheme();
@@ -31,44 +32,51 @@ const pages = [
   //   page: 'Notice',
   //   indexs: 2
   // },
-  {
-    page: 'Courses',
-    indexs: 3
-  }
+  // {
+  //   page: 'Courses',
+  //   indexs: 3
+  // }
 ];
 
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Profile', 'Account', 'Billing', 'Logout'];
 const programs = [
   {
-    name: 'Bachelor of Inforamtion and Communication Technology',
+    name: 'BICT',
     path: '/menu'
   },
-  // {
-  //   name: 'Bachelor of Inforamtion Management',
-  //   path: '/menu'
-  // }
-  // , {
-  //   name: 'Bachelor of Computer Application (BCA)',
-  //   path: '/menu'
-  // },
+  {
+    name: 'BIM',
+    path: '/menu'
+  }
+  , {
+    name: 'BSc.CSIT',
+    path: '/menu'
+  },
 ];
 
 export const ResponsiveAppBar = ({ children }) => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [anchorElPrograms, setAnchorElPrograms] = React.useState(null);
+  const dispatch = useDispatch();
 
-  const navigate =useNavigate();
+  const token = useSelector((state) => state.auth.isAuthenticated);
+  const user = useSelector((state) => state.UserInfo.user);
 
+  React.useEffect(() => {
+    dispatch(getUserAction(token))
+  }, [dispatch, token])
+
+  const navigate = useNavigate();
   const handleStepContent = (step) => () => {
     console.log(step)
     switch (step) {
-      case 0: 
+      case 0:
         return navigate("/home");
       // case 1:  
       //   return navigate("/home");
       // case 2: 
       //   return navigate("/home")
-      case 3: 
+      case 3:
         return navigate("/courses")
       default:
         return navigate("/menu")
@@ -83,11 +91,17 @@ export const ResponsiveAppBar = ({ children }) => {
     setAnchorElUser(null);
   };
 
-  const handleOpenProgramsMenu=(event)=>{
+  const handleSettingMenu = (handleKeys) => (event) => {
+    setAnchorElUser(null);
+    if (!handleKeys) return
+    navigate("/" + handleKeys.toLowerCase())
+  };
+
+  const handleOpenProgramsMenu = (event) => {
     setAnchorElPrograms(event.currentTarget);
   }
 
-  const handleCloseProgramsMenu=()=>{
+  const handleCloseProgramsMenu = () => {
     setAnchorElPrograms(null);
   }
 
@@ -124,20 +138,20 @@ export const ResponsiveAppBar = ({ children }) => {
                     {data.page}
                   </Button>
                 ))}
-                 <Button
-                    onClick={handleOpenProgramsMenu}
-                    sx={{ my: 2, color: 'white', display: 'block' }}
-                  >
-                   Programs
-                  </Button>
-                  <Menu
-                  sx={{ mt: '45px' }}
+                <Button
+                  onClick={handleOpenProgramsMenu}
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                  Programs
+                </Button>
+                <Menu
+                  sx={{ mt: '45px'}}
                   id="menu-appbar"
                   anchorEl={anchorElPrograms}
                   anchorOrigin={{
                     vertical: 'top',
                     horizontal: 'right',
-                  }} 
+                  }}
                   keepMounted
                   transformOrigin={{
                     vertical: 'top',
@@ -148,29 +162,32 @@ export const ResponsiveAppBar = ({ children }) => {
                 >
                   {programs.map((program) => (
                     <MenuItem key={program} onClick={handleCloseProgramsMenu}
-                    onMouseEnter={(e) => e.target.style.color = 'blue'} >
-                      <NavLink to={program.path} >{program.name} </NavLink>
+                      onMouseEnter={(e) => e.target.style.color = 'blue' } >
+                      <Link to={program.path} style={{  color: '#000', textDecoration: 'none' }} >{program.name}</Link>
                     </MenuItem>
                   ))}
                 </Menu>
               </Box>
               <Box sx={{ flexGrow: 0 }}>
-                <Typography variant="contained" sx={{ pr: 5, color: 'red' }}>
+                <Typography variant="contained" sx={{ pr: 2, color: 'red' }}>
                   <Link to="/online" style={{ color: '#FFF', textDecoration: 'none' }} >Online Form</Link>
+                </Typography>
+                <Typography variant="contained" sx={{ pr: 3, color: 'red' }}>
+                  <Link to="/billing" style={{ color: '#FFF', textDecoration: 'none' }} >Billing</Link>
                 </Typography>
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                    <Avatar alt={user.firstname} src={user.image} />
                   </IconButton>
                 </Tooltip>
-               <Menu
+                <Menu
                   sx={{ mt: '45px' }}
                   id="menu-appbar"
                   anchorEl={anchorElUser}
                   anchorOrigin={{
                     vertical: 'top',
                     horizontal: 'right',
-                  }} 
+                  }}
                   keepMounted
                   transformOrigin={{
                     vertical: 'top',
@@ -180,7 +197,7 @@ export const ResponsiveAppBar = ({ children }) => {
                   onClose={handleCloseUserMenu}
                 >
                   {settings.map((setting) => (
-                    <MenuItem key={setting} onClick={handleCloseUserMenu} >
+                    <MenuItem key={setting} onClick={handleSettingMenu(setting)} >
                       <Typography textAlign="center">{setting}</Typography>
                     </MenuItem>
                   ))}
@@ -215,7 +232,6 @@ export const ResponsiveAppBar = ({ children }) => {
             {children}
           </Box>
         </Box>
-        <Footer />
       </ThemeProvider>
     </div >
   );
