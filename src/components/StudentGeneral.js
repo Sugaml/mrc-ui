@@ -2,20 +2,13 @@ import React from "react";
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
 import { useDispatch, useSelector } from "react-redux";
-import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardContent from '@mui/material/CardContent';
-import IconButton from '@mui/material/IconButton';
 import { getStudentGeneralAction } from '../action/user';
 
 
 export const StudentGeneral = () => {
-  const [expanded, setExpanded] = React.useState(false);
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
 
   const dispatch = useDispatch();
 

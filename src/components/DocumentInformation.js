@@ -17,14 +17,6 @@ export const DocumentInformation=()=> {
   return (
     <div>
       <Typography>Student Document Information </Typography>
-      <div style={{ display:'flex', backgroundColor:'red' }}>
-      {documentInfo  && (
-        <Box mt={2} textAlign="center">
-          <div>Image Preview:</div>
-          <img src={documentInfo.see_transcript} alt={documentInfo.documentInfo} height="150px" />
-        </Box>
-      )}
-      </div>
     </div>
   );
 }

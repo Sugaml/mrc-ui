@@ -16,6 +16,8 @@ import { FeeInformation } from '../FeeInformation';
 import PublicRoute from './publicRouting';
 import { IconUpload } from '../IconUpload';
 import { ResetPassword } from '../ResetPassword';
+import { Administration } from '../Administration';
+import { Account } from '../Account';
  
 
 const Router = () => {
@@ -35,7 +37,8 @@ const Router = () => {
         </Route>
 
         <Route element={<PrivateRoute />}>
-        <Route  path='/home' element={<Home />} />
+        <Route  path='/adminstration' element={<Administration />} />
+        <Route  path='/account' element={<Account />} />
         <Route path='/menu' element={<BictCourse />} />
         <Route path='/profile' element={<Profile/>}/>
         <Route path='/account' element={<FeeInformation/>}/>

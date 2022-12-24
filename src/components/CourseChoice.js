@@ -44,7 +44,7 @@ export const CourseChoice = () => {
                     color="text.primary"
                     gutterBottom
                 >
-                    We offers
+                    Addmission Opens on follwing courses::
                 </Typography>
             </Container>
             <Container maxWidth="lg" component="main">
@@ -56,7 +56,7 @@ export const CourseChoice = () => {
                             key={course.name}
                             xs={12}
                             sm={course.name === 'Enterprise' ? 12 : 6}
-                            md={4}
+                            md={6}
                         >
                             <Card>
                                 <CardHeader
