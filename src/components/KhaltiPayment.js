@@ -30,6 +30,7 @@ export const KhaltiPayment = () => {
                 // hit merchant api for initiating verfication
                 console.log(payload);
                 const paymentVerifyData = {
+                    "sid":student.ID,
                     "token": payload.token,
                     "amount": payload.amount,
                 }
