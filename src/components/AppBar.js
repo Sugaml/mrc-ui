@@ -16,6 +16,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { getUserAction } from '../action/user';
+import { logout } from '../action/auth';
 
 
 const mdTheme = createTheme();
@@ -94,6 +95,9 @@ export const ResponsiveAppBar = ({ children }) => {
   const handleSettingMenu = (handleKeys) => (event) => {
     setAnchorElUser(null);
     if (!handleKeys) return
+    if (handleKeys.toLowerCase()==="logout"){
+      dispatch(logout())
+    }
     navigate("/" + handleKeys.toLowerCase())
   };
 
