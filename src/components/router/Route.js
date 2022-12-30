@@ -18,6 +18,7 @@ import { IconUpload } from '../IconUpload';
 import { ResetPassword } from '../ResetPassword';
 import { Administration } from '../Administration';
 import { Account } from '../Account';
+import { VerifyEmail } from '../VerifyEmail';
  
 
 const Router = () => {
@@ -26,6 +27,7 @@ const Router = () => {
       <Routes>
         
         <Route path='/resetpassword/:id' element={<ResetPassword/>}/>
+        <Route path='/user/verify/:id' element={<VerifyEmail/>}/>
         <Route path='/signup' element={<SignUp/>}/>
         <Route element={<PublicRoute />}>
         <Route path='/' element={<Home />} />

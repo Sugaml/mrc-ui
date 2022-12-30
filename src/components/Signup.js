@@ -85,9 +85,6 @@ export const SignUp = () => {
           <form onSubmit={formik.handleSubmit}>
             <Grid container spacing={2}>
               <Grid item xs={6}>
-                <Typography variant="body1" gutterBottom>
-                  First Name
-                </Typography>
                 <TextField
                   required
                   id="firstname"
@@ -104,9 +101,6 @@ export const SignUp = () => {
                 />
               </Grid>
               <Grid item xs={6}>
-                <Typography variant="body1" gutterBottom>
-                  Last Name
-                </Typography>
                 <TextField
                   required
                   id="lastname"
@@ -123,9 +117,6 @@ export const SignUp = () => {
                 />
               </Grid>
               <Grid item xs={12}>
-                <Typography variant="body1" gutterBottom>
-                  Email
-                </Typography>
                 <TextField
                   required
                   id="email"
@@ -142,14 +133,12 @@ export const SignUp = () => {
                 />
               </Grid>
               <Grid item xs={12}>
-                <Typography variant="body1" gutterBottom>
-                  Password
-                </Typography>
                 <TextField
                   required
                   id="password"
                   name="password"
                   label="password"
+                  type="password"
                   value={formik.values.password}
                   fullWidth
                   error={formik.touched.password && formik.errors.password ? true : false}
@@ -161,9 +150,6 @@ export const SignUp = () => {
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
-                <Typography variant="body1" gutterBottom>
-                  Gender
-                </Typography>
                 <FormControl fullWidth sx={{ m: 0 }} size="large">
                   <InputLabel id="demo-select-small">Gender</InputLabel>
                   <Select
@@ -187,9 +173,6 @@ export const SignUp = () => {
                 </FormControl>
               </Grid>
               <Grid item xs={12} sm={6}>
-                <Typography variant="body1" gutterBottom>
-                  Role
-                </Typography>
                 <FormControl fullWidth sx={{ m: 0 }} size="large">
                   <InputLabel id="demo-select-small">Role</InputLabel>
                   <Select
