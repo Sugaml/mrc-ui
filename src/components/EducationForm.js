@@ -94,9 +94,6 @@ export const EducationForm = (
             </Typography>
             <Grid container spacing={3}>
                 <Grid item xs={12} sm={6}>
-                    <Typography variant="h6" gutterBottom>
-                        Insitution Name
-                    </Typography>
                     <TextField
                         required
                         id="iname"
@@ -113,9 +110,6 @@ export const EducationForm = (
                     />
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                    <Typography variant="h6" gutterBottom>
-                        Address of Insitution
-                    </Typography>
                     <TextField
                         required
                         id="iaddress"
@@ -132,9 +126,6 @@ export const EducationForm = (
                     />
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                    <Typography variant="h6" gutterBottom>
-                        Percentage/GPA
-                    </Typography>
                     <TextField
                         required
                         id="gpa"
@@ -151,9 +142,6 @@ export const EducationForm = (
                     />
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                    <Typography variant="h6" gutterBottom>
-                        Divison/Grade
-                    </Typography>
                     <TextField
                         required
                         id="grade"
@@ -170,9 +158,6 @@ export const EducationForm = (
                     />
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                    <Typography variant="h6" gutterBottom>
-                        Passed Year
-                    </Typography>
                     <TextField
                         required
                         id="passedYear"
@@ -189,9 +174,6 @@ export const EducationForm = (
                     />
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                    <Typography variant="h6" gutterBottom>
-                        Remarks
-                    </Typography>
                     <TextField
                         required
                         id="remarks"
@@ -214,9 +196,6 @@ export const EducationForm = (
             </Typography>
             <Grid container spacing={3}>
                 <Grid item xs={12} sm={6}>
-                    <Typography variant="h6" gutterBottom>
-                        Insitution Name
-                    </Typography>
                     <TextField
                         required
                         id="cname"
@@ -233,9 +212,6 @@ export const EducationForm = (
                     />
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                    <Typography variant="h6" gutterBottom>
-                        Address of Insitution
-                    </Typography>
                     <TextField
                         required
                         id="caddress"
@@ -252,9 +228,6 @@ export const EducationForm = (
                     />
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                    <Typography variant="h6" gutterBottom>
-                        Percentage/GPA
-                    </Typography>
                     <TextField
                         required
                         id="cgpa"
@@ -271,9 +244,6 @@ export const EducationForm = (
                     />
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                    <Typography variant="h6" gutterBottom>
-                        Divison/Grade
-                    </Typography>
                     <TextField
                         required
                         id="cgrade"
@@ -290,9 +260,6 @@ export const EducationForm = (
                     />
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                    <Typography variant="h6" gutterBottom>
-                        Passed Year
-                    </Typography>
                     <TextField
                         required
                         id="cpassedYear"
@@ -309,9 +276,6 @@ export const EducationForm = (
                     />
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                    <Typography variant="h6" gutterBottom>
-                        Remarks
-                    </Typography>
                     <TextField
                         required
                         id="cremarks"

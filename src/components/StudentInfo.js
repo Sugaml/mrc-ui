@@ -82,9 +82,6 @@ export const StudentInfo = ({
                 </Typography>
                 <Grid container spacing={3}>
                     <Grid item xs={12} sm={6}>
-                        <Typography variant="h6" gutterBottom>
-                            First Name
-                        </Typography>
                         <TextField
                             required
                             id="firstName"
@@ -101,9 +98,6 @@ export const StudentInfo = ({
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <Typography variant="h6" gutterBottom>
-                            Last Name
-                        </Typography>
                         <TextField
                             required
                             id="lastName"
@@ -122,9 +116,6 @@ export const StudentInfo = ({
 
 
                     <Grid item xs={12} sm={6}>
-                        <Typography variant="h6" gutterBottom>
-                            Gender
-                        </Typography>
                         <FormControl fullWidth sx={{ m: 0 }} size="large">
                             <InputLabel id="demo-select-small">Gender</InputLabel>
                             <Select
@@ -149,11 +140,8 @@ export const StudentInfo = ({
                     </Grid>
 
                     <Grid item xs={12} sm={6}>
-                        <Typography variant="h6" gutterBottom>
-                            Email
-                        </Typography>
                         <TextField
-                            //  required
+                             required
                             id="email"
                             name="email"
                             label="Email"
@@ -169,9 +157,6 @@ export const StudentInfo = ({
                     </Grid>
 
                     <Grid item xs={12} sm={6}>
-                        <Typography variant="h6" gutterBottom>
-                            Mobile Number
-                        </Typography>
                         <TextField
                             required
                             id="mobileNum"
@@ -189,9 +174,6 @@ export const StudentInfo = ({
                     </Grid>
 
                     <Grid item xs={12} sm={6}>
-                        <Typography variant="h6" gutterBottom>
-                            Parent Name
-                        </Typography>
                         <TextField
                             required
                             id="parentName"
@@ -208,17 +190,14 @@ export const StudentInfo = ({
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <Typography variant="h6" gutterBottom>
-                            Parent Relation
-                        </Typography>
                         <TextField
                             required
                             id="parentRelation"
                             name="parentRelation"
-                            label="Patent Relation"
+                            label="Parent Relation"
                             value={formik.values.parentRelation}
                             fullWidth
-                            autoComplete="Patent Relation"
+                            autoComplete="Parent Relation"
                             variant="outlined"
                             onChange={formik.handleChange}
                             error={formik.touched.parentRelation && formik.errors.parentRelation ? true : false}
@@ -227,9 +206,6 @@ export const StudentInfo = ({
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <Typography variant="h6" gutterBottom>
-                            Parent Mobile Number
-                        </Typography>
                         <TextField
                             id="parentNumber"
                             name="parentNumber"
@@ -244,9 +220,6 @@ export const StudentInfo = ({
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <Typography variant="h6" gutterBottom>
-                            Date of Birth
-                        </Typography>
                         <TextField
                             required
                             id="dob"
@@ -263,9 +236,6 @@ export const StudentInfo = ({
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <Typography variant="h6" gutterBottom>
-                            Religion
-                        </Typography>
                         <TextField
                             required
                             id="religion"
