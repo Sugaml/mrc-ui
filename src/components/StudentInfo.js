@@ -86,7 +86,7 @@ export const StudentInfo = ({
                             required
                             id="firstName"
                             name="firstName"
-                            label="First Name"
+                            label="Student Name"
                             value={formik.values.firstName}
                             fullWidth
                             error={formik.touched.firstName && formik.errors.firstName ? true : false}
