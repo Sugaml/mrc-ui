@@ -96,9 +96,6 @@ export const AddressForm = (
                 </Typography>
                 <Grid container spacing={3}>
                     <Grid item xs={12} sm={6}>
-                        <Typography variant="h6" gutterBottom>
-                            Provience
-                        </Typography>
                         <FormControl fullWidth sx={{ m: 0 }} size="large">
                             <InputLabel id="demo-select-small">Provience</InputLabel>
                             <Select
@@ -124,9 +121,6 @@ export const AddressForm = (
                     </Grid>
 
                     <Grid item xs={12} sm={6}>
-                        <Typography variant="h6" gutterBottom>
-                            District
-                        </Typography>
                         <FormControl fullWidth sx={{ m: 0 }} size="large">
                             <InputLabel id="demo-select-small">District</InputLabel>
                             <Select
@@ -152,9 +146,6 @@ export const AddressForm = (
                     </Grid>
 
                     <Grid item xs={12} sm={6}>
-                        <Typography variant="h6" gutterBottom>
-                            Rural/Municipality
-                        </Typography>
                         <FormControl fullWidth sx={{ m: 0 }} size="large">
                             <InputLabel id="demo-select-small">Rural/Municipality</InputLabel>
                             <Select
@@ -180,9 +171,6 @@ export const AddressForm = (
                         </FormControl>
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <Typography variant="h6" gutterBottom>
-                            Street
-                        </Typography>
                         <TextField
                             required
                             id="street"
@@ -199,9 +187,6 @@ export const AddressForm = (
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <Typography variant="h6" gutterBottom>
-                            Ward Number
-                        </Typography>
                         <TextField
                             required
                             id="wardNum"
@@ -218,9 +203,6 @@ export const AddressForm = (
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <Typography variant="h6" gutterBottom>
-                            House Number
-                        </Typography>
                         <TextField
                             id="houseNum"
                             name="houseNum"
@@ -238,9 +220,6 @@ export const AddressForm = (
                 </Typography>
                 <Grid container spacing={3}>
                 <Grid item xs={12} sm={6}>
-                        <Typography variant="h6" gutterBottom>
-                            Provience
-                        </Typography>
                         <FormControl fullWidth sx={{ m: 0 }} size="large">
                             <InputLabel id="demo-select-small">Provience</InputLabel>
                             <Select
@@ -267,9 +246,6 @@ export const AddressForm = (
                     </Grid>
 
                     <Grid item xs={12} sm={6}>
-                        <Typography variant="h6" gutterBottom>
-                            District
-                        </Typography>
                         <FormControl fullWidth sx={{ m: 0 }} size="large">
                             <InputLabel id="demo-select-small">District</InputLabel>
                             <Select
@@ -296,9 +272,6 @@ export const AddressForm = (
                     </Grid>
 
                     <Grid item xs={12} sm={6}>
-                        <Typography variant="h6" gutterBottom>
-                            Rural/Municipality
-                        </Typography>
                         <FormControl fullWidth sx={{ m: 0 }} size="large">
                             <InputLabel id="demo-select-small">Rural/Municipality</InputLabel>
                             <Select
@@ -325,9 +298,6 @@ export const AddressForm = (
                         </FormControl>
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <Typography variant="h6" gutterBottom>
-                            Street
-                        </Typography>
                         <TextField
                             required
                             id="tstreet"
@@ -344,9 +314,6 @@ export const AddressForm = (
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <Typography variant="h6" gutterBottom>
-                            Ward Number
-                        </Typography>
                         <TextField
                             required
                             id="twardNum"
@@ -363,9 +330,6 @@ export const AddressForm = (
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <Typography variant="h6" gutterBottom>
-                            House Number
-                        </Typography>
                         <TextField
                             id="thouseNum"
                             name="thouseNum"

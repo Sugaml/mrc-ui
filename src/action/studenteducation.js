@@ -1,6 +1,6 @@
 import ToastConfig from "../components/toast/Toast";
 import * as types from "../constant/actionTypes";
-import { postStudentEducationInfo } from "../services/student";
+import { getCurrentEducation, postStudentEducationInfo } from "../services/student";
 
 
 const studentEducationInfo = () => ({
@@ -32,6 +32,38 @@ export const studentEducationInfoAction= (studentEducationInfoData) => async (di
   catch (error) {
       console.log("error save student education ::",error);
       dispatch(studentEducationInfoFailure());
+      ToastConfig.error(error.error)
+    }
+};
+
+const getEducationInfo = () => ({
+  type: types.GET_CURRENT_EDUCATION,
+});
+
+const getEducationSuccess = (response) => ({
+  type: types.GET_CURRENT_EDUCATION_SUCCESS,
+  payload: response,
+});
+
+const getEducationFailure = () => ({
+  type: types.GET_CURRENT_EDUCATION_FAILURE,
+});
+
+export const getEducationAction= (token,id) => async (dispatch) => {
+  try{
+    dispatch(getEducationInfo());
+    const response = await getCurrentEducation(token, "student/"+id+"/education");
+    if (response){
+      dispatch(getEducationSuccess(response.data));
+      ToastConfig.success("Successfully get student education.")
+    }else{
+      dispatch(getEducationFailure());
+      ToastConfig.error("Failed to load student education.")
+    }
+  }
+  catch (error) {
+      console.log("error save student education",error);
+      dispatch(getEducationFailure());
       ToastConfig.error(error.error)
     }
 };

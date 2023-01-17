@@ -46,13 +46,13 @@ export const Footer = () => {
     return (
         <div>
         <div style={{backgroundColor:'white',padding:'15px',}}>
-                {/* <Typography variant="h3" color="blue" gutterBottom>
+                {/* <Typography variant="h3" color="SlateBlue" gutterBottom>
                    Mahendra Ratna Campus
                 </Typography> */}
                 <Grid container spacing={4} justifyContent="space-evenly">
                     {footers.map((footer) => (
                         <Grid item xs={6} sm={3} key={footer.title}>
-                            <Typography variant="h6" color="text.primary"  gutterBottom  sx={{ pl: 2.5, pr:2.5}}>
+                            <Typography variant="h6" color="SlateBlue"  gutterBottom  sx={{ pl: 2.5, pr:2.5}}>
                                 {footer.title}
                             </Typography>
                             <ul >
@@ -68,7 +68,7 @@ export const Footer = () => {
                     ))}
                 </Grid>
                 </div>
-                <div  style={{backgroundColor:'blue',padding:'15px',}}>
+                <div  style={{backgroundColor:'SlateBlue',padding:'15px'}}>
                     <Copyright sx={{mt: 3 }} />
                 </div>
         </div>

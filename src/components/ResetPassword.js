@@ -67,14 +67,12 @@ export const ResetPassword = () => {
             <form onSubmit={formik.handleSubmit}>
               <Grid container spacing={2}>
                 <Grid item xs={12}>
-                  <Typography variant="h6" gutterBottom>
-                    New Password
-                  </Typography>
                   <TextField
                     required
                     id="npwd"
                     name="npwd"
                     label="New Password"
+                    type="password"
                     value={formik.values.npwd}
                     fullWidth
                     error={formik.touched.npwd && formik.errors.npwd ? true : false}
@@ -86,13 +84,11 @@ export const ResetPassword = () => {
                   />
                 </Grid>
                 <Grid item xs={12}>
-                  <Typography variant="h6" gutterBottom>
-                    Confirm Password
-                  </Typography>
                   <TextField
                     required
                     id="cpwd"
                     name="cpwd"
+                    type="password"
                     label="Confirm Password"
                     value={formik.values.cpwd}
                     fullWidth

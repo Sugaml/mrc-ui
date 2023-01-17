@@ -16,18 +16,19 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { getUserAction } from '../action/user';
+import { logout } from '../action/auth';
 
 
 const mdTheme = createTheme();
 const pages = [
   {
-    page: 'Home',
+    page: 'Administration',
     indexs: 0
   },
-  // {
-  //   page: 'About',
-  //   indexs: 1
-  // }
+  {
+    page: 'Account',
+    indexs: 1
+  }
   // , {
   //   page: 'Notice',
   //   indexs: 2
@@ -38,7 +39,7 @@ const pages = [
   // }
 ];
 
-const settings = ['Profile', 'Account', 'Billing', 'Logout'];
+const settings = ['Profile', 'Logout'];
 const programs = [
   {
     name: 'BICT',
@@ -71,13 +72,13 @@ export const ResponsiveAppBar = ({ children }) => {
     console.log(step)
     switch (step) {
       case 0:
-        return navigate("/home");
-      // case 1:  
-      //   return navigate("/home");
+        return navigate("/profile");
+      case 1:  
+        return navigate("/account");
       // case 2: 
       //   return navigate("/home")
-      case 3:
-        return navigate("/courses")
+      // case 3:
+      //   return navigate("/courses")
       default:
         return navigate("/menu")
     }
@@ -94,6 +95,9 @@ export const ResponsiveAppBar = ({ children }) => {
   const handleSettingMenu = (handleKeys) => (event) => {
     setAnchorElUser(null);
     if (!handleKeys) return
+    if (handleKeys.toLowerCase()==="logout"){
+      dispatch(logout())
+    }
     navigate("/" + handleKeys.toLowerCase())
   };
 
@@ -115,7 +119,7 @@ export const ResponsiveAppBar = ({ children }) => {
                 variant="h4"
                 noWrap
                 component="a"
-                href="/home"
+                href="/online"
                 sx={{
                   mr: 2,
                   display: { xs: 'none', md: 'flex' },
@@ -138,12 +142,6 @@ export const ResponsiveAppBar = ({ children }) => {
                     {data.page}
                   </Button>
                 ))}
-                <Button
-                  onClick={handleOpenProgramsMenu}
-                  sx={{ my: 2, color: 'white', display: 'block' }}
-                >
-                  Programs
-                </Button>
                 <Menu
                   sx={{ mt: '45px'}}
                   id="menu-appbar"
@@ -170,11 +168,11 @@ export const ResponsiveAppBar = ({ children }) => {
               </Box>
               <Box sx={{ flexGrow: 0 }}>
                 <Typography variant="contained" sx={{ pr: 2, color: 'red' }}>
-                  <Link to="/online" style={{ color: '#FFF', textDecoration: 'none' }} >Online Form</Link>
+                  <Link to="/online" style={{ color: '#FFF', textDecoration: 'none' }} >Enroll Now</Link>
                 </Typography>
-                <Typography variant="contained" sx={{ pr: 3, color: 'red' }}>
-                  <Link to="/billing" style={{ color: '#FFF', textDecoration: 'none' }} >Billing</Link>
-                </Typography>
+                {/* <Typography variant="contained" sx={{ pr: 3, color: 'red' }}>
+                  <Link to="/billing" style={{ color: '#FFF', textDecoration: 'none' }} >Account</Link>
+                </Typography> */}
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                     <Avatar alt={user.firstname} src={user.image} />

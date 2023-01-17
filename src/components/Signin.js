@@ -57,7 +57,7 @@ export const SignIn=() =>{
     }
   });
 
-if (isAuthenticated) return <Navigate to="/home" />;
+if (isAuthenticated) return <Navigate to="/profile" />;
 
   return (
     <ThemeProvider theme={theme}>
@@ -81,9 +81,6 @@ if (isAuthenticated) return <Navigate to="/home" />;
           <form onSubmit={formik.handleSubmit}>
             <Grid container spacing={2}>
             <Grid item xs={12}>
-                <Typography variant="body1" gutterBottom>
-                  Email
-                </Typography>
                 <TextField
                   required
                   id="email"
@@ -100,14 +97,12 @@ if (isAuthenticated) return <Navigate to="/home" />;
                 />
               </Grid>
               <Grid item xs={12}>
-                <Typography variant="body1" gutterBottom>
-                  Password
-                </Typography>
                 <TextField
                   required
                   id="password"
                   name="password"
                   label="password"
+                  type="password"
                   value={formik.values.password}
                   fullWidth
                   error={formik.touched.password && formik.errors.password ? true : false}
@@ -142,7 +137,7 @@ if (isAuthenticated) return <Navigate to="/home" />;
               </Grid>
               <Grid item>
                 <Link href="/signup" variant="body2">
-                  {"Don't have an account? Sign Up"}
+                  {"New to MRC? Sign Up"}
                 </Link>
               </Grid>
             </Grid>

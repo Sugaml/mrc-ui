@@ -1,8 +1,6 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
 import Typography from '@mui/material/Typography';
@@ -12,164 +10,50 @@ import MenuItem from '@mui/material/MenuItem';
 import ListItemText from '@mui/material/ListItemText';
 import MenuList from '@mui/material/MenuList';
 import Divider from '@mui/material/Divider';
-import { Footer } from './Footer';
 import { useNavigate } from "react-router-dom";
-
-
-const tiers = [
-    {
-        title: 'BICTE',
-        price: '25000',
-        description: [
-            {
-                title: 'Total Duration',
-                titleValue: '4 years'
-            },
-            {
-                title: 'Total Semester',
-                titleValue: '8'
-            },
-            {
-                title: 'Credit Hours',
-                titleValue: '138'
-            },
-            {
-                title: 'Subjects',
-                titleValue: '45'
-            },
-            {
-                title: 'Seat',
-                titleValue: '40'
-            },
-            {
-                title: 'Faculty',
-                titleValue: 'Education'
-            },
-            {
-                title: 'Affilated By',
-                titleValue: 'TU'
-            },
-        ],
-        buttonText: 'Enroll Now',
-        buttonVariant: 'contained',
-    },
-    {
-        title: 'BCA',
-        subheader: 'Most popular',
-        price: '25000',
-        description: [
-            {
-                title: 'Total Duration',
-                titleValue: '4 years'
-            },
-            {
-                title: 'Total Semester',
-                titleValue: '8'
-            },
-            {
-                title: 'Credit Hours',
-                titleValue: '138'
-            },
-            {
-                title: 'Subjects',
-                titleValue: '45'
-            },
-            {
-                title: 'Seat',
-                titleValue: '40'
-            },
-            {
-                title: 'Faculty',
-                titleValue: 'Education'
-            },
-            {
-                title: 'Affilated By',
-                titleValue: 'TU'
-            },
-        ],
-        buttonText: 'Enroll Now',
-        buttonVariant: 'contained',
-    },
-    {
-        title: 'BIM',
-        price: '30000',
-        description: [
-            {
-                title: 'Total Duration',
-                titleValue: '4 years'
-            },
-            {
-                title: 'Total Semester',
-                titleValue: '8'
-            },
-            {
-                title: 'Credit Hours',
-                titleValue: '138'
-            },
-            {
-                title: 'Subjects',
-                titleValue: '45'
-            },
-            {
-                title: 'Seat',
-                titleValue: '40'
-            },
-            {
-                title: 'Faculty',
-                titleValue: 'Education'
-            },
-            {
-                title: 'Affilated By',
-                titleValue: 'TU'
-            },
-        ],
-        buttonText: 'Enroll Now',
-        buttonVariant: 'contained',
-    },
-];
+import { useDispatch, useSelector } from "react-redux";
+import { getAllCourses, getCurrentCourse } from '../action/courses';
 
 
 export const Course = () => {
-    const navigate =useNavigate();
-    
-    const handleEnroll=()=>{
-        return navigate("/online");
-    }
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const token = useSelector((state) => state.auth.isAuthenticated);
+    const courses = useSelector((state) => state.Courses.courses);
+
+    React.useEffect(() => {
+        dispatch(getAllCourses())
+    }, [dispatch])
+    console.log(courses)
 
     return (
         <div>
             <Container disableGutters maxWidth="xl" component="main" sx={{ pt: 2, pb: 6 }}>
+
                 <Typography
-                    component="h2"
-                    variant="h3"
+                    component="h6"
+                    variant="h6"
                     color="text.primary"
                     gutterBottom
                 >
-                    Our Courses
+                Available Courses
                 </Typography>
-                {/* <Typography variant="h4"  color="text.secondary" component="p">
-                Bachelor of Education in Information Communication Technology (BEd ICT) is an undergraduate program
-                    offered by Tribhuvan University, under the Faculty of Education. It is a 4-year semester-based program
-                    spreading over 8 semesters covering a total of 138 credit hours, that includes 12 credit hours for
-                    communication skills courses, 24 credit hours for educational core courses, 60 credit hours for specialization
-                    major subjects, 30 credit hours for minor subjects and 9 credit hours for teaching internship/practicum.
-                </Typography> */}
             </Container>
-            {/* End hero unit */}
             <Container maxWidth="lg" component="main">
                 <Grid container spacing={5} alignItems="flex-end">
-                    {tiers.map((tier) => (
+                    {courses.map((course) => (
                         // Enterprise card is full width at sm breakpoint
                         <Grid
                             item
-                            key={tier.title}
+                            key={course.name}
                             xs={12}
-                            sm={tier.title === 'Enterprise' ? 12 : 6}
-                            md={4}
+                            sm={course.name === 'Enterprise' ? 12 : 6}
+                            md={6}
                         >
                             <Card>
                                 <CardHeader
-                                    title={tier.title}
+                                    title={course.name}
                                     titleTypographyProps={{ align: 'center' }}
                                     sx={{
                                         backgroundColor: (theme) =>
@@ -188,7 +72,7 @@ export const Course = () => {
                                         }}
                                     >
                                         <Typography component="h3" variant="h4" color="text.primary">
-                                            Rs.{tier.price}
+                                            Rs.{course.fee}
                                         </Typography>
                                         <Typography variant="h6" color="text.secondary">
                                             /semester
@@ -196,27 +80,55 @@ export const Course = () => {
                                     </Box>
                                     <Divider />
                                     <MenuList>
-                                        {tier.description.map((line) => (
-                                            <MenuItem>
-                                                <ListItemText>{line.title}</ListItemText>
-                                                <Typography variant="body2">
-                                                    {line.titleValue}
-                                                </Typography>
-                                            </MenuItem>
-                                        ))}
+                                        <MenuItem>
+                                            <ListItemText>Duration</ListItemText>
+                                            <Typography variant="body2">
+                                                {course.duration}/month
+                                            </Typography>
+                                        </MenuItem>
+                                        <MenuItem>
+                                            <ListItemText>Years</ListItemText>
+                                            <Typography variant="body2">
+                                                {course.year}/yrs
+                                            </Typography>
+                                        </MenuItem>
+                                        <MenuItem>
+                                            <ListItemText>Credit Hours</ListItemText>
+                                            <Typography variant="body2">
+                                                {course.credit_hours}
+                                            </Typography>
+                                        </MenuItem>
+                                        <MenuItem>
+                                            <ListItemText>Subject</ListItemText>
+                                            <Typography variant="body2">
+                                                {course.subject}
+                                            </Typography>
+                                        </MenuItem>
+                                        <MenuItem>
+                                            <ListItemText>Seat</ListItemText>
+                                            <Typography variant="body2">
+                                                {course.quota}
+                                            </Typography>
+                                        </MenuItem>
+                                        <MenuItem>
+                                            <ListItemText>Faculty</ListItemText>
+                                            <Typography variant="body2">
+                                                {course.faculty}
+                                            </Typography>
+                                        </MenuItem>
+                                        <MenuItem>
+                                            <ListItemText>Affilated By</ListItemText>
+                                            <Typography variant="body2">
+                                                {course.affiliated_by}
+                                            </Typography>
+                                        </MenuItem>
                                     </MenuList>
                                 </CardContent>
-                                <CardActions>
-                                    <Button fullWidth onClick={handleEnroll} variant={tier.buttonVariant}>
-                                        {tier.buttonText}
-                                    </Button>
-                                </CardActions>
                             </Card>
                         </Grid>
                     ))}
                 </Grid>
             </Container>
-            <Footer/>
         </div>
     )
 }

@@ -3,6 +3,8 @@ import * as types from "../constant/actionTypes";
 const INITIAL_STUDENT_EDUCATION_INFO_STATE = {
   studentEducationInfo: null,
   student: false,
+  currentEducation:null,
+  isCurrentEducation:false
 };
 
 function StudentEducationInfo(state = INITIAL_STUDENT_EDUCATION_INFO_STATE, action) {
@@ -25,6 +27,23 @@ function StudentEducationInfo(state = INITIAL_STUDENT_EDUCATION_INFO_STATE, acti
           ...state,
           student: false,
         };
+      case types.GET_CURRENT_EDUCATION:
+          console.log("data",payload)
+          return {
+            ...state,
+            isCurrentEducation: true
+          };
+      case types.GET_CURRENT_EDUCATION_SUCCESS:
+            return {
+              ...state,
+              currentEducation: payload,
+              isCurrentEducation: false
+            };
+      case types.GET_CURRENT_EDUCATION_FAILURE:
+            return {
+              ...state,
+              isCurrentEducation: false,
+            };
     default:
       return state;
   }

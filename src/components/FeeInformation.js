@@ -8,10 +8,13 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import Container from '@mui/material/Container';
+import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
+import { Button, Divider } from '@mui/material';
+import { Deposits } from './Deposits';
+import Title from './Title';
 
-
-const TAX_RATE = 0.07;
 
 function ccyFormat(num) {
   return `${num.toFixed(2)}`;
@@ -31,14 +34,11 @@ function subtotal(items) {
 }
 
 const rows = [
-  createRow('Paperclips (Box)', 100, 1.15),
-  createRow('Paper (Case)', 10, 45.99),
-  createRow('Waste Basket', 2, 17.99),
+  createRow('Enrollment Course Fee)', 100, 1.15),
 ];
 
 const invoiceSubtotal = subtotal(rows);
-const invoiceTaxes = TAX_RATE * invoiceSubtotal;
-const invoiceTotal = invoiceTaxes + invoiceSubtotal;
+const invoiceTotal =  invoiceSubtotal;
 
 export const FeeInformation=() =>{
     const dispatch = useDispatch();
@@ -48,51 +48,77 @@ export const FeeInformation=() =>{
         dispatch(getStudentGeneralAction(token))
       },[dispatch,token])
   return (
-    student && student.ID && !!student.ID && student.course && student.course.ID &&  <div>
+    <div>
+      {student && student.ID && !!student.ID && student.course && student.course.ID ?(
+        <div>
        <Typography variant="h6" gutterBottom sx={{ pt: 2}} >Account Section</Typography>
+    <div>
+    <Grid container spacing={3}>
+              {/* Chart */}
+              <Grid item xs={6} md={6}>
+                <Paper
+                  sx={{
+                    p: 2,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    height: 240,
+                  }}
+                >
+                  <Deposits />
+                </Paper>
+              </Grid>
+              <Grid item xs={6} md={6}>
+                <Paper
+                  sx={{
+                    p: 2,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    height: 240,
+                  }}
+                >
+                  <Deposits />
+                </Paper>
+              </Grid>
+       </Grid>
+    </div>
+    <Divider/>
+    <Title>Fee Summary</Title>
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="spanning table">
         <TableHead>
           <TableRow>
-            <TableCell align="center" colSpan={3}>
+            <TableCell align="center" >
               Details
             </TableCell>
-            <TableCell align="right">Price</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>Desc</TableCell>
-            <TableCell align="right">Qty.</TableCell>
-            <TableCell align="right">Unit</TableCell>
-            <TableCell align="right">Sum</TableCell>
+            <TableCell align="center">Amount</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.desc}>
-              <TableCell>{row.desc}</TableCell>
-              <TableCell align="right">{row.qty}</TableCell>
-              <TableCell align="right">{row.unit}</TableCell>
-              <TableCell align="right">{ccyFormat(row.price)}</TableCell>
+            <TableRow key={student.course.name}>
+              <TableCell>{student.course.name}</TableCell>
+              <TableCell align="center">{student.course.fee}</TableCell>
             </TableRow>
-          ))}
+          
 
           <TableRow>
-            <TableCell rowSpan={3} />
-            <TableCell colSpan={2}>Subtotal</TableCell>
-            <TableCell align="right">{ccyFormat(invoiceSubtotal)}</TableCell>
+            <TableCell colSpan={1}>Subtotal</TableCell>
+            <TableCell align="center">{student.course.fee}</TableCell>
           </TableRow>
           <TableRow>
-            <TableCell>Tax</TableCell>
-            <TableCell align="right">{`${(TAX_RATE * 100).toFixed(0)} %`}</TableCell>
-            <TableCell align="right">{ccyFormat(invoiceTaxes)}</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell colSpan={2}>Total</TableCell>
-            <TableCell align="right">{ccyFormat(invoiceTotal)}</TableCell>
+            <TableCell colSpan={1}>Total</TableCell>
+            <TableCell align="center">{student.course.fee}</TableCell>
           </TableRow>
         </TableBody>
       </Table>
     </TableContainer>
     </div>
+      ):(
+        <div>
+          <Typography>Not Available Fee</Typography>
+        </div>
+      )
+      }
+    </div>
+   
   );
 }

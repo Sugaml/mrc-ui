@@ -60,27 +60,22 @@ export const DocumentForm = ({
             setSignatureUrl(URL.createObjectURL(signature));
         }
     }, [selectedImage,seeTranscript,seeCharacter,marksheet,character,migration,signature]);
-    console.log("Image Url :: ",seeTranscriptUrl,imageUrl)
 
     const handleDocumentAction = (e)=> (id) => {
-            console.log('Inside address onsubmit.....')
+        const formData = new FormData();
+            console.log('Inside document onsubmit.....')
             if (studentInfo) {
-                const studentDocumentData = {
-                    "photo": imageUrl,
-                    "see_transcript":seeTranscriptUrl ,
-                    "see_character": seeCharacterUrl,
-                    "certificate_transcript":marksheetUrl,
-                    "certificate_character": characterUrl,
-                    "certificate_migration": migrationUrl,
-                    "citizenship_front": "",
-                    "citizenship_back": "",
-                    "signatue":signatureUrl,
-                    "student_id": studentInfo.ID,
-                }
-                console.log("Document Data ::",studentDocumentData)
+                formData.append("image", selectedImage);
+                formData.append("seeTranscript",seeTranscript);
+                formData.append("seeCharacter",seeCharacter);
+                formData.append("marksheet",marksheet);
+                formData.append("character",character);
+                formData.append("migration",migration);
+                formData.append("signature", signature);
                 handleSuccess();
-                dispatch(studentFileInfoAction(studentDocumentData))
-            }
+                console.log(formData)
+                dispatch(studentFileInfoAction(formData,studentInfo.ID))
+           }
         }
 
     return (

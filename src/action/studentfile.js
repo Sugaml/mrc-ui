@@ -17,10 +17,11 @@ const studentFileInfoFailure = () => ({
 });
 
 
-export const studentFileInfoAction= (studentFileInfoData) => async (dispatch) => {
+export const studentFileInfoAction= (studentFileInfoData,sid) => async (dispatch) => {
   try{
     dispatch(studentFileInfo());
-    const response = await postStudentFileInfo(studentFileInfoData, "student/file");
+    console.log("sid ",sid)
+    const response = await postStudentFileInfo(studentFileInfoData, "uploads/multiple/"+sid);
     if (response){
       dispatch(studentFileSuccess(response));
       ToastConfig.success("Successfully saved student document information.")

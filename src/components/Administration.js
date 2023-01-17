@@ -4,13 +4,9 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import { StudentGeneral } from './StudentGeneral';
-import { AddressInformation } from './AddressInformation';
-import { CourseInformation } from './CourseInformation';
 import { CourseChoice } from './CourseChoice';
 import { Course } from './course';
-import { KhaltiPayment } from './KhaltiPayment';
-import { FeeHistory } from './FeeHistory';
+import { GeneralInformation } from './GeneralInformation';
 
 
 function TabPanel(props) {
@@ -46,12 +42,13 @@ function a11yProps(index) {
   };
 }
 
-export const Account=()=> {
+export const Administration=()=> {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
   return (
     <Box
       sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex' }}
@@ -64,14 +61,18 @@ export const Account=()=> {
         aria-label="Vertical tabs example"
         sx={{ borderRight: 1, borderColor: 'divider' }}
       >
-        <Tab label="Fee Information" {...a11yProps(0)} />
-        <Tab label="Fee History" {...a11yProps(1)} />
+        <Tab label="General Information" {...a11yProps(0)} />
+        <Tab label="Addmission Information" {...a11yProps(1)} />
+        <Tab label="Course Information" {...a11yProps(2)} />
       </Tabs>
       <TabPanel value={value} index={0}>
-       <KhaltiPayment/>
+       <GeneralInformation/>
       </TabPanel>
       <TabPanel value={value} index={1}>
-      <FeeHistory/>
+      <CourseChoice/>
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+       <Course/>
       </TabPanel>
     </Box>
   );

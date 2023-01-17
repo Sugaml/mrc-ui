@@ -1,6 +1,6 @@
 import ToastConfig from "../components/toast/Toast";
 import * as types from "../constant/actionTypes";
-import { postresetPassword } from "../services/user";
+import { postresetPassword, emailVerify} from "../services/user";
 
 
 const restPassword = () => ({
@@ -32,6 +32,40 @@ export const resetPasswordAction= (resetPasswordData) => async (dispatch) => {
   catch (error) {
       console.log("error in reset password ",error);
       dispatch(resetPasswordFailure());
+      ToastConfig.error(error.error)
+    }
+};
+
+
+const verifyEmail = () => ({
+  type: types.VERIFY_EMAIL,
+});
+
+const verifyEmailSuccess = (response) => ({
+  type: types.VERIFY_EMAIL_SUCCESS,
+  payload: response,
+});
+
+const  verifyEmailFailure = () => ({
+  type: types.VERIFY_EMAIL_FAILURE,
+});
+
+
+export const verifyEmailAction= (token) => async (dispatch) => {
+  try{
+    dispatch(verifyEmail());
+    const response = await emailVerify(token,"/user/email/verify");
+    if (response){
+      dispatch(verifyEmailSuccess(response.data));
+      ToastConfig.success("Successfully sent reset password.")
+    }else{
+      dispatch(verifyEmailFailure());
+      ToastConfig.error("Failed to reset password.")
+    }
+  }
+  catch (error) {
+      console.log("error in reset password ",error);
+      dispatch(verifyEmailFailure());
       ToastConfig.error(error.error)
     }
 };
