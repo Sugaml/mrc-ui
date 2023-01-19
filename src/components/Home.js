@@ -26,11 +26,11 @@ export const Home = () => {
                         component="h1"
                         variant="h4"
                         align="left"
-                        color="blue"
+                        color="SlateBlue"
                         gutterBottom
                         sx={{ pl: 2.5, pr:2.5}}
                     >
-                        Welcome to MRC
+                       <b>Welcome to MRC</b> 
                     </Typography>
                     <Typography
                         paragraph
