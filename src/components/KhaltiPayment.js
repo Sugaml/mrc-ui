@@ -3,7 +3,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { useDispatch, useSelector } from "react-redux";
 import { paymentVerifyAction } from '../action/payment';
-import khalti from '../../src/static/images/buttons/khalti.png'
+import khalti from '../../src/static/images/buttons/khalti.ico'
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
@@ -63,7 +63,7 @@ export const KhaltiPayment = () => {
                         <Typography variant="h6" gutterBottom>
                             Fee Information
                         </Typography>
-                        <Card sx={{ minWidth: 100, }}>
+                        <Card >
                             <CardContent sx={{ backgroundColor: 'white' }}>
                                 <Typography sx={{ mb: 1.5 }} variant="h5">
                                     Fee Details
@@ -81,17 +81,18 @@ export const KhaltiPayment = () => {
                                     onClick={openPaymentGateway}
                                     sx={{ mt: 3, ml: 1 }}
                                 >
-                                    <Card sx={{ minWidth: 100, backgroundColor: 'blue' }}>
+                                    <Card sx={{ minWidth: 100, background: 'blue' }}>
                                         <CardMedia
+                                         sx={{ mt: '4px' }}
                                             component="img"
-                                            height="120"
-                                            width="120"
+                                            height="100"
+                                            width="100"
                                             image={khalti}
-                                            alt="khalti"
+                                            alt="Pay With khalti"
                                         />
                                         <CardContent sx={{ backgroundColor: 'white' }}>
-                                            <Typography variant="h6" gutterBottom>
-                                                Khalti
+                                            <Typography  sx={{ color: 'blue' }} variant="h6" gutterBottom>
+                                                Pay With Khalti
                                             </Typography>
                                         </CardContent>
                                     </Card>
