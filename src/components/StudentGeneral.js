@@ -23,7 +23,7 @@ export const StudentGeneral = () => {
 
   return (
     student && !!student.ID && <div>
-    <Card sx={{ maxWidth: 1200 }}>
+    <Card sx={{ height: '300px', width:'600px'  }}>
       <CardHeader
         avatar={
           <Avatar sizes='150' alt={student.first_name} src="https://www.w3schools.com/howto/img_avatar.png" />
