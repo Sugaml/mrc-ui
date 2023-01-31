@@ -3,6 +3,7 @@ import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
 import { useDispatch, useSelector } from "react-redux";
 import Card from '@mui/material/Card';
+import MailIcon from '@mui/icons-material/Mail';
 import CardHeader from '@mui/material/CardHeader';
 import CardContent from '@mui/material/CardContent';
 import { getStudentGeneralAction } from '../action/user';
@@ -33,7 +34,7 @@ export const StudentGeneral = () => {
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-        {student.email}
+          <MailIcon/> {student.email}
         </Typography>
         <Typography variant="body2" color="text.secondary">
         {student.mobile_num}

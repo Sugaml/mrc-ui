@@ -9,10 +9,14 @@ import Select from '@mui/material/Select';
 import { useFormik } from "formik";
 import Button from '@mui/material/Button';
 import * as Yup from 'yup';
+import Calendar from "@sbmdkl/nepali-datepicker-reactjs";
+import "@sbmdkl/nepali-datepicker-reactjs/dist/index.css";
 import { useDispatch, useSelector } from "react-redux";
+import { useState} from "react";
 import { studentInfoAction } from '../action/studentinfo';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
+import { display } from '@mui/system';
 
 export const StudentInfo = ({
     activeStep,
@@ -28,7 +32,12 @@ export const StudentInfo = ({
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const studentInfo = useSelector((state) => state.StudentInfo.student);
     const course = useSelector((state) => state.CurrentCourse.course);
-    
+    const [date,setDate] = useState("");
+
+    const handleDate = ({ bsDate, adDate }) => {
+       setDate({ date: bsDate });
+     };
+     console.log("date ",date)
     const formik = useFormik({
         initialValues: {
             firstName: "",
@@ -220,20 +229,8 @@ export const StudentInfo = ({
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <TextField
-                            required
-                            id="dob"
-                            name="dob"
-                            label="Date of Birth"
-                            value={formik.values.dob}
-                            fullWidth
-                            autoComplete="dob"
-                            variant="outlined"
-                            onChange={formik.handleChange}
-                            error={formik.touched.dob && formik.errors.dob ? true : false}
-                            helperText={formik.errors.dob}
-                            onBlur={formik.handleBlur}
-                        />
+
+                         <Calendar sx={{margin:"0",display:"block",width:"100%",padding: "16.5px 14px",}} onChange={handleDate} language="en" theme="deepdark" />
                     </Grid>
                     <Grid item xs={12} sm={6}>
                         <TextField
