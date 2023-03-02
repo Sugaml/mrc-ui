@@ -41,14 +41,14 @@ function getStepContent(activeStep,setActiveStep, steps, handleBack, handleNext)
       handleNext={handleNext}
       steps={steps}
       />;
-    case 3:
-      return <DocumentForm
-      activeStep={activeStep}
-      setActiveStep={setActiveStep}
-      handleBack={handleBack}
-      handleNext={handleNext}
-      steps={steps}
-         />;
+    // case 3:
+    //   return <DocumentForm
+    //   activeStep={activeStep}
+    //   setActiveStep={setActiveStep}
+    //   handleBack={handleBack}
+    //   handleNext={handleNext}
+    //   steps={steps}
+    //      />;
     default:
       throw new Error('Unknown step');
   }
