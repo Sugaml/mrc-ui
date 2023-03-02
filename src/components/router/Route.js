@@ -25,7 +25,6 @@ const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        
         <Route path='/resetpassword/:id' element={<ResetPassword/>}/>
         <Route path='/user/verify/:id' element={<VerifyEmail/>}/>
         <Route path='/signup' element={<SignUp/>}/>

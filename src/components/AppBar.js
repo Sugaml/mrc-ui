@@ -20,24 +20,7 @@ import { logout } from '../action/auth';
 
 
 const mdTheme = createTheme();
-const pages = [
-  {
-    page: 'Administration',
-    indexs: 0
-  },
-  {
-    page: 'Account',
-    indexs: 1
-  }
-  // , {
-  //   page: 'Notice',
-  //   indexs: 2
-  // },
-  // {
-  //   page: 'Courses',
-  //   indexs: 3
-  // }
-];
+
 
 const settings = ['Profile', 'Logout'];
 const programs = [
@@ -104,6 +87,24 @@ export const ResponsiveAppBar = ({ children }) => {
   const handleOpenProgramsMenu = (event) => {
     setAnchorElPrograms(event.currentTarget);
   }
+  const pages = [
+    {
+      page:user.username,
+      indexs: 0
+    },
+    {
+      page: 'Account',
+      indexs: 1
+    }
+    // , {
+    //   page: 'Notice',
+    //   indexs: 2
+    // },
+    // {
+    //   page: 'Courses',
+    //   indexs: 3
+    // }
+  ];
 
   const handleCloseProgramsMenu = () => {
     setAnchorElPrograms(null);

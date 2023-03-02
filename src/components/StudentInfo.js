@@ -17,6 +17,8 @@ import { studentInfoAction } from '../action/studentinfo';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import { display } from '@mui/system';
+// import { CalendarPicker } from '@mui/x-date-pickers/CalendarPicker';
+
 
 export const StudentInfo = ({
     activeStep,
@@ -37,7 +39,6 @@ export const StudentInfo = ({
     const handleDate = ({ bsDate, adDate }) => {
        setDate({ date: bsDate });
      };
-     console.log("date ",date)
     const formik = useFormik({
         initialValues: {
             firstName: "",
@@ -60,7 +61,6 @@ export const StudentInfo = ({
             parentName: Yup.string().max(15, "Must be 15 character or less").required("Required"),
             parentRelation: Yup.string().max(15, "Must be 15 character or less").required("Required"),
             parentNumber:Yup.number().required("required mobile number").test('len', 'Must be 10 digit', val => val && val.toString().length === 10 ),
-            dob: Yup.string().required(),
             religion: Yup.string().max(15, "Must be 15 character or less").required()
         }),
 
@@ -69,7 +69,7 @@ export const StudentInfo = ({
                 "first_name":formik.values.firstName,
                 "last_name":formik.values.lastName,
                 "gender":formik.values.gender,
-                "dob":formik.values.dob,
+                "dob":date.date,
                 "mobile_num":formik.values.mobileNum,
                 "email":formik.values.email,
                 "parent_name":formik.values.parentName,
@@ -228,10 +228,7 @@ export const StudentInfo = ({
                             onBlur={formik.handleBlur}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={6}>
-
-                         <Calendar sx={{margin:"0",display:"block",width:"100%",padding: "16.5px 14px",}} onChange={handleDate} language="en" theme="deepdark" />
-                    </Grid>
+                  
                     <Grid item xs={12} sm={6}>
                         <TextField
                             required
@@ -248,6 +245,9 @@ export const StudentInfo = ({
                             onBlur={formik.handleBlur}
                         />
                     </Grid>
+                    <Grid item xs={12} md={6} sm={12}>
+                        <Calendar style={{margin:"0",display:"block",width:"100%",padding: "14px 1px", borderRadius:2}} onChange={handleDate} language="en" theme="deepdark" size="large"/>
+                    </Grid>
                 </Grid>
 
                 <div>
@@ -259,10 +259,10 @@ export const StudentInfo = ({
                     <Button
                         type='submit'
                         variant="contained"
-                        sx={{ mt: 3, ml: 1,float:'right' }}
+                        sx={{ mt: 5, ml: 1,float:'right' }}
                         disabled={!formik.values.firstName || !formik.values.lastName || !formik.values.gender ||
                             !formik.values.email || !formik.values.mobileNum || !formik.values.parentName
-                            || !formik.values.parentRelation || !formik.values.dob || !formik.values.religion ||
+                            || !formik.values.parentRelation || !formik.values.religion ||
                             formik.errors.email || formik.errors.mobileNum
                         }
                     >
