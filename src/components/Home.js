@@ -12,7 +12,7 @@ const mainFeaturedPost = {
     title: 'Welcome to Mahendra Ratna Campus',
     description:
       "Multiple lines of text that form the lede, informing new readers quickly and efficiently about what's most interesting in this post's contents.",
-    image: 'https://mrctu.edu.np/images/1.jpg',
+    image: 'https://mrctu.edu.np/slideshow/1672897395_1.jpg',
     imageText: 'main image description',
   };
 
