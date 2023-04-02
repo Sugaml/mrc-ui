@@ -19,8 +19,8 @@ export const auth = (dataLoginRequest) => async (dispatch) => {
     dispatch(getAuth(response.data.token));
     ToastConfig.success("Successfully Login.")
   } catch (error) {
-    console.log("error in login",error);
-    ToastConfig.error(error.message)
+    console.log("error in login",error.response.data.error);
+    ToastConfig.error(error.response.data.error)
   }
 };
 
