@@ -20,8 +20,8 @@ export const KhaltiPayment = () => {
 
 
     let config = {
-        "publicKey":"live_public_key_1a35555e5f0f45b695f94a0f357d99f0",
-       // "publicKey": "test_public_key_b048b45bdccb43ba818968273ffd49c4",
+        // "publicKey":"live_public_key_1a35555e5f0f45b695f94a0f357d99f0",
+       "publicKey": "test_public_key_b048b45bdccb43ba818968273ffd49c4",
         "productIdentity": "123",
         "productName": "Drogon",
         "productUrl": "https://01cloud.io/",
