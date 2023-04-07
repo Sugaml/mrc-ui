@@ -66,6 +66,6 @@ export const verifyEmailAction= (token) => async (dispatch) => {
   catch (error) {
       console.log("error in reset password ",error);
       dispatch(verifyEmailFailure());
-      ToastConfig.error(error.error)
+      ToastConfig.error(error.response.data.error)
     }
 };
