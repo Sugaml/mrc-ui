@@ -29,12 +29,14 @@ export const postresetPassword = (payload, url) => {
 };
 
 export const emailVerify = (token, url) => {
+    const config = {
+        headers: { 
+            Authorization: `basic ${token}` 
+        }
+    };
     return axios.put(
         `${process.env.REACT_APP_API}/${url}`,
-        {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-        },
+        {},
+        config,
     );
 };
