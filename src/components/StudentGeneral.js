@@ -28,7 +28,7 @@ export const StudentGeneral = () => {
         avatar={
           <Avatar sizes='150' alt={student.firstname} src="https://www.w3schools.com/howto/img_avatar.png" />
         }
-        title={student.first_name + " " + student.lastname }
+        title={student.firstname + " " + student.lastname }
         subheader="Approved"
       />
       <CardContent>
