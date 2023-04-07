@@ -30,9 +30,8 @@ export const paymentInitiateAction= (paymentInitiateData) => async (dispatch) =>
     }
   }
   catch (error) {
-      console.log("error in payment initiate",error);
       dispatch(paymentInitiateFailure());
-      ToastConfig.error(error.error)
+      ToastConfig.error(error.response.data.error)
     }
 };
 
@@ -64,8 +63,7 @@ export const paymentVerifyAction= (paymentVerifyData) => async (dispatch) => {
     }
   }
   catch (error) {
-      console.log("error in payment verification",error);
       dispatch(paymentVerifyFailure());
-      ToastConfig.error(error.error)
+      ToastConfig.error(error.response.data.error)
     }
 };

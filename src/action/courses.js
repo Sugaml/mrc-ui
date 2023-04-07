@@ -26,12 +26,11 @@ export const getAllCourses= () => async (dispatch) => {
     ToastConfig.success("Successfully get courses.")
     }else{
       dispatch(getCoursesFailure());
-      ToastConfig.error("Filed to load courses")
+      ToastConfig.error(error.response.data.error)
     }
   } catch (error) {
-    console.log("error in fetch all courses",error);
     dispatch(getCoursesFailure());
-    ToastConfig.error(error.message)
+    ToastConfig.error(error.response.data.error)
   }
 };
 
@@ -63,6 +62,6 @@ export const getCurrentCourse= (token,id) => async (dispatch) => {
   } catch (error) {
     console.log("error in fetch all course",error);
     dispatch(getCurrentCoursesFailure());
-    ToastConfig.error(error.message)
+    ToastConfig.error(error.response.data.error)
   }
 };

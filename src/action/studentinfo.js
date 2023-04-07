@@ -30,8 +30,7 @@ export const studentInfoAction= (token,studentInfoData) => async (dispatch) => {
     }
   }
   catch (error) {
-      console.log("error in sign up",error);
       dispatch(stuInfoFailure());
-      ToastConfig.error(error.error)
+      ToastConfig.error(error.response.data.error)
     }
 };

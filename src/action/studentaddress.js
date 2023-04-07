@@ -29,9 +29,8 @@ export const studentAddressInfoAction= (studentAddressInfoData) => async (dispat
     }
   }
   catch (error) {
-      console.log("error save student address",error);
       dispatch(studentAddressInfoFailure());
-      ToastConfig.error(error.error)
+      ToastConfig.error(error.response.data.error)
     }
 };
 
@@ -61,8 +60,7 @@ export const getAddress= (token,id) => async (dispatch) => {
     }
   }
   catch (error) {
-      console.log("error save student address",error);
       dispatch(getAddressInfoFailure());
-      ToastConfig.error(error.error)
+      ToastConfig.error(error.response.data.error)
     }
 };
