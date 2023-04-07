@@ -30,6 +30,7 @@ const Router = () => {
         <Route path='/signup' element={<SignUp/>}/>
         <Route element={<PublicRoute />}>
         <Route path='/' element={<Home />} />
+        <Route path='/home' element={<Home />} />
         <Route path='/signin' element={<SignIn />} />
         <Route path='/forgot_password' element={<ForgotPassword />} />
         <Route path='/menu' element={<BictCourse />} />

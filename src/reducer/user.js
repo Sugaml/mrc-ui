@@ -27,11 +27,10 @@ function UserInfo(state = INITIAL_STATE, action) {
           isEmailVerify: true,
         };
       case types.VERIFY_EMAIL_SUCCESS:
-          console.log('testing === ', payload)
         return {
           ...state,
           user:payload,
-          isEmailVerify: true,
+          isEmailVerify: false,
         }
     default:
       return state;

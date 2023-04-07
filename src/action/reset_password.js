@@ -57,7 +57,7 @@ export const verifyEmailAction= (token) => async (dispatch) => {
     const response = await emailVerify(token,"/user/email/verify");
     if (response){
       dispatch(verifyEmailSuccess(response.data));
-      ToastConfig.success("Successfully sent reset password.")
+      ToastConfig.success("Successfully verified your email.")
     }else{
       dispatch(verifyEmailFailure());
       ToastConfig.error("Failed to reset password.")
