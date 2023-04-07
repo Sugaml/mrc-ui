@@ -15,7 +15,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { getStudentGeneralAction, getUserAction } from '../action/user';
+import { getUserAction } from '../action/user';
 import { logout } from '../action/auth';
 
 
@@ -45,11 +45,9 @@ export const ResponsiveAppBar = ({ children }) => {
 
   const token = useSelector((state) => state.auth.isAuthenticated);
   const user = useSelector((state) => state.UserInfo.user);
-  const student = useSelector((state) => state.StudentGeneral.currentStudent);
  
   React.useEffect(() => {
     dispatch(getUserAction(token))
-    dispatch(getStudentGeneralAction(token))
   }, [dispatch, token])
 
   const navigate = useNavigate();
@@ -178,7 +176,7 @@ export const ResponsiveAppBar = ({ children }) => {
                 </Typography> */}
                 <Tooltip title="Open settings">
                   <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar alt={student.firstname} src={user.image} />
+                    <Avatar alt={user.email} src={user.image} />
                   </IconButton>
                 </Tooltip>
                 <Menu
