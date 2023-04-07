@@ -14,7 +14,6 @@ export const StudentGeneral = () => {
   const dispatch = useDispatch();
 
   const token = useSelector((state) => state.auth.isAuthenticated);
-  console.log("token :: ",token)
 
   const student = useSelector((state) => state.StudentGeneral.currentStudent);
     React.useEffect(()=>{
@@ -27,9 +26,9 @@ export const StudentGeneral = () => {
     <Card sx={{ height: '300px', width:'600px'  }}>
       <CardHeader
         avatar={
-          <Avatar sizes='150' alt={student.first_name} src="https://www.w3schools.com/howto/img_avatar.png" />
+          <Avatar sizes='150' alt={student.firstname} src="https://www.w3schools.com/howto/img_avatar.png" />
         }
-        title={student.first_name + " " + student.last_name }
+        title={student.first_name + " " + student.lastname }
         subheader="Approved"
       />
       <CardContent>
