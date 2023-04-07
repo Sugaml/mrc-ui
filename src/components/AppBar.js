@@ -15,7 +15,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { getUserAction } from '../action/user';
+import { getStudentGeneralAction, getUserAction } from '../action/user';
 import { logout } from '../action/auth';
 
 

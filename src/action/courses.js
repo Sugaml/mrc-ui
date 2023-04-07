@@ -26,7 +26,6 @@ export const getAllCourses= () => async (dispatch) => {
     ToastConfig.success("Successfully get courses.")
     }else{
       dispatch(getCoursesFailure());
-      ToastConfig.error(error.response.data.error)
     }
   } catch (error) {
     dispatch(getCoursesFailure());
