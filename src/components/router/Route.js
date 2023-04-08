@@ -10,7 +10,6 @@ import { BictCourse } from '../BictCourse';
 import { CourseChoice } from '../CourseChoice';
 import {CustomizedSnackbars} from '../SnackBar'
 import { ForgotPassword } from '../ForgotPassword';
-import {KhaltiPayment} from '../KhaltiPayment';
 import { FeeInformation } from '../FeeInformation';
 import PublicRoute from './publicRouting';
 import { ResetPassword } from '../ResetPassword';
@@ -47,7 +46,6 @@ const Router = () => {
         <Route path='/payment-history' element={<PaymentHistory/>}/>
 
         <Route  path='/enroll' element={<EnrollForm />} /> 
-        <Route index path='/billing' element={<KhaltiPayment />} />
         <Route path='/online' element={<CourseChoice/>}/>
         <Route index path='/courses' element={<Course />} />
         <Route path='/snack' element={<CustomizedSnackbars />} />
