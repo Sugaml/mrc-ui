@@ -29,7 +29,7 @@ export const StudentHomePage = () => {
                             <div>
                             <Box sx={{ flexGrow: 1, p: 3 }}>
                                 <Typography variant="h5" gutterBottom>
-                                    Hello , {student.firstname + student.lastname}
+                                    Hello , {student.firstname +" "+ student.lastname}
                                 </Typography>
                                 <CourseChoice />
                             </Box>

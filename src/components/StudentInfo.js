@@ -17,6 +17,7 @@ import { studentInfoAction } from '../action/studentinfo';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import { display } from '@mui/system';
+import { getStudentGeneralAction } from '../action/user';
 // import { CalendarPicker } from '@mui/x-date-pickers/CalendarPicker';
 
 
@@ -34,17 +35,24 @@ export const StudentInfo = ({
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const studentInfo = useSelector((state) => state.StudentInfo.student);
     const course = useSelector((state) => state.CurrentCourse.course);
+    const student = useSelector((state) => state.StudentGeneral.currentStudent);
+
     const [date,setDate] = useState("");
+    const getStudentGeneral = React.useCallback(() => dispatch(getStudentGeneralAction(isAuthenticated)), [dispatch, isAuthenticated]);
+
+    React.useEffect(() => {
+        getStudentGeneral();
+    }, [getStudentGeneral]);
 
     const handleDate = ({ bsDate, adDate }) => {
        setDate({ date: bsDate });
      };
     const formik = useFormik({
         initialValues: {
-            firstName: "",
-            lastName: "",
-            gender: "",
-            email: "",
+            firstName: student.firstname,
+            lastName: student.lastname,
+            gender: student.email,
+            email: student.gender,
             mobileNum: "",
             parentName: "",
             parentRelation: "",
@@ -53,15 +61,15 @@ export const StudentInfo = ({
             religion: ""
         },
         validationSchema: Yup.object({
-            firstName: Yup.string().max(15, "Must be 15 character or less").required("Required"),
-            lastName: Yup.string().max(15, "Must be 15 character or less").required("Required"),
-            gender: Yup.string().required("Required"),
-            email: Yup.string().email('Invalid Email').required(),
+            firstName: Yup.string().max(15, "Must be 15 character or less").required("required firstname"),
+            lastName: Yup.string().max(15, "Must be 15 character or less").required("required lastname"),
+            gender: Yup.string().required("required gender"),
+            email: Yup.string().email('invalid emal').required(),
             mobileNum: Yup.number().required("required mobile number").test('len', 'Must be 10 digit', val => val && val.toString().length === 10 ),
-            parentName: Yup.string().max(15, "Must be 15 character or less").required("Required"),
-            parentRelation: Yup.string().max(15, "Must be 15 character or less").required("Required"),
-            parentNumber:Yup.number().required("required mobile number").test('len', 'Must be 10 digit', val => val && val.toString().length === 10 ),
-            religion: Yup.string().max(15, "Must be 15 character or less").required()
+            parentName: Yup.string().max(5, "must be atleat 5 character or less").required("required parent name"),
+            parentRelation: Yup.string().max(5, "must be 5 character or less").required("required parent relation"),
+            parentNumber:Yup.number().required("required mobile number").test('len', 'must be 10 digit', val => val && val.toString().length === 10 ),
+            religion: Yup.string().max(5, "must be 5 character or less").required()
         }),
 
         onSubmit: (handleNext) => {
@@ -122,7 +130,6 @@ export const StudentInfo = ({
                             onBlur={formik.handleBlur}
                         />
                     </Grid>
-
 
                     <Grid item xs={12} sm={6}>
                         <FormControl fullWidth sx={{ m: 0 }} size="large">
