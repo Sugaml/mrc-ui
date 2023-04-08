@@ -41,7 +41,7 @@ export const Payment = () => {
     };
 
     let config = {
-       "publicKey": `${process.env.REACT_APP_API}`,
+       "publicKey": "test_public_key_b048b45bdccb43ba818968273ffd49c4",
         "productIdentity": student.course.name,
         "productName": student.course.name,
         "productUrl": "https://mrc.babulal.com.np/",
@@ -66,7 +66,7 @@ export const Payment = () => {
             }
         },
         "paymentPreference": ["KHALTI"],
-        "paymentPreference": ["KHALTI", "EBANKING", "MOBILE_BANKING", "CONNECT_IPS", "SCT"],
+        // "paymentPreference": ["KHALTI", "EBANKING", "MOBILE_BANKING", "CONNECT_IPS", "SCT"],
     };
 
     const openPaymentGateway = () => {

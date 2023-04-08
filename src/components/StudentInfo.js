@@ -220,6 +220,7 @@ export const StudentInfo = ({
                     </Grid>
                     <Grid item xs={12} sm={6}>
                         <TextField
+                            required
                             id="parentNumber"
                             name="parentNumber"
                             label="Parent Mobile Number"
