@@ -74,9 +74,7 @@ export const Payment = () => {
         checkout.show({ amount: 1000 });
 
     }
-    const handleSubmit = (event) => {
-        event.preventDefault();
-    };
+
 
     return (
         <div>
