@@ -35,7 +35,7 @@ export const CourseInformation = () => {
       {student ? (
         <div>
           {
-            student.course ? (
+             student.cid && student.course ? (
               <div>
                 <Grid
                   item
@@ -131,7 +131,7 @@ export const CourseInformation = () => {
                     You are not Enroll in Our course.
                   </Typography>
                   <div>
-                    <p>Click <a href="localhost:3000/profile">click here</a></p>
+                    <p>Click <a href="https://mrc.babulal.com.np/profile">click here</a></p>
                   </div>
                 </Box>
               </div>
