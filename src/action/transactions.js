@@ -29,6 +29,6 @@ const listTransaction = () => ({
       }
     } catch (error) {
       await dispatch(listTransactionFailure());
-      ToastConfig.error(error.response.data.error)
+      ToastConfig.error(error.response.data.data.error)
     }
   };

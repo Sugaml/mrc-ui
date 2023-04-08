@@ -58,7 +58,6 @@ export const EducationForm = (
             console.log('Inside address onsubmit.....')
             const studetEducationInfoData = [
                 {
-
                     "institute_name": formik.values.iname,
                     "institute_address": formik.values.iaddress,
                     "course_name": "Science",
@@ -146,7 +145,7 @@ export const EducationForm = (
                         required
                         id="grade"
                         name="grade"
-                        label="Grade"
+                        label="Division/Grade"
                         value={formik.values.grade}
                         fullWidth
                         autoComplete="family-name"
@@ -175,7 +174,6 @@ export const EducationForm = (
                 </Grid>
                 <Grid item xs={12} sm={6}>
                     <TextField
-                        required
                         id="remarks"
                         name="remarks"
                         label="Remarks"
@@ -277,7 +275,6 @@ export const EducationForm = (
                 </Grid>
                 <Grid item xs={12} sm={6}>
                     <TextField
-                        required
                         id="cremarks"
                         name="cremarks"
                         label="Remarks"
