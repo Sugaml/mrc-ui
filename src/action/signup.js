@@ -16,7 +16,6 @@ export const signUp= (dataSignUpRequest) => async (dispatch) => {
     dispatch(signUpUser(true));
     ToastConfig.success("Successfully Signup.")
   } catch (error) {
-    console.log("error in sign up",error.response.data.error);
     ToastConfig.error(error.response.data.error)
   }
 };

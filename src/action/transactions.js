@@ -28,7 +28,6 @@ const listTransaction = () => ({
         ToastConfig.error("Failed to load transactions")
       }
     } catch (error) {
-      console.log("error in fetch teansactions",error);
       await dispatch(listTransactionFailure());
       ToastConfig.error(error.response.data.error)
     }

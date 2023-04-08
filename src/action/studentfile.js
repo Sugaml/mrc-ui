@@ -33,7 +33,7 @@ export const studentFileInfoAction= (studentFileInfoData,sid) => async (dispatch
   catch (error) {
       console.log("error save student document ::",error);
       dispatch(studentFileInfoFailure());
-      ToastConfig.error(error.error)
+      ToastConfig.error(error.response.data.error)
     }
 };
 
@@ -65,6 +65,6 @@ export const getStudentDocument= (token,id) => async (dispatch) => {
   catch (error) {
       console.log("error save student document",error);
       dispatch(getDocumentFailure());
-      ToastConfig.error(error.error)
+      ToastConfig.error(error.response.data.error)
     }
 };

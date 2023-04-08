@@ -30,8 +30,7 @@ export const fotgotPasswordAction= (fotgotPasswordData) => async (dispatch) => {
     }
   }
   catch (error) {
-      console.log("error in forgot password ",error);
       dispatch(forgotPasswordFailure());
-      ToastConfig.error(error.error)
+      ToastConfig.error(error.response.data.error)
     }
 };

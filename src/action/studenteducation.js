@@ -32,7 +32,7 @@ export const studentEducationInfoAction= (studentEducationInfoData) => async (di
   catch (error) {
       console.log("error save student education ::",error);
       dispatch(studentEducationInfoFailure());
-      ToastConfig.error(error.error)
+      ToastConfig.error(error.response.data.error)
     }
 };
 
@@ -62,8 +62,7 @@ export const getEducationAction= (token,id) => async (dispatch) => {
     }
   }
   catch (error) {
-      console.log("error save student education",error);
       dispatch(getEducationFailure());
-      ToastConfig.error(error.error)
+      ToastConfig.error(error.response.data.error)
     }
 };
