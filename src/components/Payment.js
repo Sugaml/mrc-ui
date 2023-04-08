@@ -96,7 +96,7 @@ export const Payment = () => {
                                                 <Grid container spacing={2}>
                                                     <Grid item xs={12} sm={6}>
                                                         <Typography variant="subtitle1">Fee Amount:</Typography>
-                                                        <Typography variant="h6">${student.course.fee}</Typography>
+                                                        <Typography variant="h6">Rs. {student.course.fee}</Typography>
                                                     </Grid>
                                                     <Grid item xs={12} sm={6}>
                                                         <FormControl component="fieldset">
