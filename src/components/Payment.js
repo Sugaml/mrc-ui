@@ -52,7 +52,7 @@ export const Payment = () => {
                 const paymentVerifyData = {
                     "sid":student.ID,
                     "token": payload.token,
-                    "amount": student.course.fee,
+                    "amount": payload.amount,
                 }
                 dispatch(paymentVerifyAction(paymentVerifyData))
             },

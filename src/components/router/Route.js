@@ -10,7 +10,6 @@ import { BictCourse } from '../BictCourse';
 import { CourseChoice } from '../CourseChoice';
 import {CustomizedSnackbars} from '../SnackBar'
 import { ForgotPassword } from '../ForgotPassword';
-import { FeeInformation } from '../FeeInformation';
 import PublicRoute from './publicRouting';
 import { ResetPassword } from '../ResetPassword';
 import { VerifyEmail } from '../VerifyEmail';
@@ -41,7 +40,6 @@ const Router = () => {
         <Route path='/menu' element={<BictCourse />} />
         <Route path='/profile' element={<StudentHomePage/>}/>
         <Route path='/course' element={<CourseInformation/>}/>
-        <Route path='/account' element={<FeeInformation/>}/>
         <Route path='/payment' element={<Payment/>}/>
         <Route path='/payment-history' element={<PaymentHistory/>}/>
 

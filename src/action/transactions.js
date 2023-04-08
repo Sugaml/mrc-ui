@@ -18,7 +18,7 @@ const listTransaction = () => ({
   export const listTransactionAction= (token,studentID) => async (dispatch) => {
     try {
       dispatch(listTransaction());
-      const response = await getTransactions(token, "payment/transactions?student_id="+studentID);
+      const response = await getTransactions(token, "payment/student/transactions?student_id="+studentID);
       if (response.data || response.status === 200){
         await dispatch(listTransactionSuccess(response.data));
         ToastConfig.success("Successfully list transactions")
