@@ -51,11 +51,11 @@ export const StudentInfo = ({
             lastName: student.lastname,
             gender: student.gender,
             email: student.email,
-            mobileNum: "",
-            parentName: "",
-            parentRelation: "",
-            parentNumber: "",
-            dob: "",
+            mobileNum: student.mobile_num,
+            parentName: student.parent_name,
+            parentRelation:student.parent_relation,
+            parentNumber:student.parent_mobile,
+            dob: student.dob,
             religion: ""
         },
         validationSchema: Yup.object({
