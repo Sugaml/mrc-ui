@@ -15,13 +15,17 @@ export const logout = () => ({
 export const auth = (dataLoginRequest) => async (dispatch) => {
   try {
     const response = await postRequest(dataLoginRequest, "user/login");
-    console.log('......',response.data.token)
     dispatch(getAuth(response.data.token));
     ToastConfig.success("Successfully Login.")
   } catch (error) {
     ToastConfig.error(error.response.data.error)
   }
 };
+
+export const authLogout = () => async (dispatch) => {
+    dispatch(logout());
+};
+
 
 
 

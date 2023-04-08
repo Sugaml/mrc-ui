@@ -5,6 +5,7 @@ import { getStudentGeneralAction } from '../action/user';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 import { CourseChoice } from './CourseChoice';
+import { StudentCard } from './StudentCard';
 
 export const StudentHomePage = () => {
     const dispatch = useDispatch();
@@ -35,6 +36,7 @@ export const StudentHomePage = () => {
                         </div>
                         ):(
                             <div>
+                            <StudentCard/>
                             <Box sx={{ flexGrow: 1, p: 3 }}>
                             <Typography variant="h5" gutterBottom>
                                   Recent Activities

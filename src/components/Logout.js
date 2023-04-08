@@ -1,22 +1,11 @@
 import React from 'react';
-import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
+import { useDispatch,useSelector } from "react-redux";
+import { authLogout } from '../action/auth';
 
-import { Button } from '@mui/material';
-
-export const Logout=()=> {
-    const navigate = useNavigate();
-  const handleLogout = () => {
-   
-    // remove user data from localStorage
-    localStorage.removeItem('auth');
-
-    // redirect to login page
- navigate('/signin');
-  };
-
-  return (
-    <Button variant="contained" color="secondary" onClick={handleLogout}>
-      Logout
-    </Button>
-  );
+export const Logout = () => {
+  const dispatch = useDispatch();
+  dispatch(authLogout());
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  if (!isAuthenticated) return <Navigate to="/signin" />;
 }
