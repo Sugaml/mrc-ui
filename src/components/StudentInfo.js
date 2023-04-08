@@ -72,8 +72,8 @@ export const StudentInfo = ({
 
         onSubmit: (handleNext) => {
             const studetInfoData={
-                "first_name":formik.values.firstName,
-                "last_name":formik.values.lastName,
+                "firstname":formik.values.firstName,
+                "lastname":formik.values.lastName,
                 "gender":formik.values.gender,
                 "dob":date.date,
                 "mobile_num":formik.values.mobileNum,
