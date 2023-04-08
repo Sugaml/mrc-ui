@@ -14,11 +14,16 @@ function Courses(state = INITIAL_STATE, action) {
         fetchingCourse: true,
       };
     case types.GETCOURSESSUCCESS:
-      console.log("success course :: ",payload)
       return {
         ...state,
-        courses:payload
+        courses:payload,
+        fetchingCourse:false,
       }
+      case types.GETCOURSESFAILURE:
+        return {
+          ...state,
+          fetchingCourse:false,
+        }
     default:
       return state;
   }

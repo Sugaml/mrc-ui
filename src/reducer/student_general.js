@@ -2,7 +2,7 @@ import * as types from "../constant/actionTypes";
 
 const INITIAL_STATE = {
   currentStudent: null,
-  isStudentGeneral:false
+  isStudentGeneral:true
 };
 
 function StudentGeneral(state = INITIAL_STATE, action) {
@@ -11,14 +11,18 @@ function StudentGeneral(state = INITIAL_STATE, action) {
     case types.GET_STUDENT_GENERAL:
       return {
         ...state,
-        currentStudent: null,
         isStudentGeneral: true,
       };
     case types.GET_STUDENT_GENERAL_SUCCESS:
       return {
         ...state,
         currentStudent:payload,
-        isStudentGeneral:true,
+        isStudentGeneral:false,
+      }
+      case types.GET_STUDENT_GENERAL_FAILURE:
+      return {
+        ...state,
+        isStudentGeneral:false,
       }
     default:
       return state;

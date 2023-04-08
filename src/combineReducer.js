@@ -14,6 +14,7 @@ import CurrentCourse from "./reducer/current_course";
 import CurrentAddress from "./reducer/current_address";
 import CurrentDocument from "./reducer/current_document";
 import ResetPassword from "./reducer/reset_password";
+import GetTransactions from "./reducer/transaction";
 
 
 const rootReducer = combineReducers({
@@ -32,6 +33,7 @@ const rootReducer = combineReducers({
   UserInfo:UserInfo,
   CurrentDocument:CurrentDocument,
   ResetPassword:ResetPassword,
+  Transactions:GetTransactions,
 });
 
 export default rootReducer;

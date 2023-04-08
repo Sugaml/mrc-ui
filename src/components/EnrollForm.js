@@ -13,7 +13,7 @@ import { StudentInfo } from './StudentInfo';
 import { DocumentForm } from './DocumentForm';
 import { EducationForm } from './EducationForm';
 
-const steps = [ 'General Info', 'Address Info', 'Academic Info', 'Document Attach'];
+const steps = [ 'General Info', 'Address Info', 'Academic Info'];
 
 function getStepContent(activeStep,setActiveStep, steps, handleBack, handleNext) {
   switch (activeStep) {

@@ -19,6 +19,12 @@ import { ResetPassword } from '../ResetPassword';
 import { Administration } from '../Administration';
 import { Account } from '../Account';
 import { VerifyEmail } from '../VerifyEmail';
+import HomePage from '../HomePage';
+import { StudentHomePage } from '../StudentHomePage';
+import { CourseInformation } from '../CourseInformation';
+import {Payment} from '../Payment';
+import { PaymentHistory } from '../PaymentHistory';
+import { Logout } from '../Logout';
  
 
 const Router = () => {
@@ -30,20 +36,23 @@ const Router = () => {
         <Route path='/signup' element={<SignUp/>}/>
         <Route element={<PublicRoute />}>
         <Route path='/' element={<Home />} />
-        <Route path='/home' element={<Home />} />
+        <Route path='/home' element={<HomePage />} />
         <Route path='/signin' element={<SignIn />} />
         <Route path='/forgot_password' element={<ForgotPassword />} />
         <Route path='/menu' element={<BictCourse />} />
         <Route  path="/upload" element={<IconUpload/>}/>
-        <Route path='/logout' element={<Home/>}/>
+        <Route path='/logout' element={<Logout/>}/>
         </Route>
 
         <Route element={<PrivateRoute />}>
         <Route  path='/adminstration' element={<Administration />} />
         <Route  path='/account' element={<Account />} />
         <Route path='/menu' element={<BictCourse />} />
-        <Route path='/profile' element={<Profile/>}/>
+        <Route path='/profile' element={<StudentHomePage/>}/>
+        <Route path='/course' element={<CourseInformation/>}/>
         <Route path='/account' element={<FeeInformation/>}/>
+        <Route path='/payment' element={<Payment/>}/>
+        <Route path='/payment-history' element={<PaymentHistory/>}/>
 
         <Route  path='/enroll' element={<EnrollForm />} /> 
         <Route index path='/billing' element={<KhaltiPayment />} />

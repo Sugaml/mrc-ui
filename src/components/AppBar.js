@@ -17,7 +17,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { getUserAction } from '../action/user';
 import { logout } from '../action/auth';
-
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import SchoolIcon from '@mui/icons-material/School';
+import PaymentIcon from '@mui/icons-material/Payment';
+import HistoryIcon from '@mui/icons-material/History';
+import SettingsIcon from '@mui/icons-material/Settings';
+import LogoutIcon from '@mui/icons-material/Logout';
+import { Divider, List, ListItem, ListItemIcon, ListItemText} from '@mui/material';
 
 const mdTheme = createTheme();
 
@@ -216,6 +222,7 @@ export const ResponsiveAppBar = ({ children }) => {
             height: '100vh',
             overflow: 'auto',
           }} >
+         
           <Box
             component="main"
             sx={{
