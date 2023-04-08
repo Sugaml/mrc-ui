@@ -11,13 +11,9 @@ import { CourseChoice } from '../CourseChoice';
 import {CustomizedSnackbars} from '../SnackBar'
 import { ForgotPassword } from '../ForgotPassword';
 import {KhaltiPayment} from '../KhaltiPayment';
-import { Profile } from '../Profile';
 import { FeeInformation } from '../FeeInformation';
 import PublicRoute from './publicRouting';
-import { IconUpload } from '../IconUpload';
 import { ResetPassword } from '../ResetPassword';
-import { Administration } from '../Administration';
-import { Account } from '../Account';
 import { VerifyEmail } from '../VerifyEmail';
 import HomePage from '../HomePage';
 import { StudentHomePage } from '../StudentHomePage';
@@ -25,7 +21,6 @@ import { CourseInformation } from '../CourseInformation';
 import {Payment} from '../Payment';
 import { PaymentHistory } from '../PaymentHistory';
 import { Logout } from '../Logout';
- 
 
 const Router = () => {
   return (
@@ -36,17 +31,14 @@ const Router = () => {
         <Route path='/signup' element={<SignUp/>}/>
         <Route element={<PublicRoute />}>
         <Route path='/' element={<Home />} />
-        <Route path='/home' element={<HomePage />} />
+        <Route path='/home' element={<Home />} />
         <Route path='/signin' element={<SignIn />} />
         <Route path='/forgot_password' element={<ForgotPassword />} />
         <Route path='/menu' element={<BictCourse />} />
-        <Route  path="/upload" element={<IconUpload/>}/>
         <Route path='/logout' element={<Logout/>}/>
         </Route>
 
         <Route element={<PrivateRoute />}>
-        <Route  path='/adminstration' element={<Administration />} />
-        <Route  path='/account' element={<Account />} />
         <Route path='/menu' element={<BictCourse />} />
         <Route path='/profile' element={<StudentHomePage/>}/>
         <Route path='/course' element={<CourseInformation/>}/>

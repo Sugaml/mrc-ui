@@ -12,7 +12,6 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import { Button, Divider } from '@mui/material';
-import { Deposits } from './Deposits';
 import Title from './Title';
 
 
@@ -64,7 +63,6 @@ export const FeeInformation=() =>{
                     height: 240,
                   }}
                 >
-                  <Deposits />
                 </Paper>
               </Grid>
               <Grid item xs={6} md={6}>
@@ -76,7 +74,6 @@ export const FeeInformation=() =>{
                     height: 240,
                   }}
                 >
-                  <Deposits />
                 </Paper>
               </Grid>
        </Grid>
