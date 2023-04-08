@@ -64,10 +64,9 @@ export const StudentInfo = ({
             gender: Yup.string().required("required gender"),
             email: Yup.string().email('invalid emal').required(),
             mobileNum: Yup.number().required("required mobile number").test('len', 'Must be 10 digit', val => val && val.toString().length === 10 ),
-            parentName: Yup.string().max(5, "must be atleat 5 character or less").required("required parent name"),
-            parentRelation: Yup.string().max(5, "must be 5 character or less").required("required parent relation"),
+            parentName: Yup.string().required("required parent name"),
+            parentRelation: Yup.string().required("required parent relation"),
             parentNumber:Yup.number().required("required mobile number").test('len', 'must be 10 digit', val => val && val.toString().length === 10 ),
-            religion: Yup.string().max(5, "must be 5 character or less").required()
         }),
 
         onSubmit: (handleNext) => {
