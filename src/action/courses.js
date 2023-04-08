@@ -51,7 +51,6 @@ export const getCurrentCourse= (token,id) => async (dispatch) => {
     dispatch(getCurrentCourses());
     const response = await getCourse(token,"course/"+id);
     if (response){
-      console.log("respone course ::",response.data)
     await dispatch(getCurrentCoursesSuccess(response.data));
     ToastConfig.success("Successfully select "+response.data.name +" course")
     }else{

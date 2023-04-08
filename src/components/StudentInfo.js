@@ -16,9 +16,7 @@ import { useState} from "react";
 import { studentInfoAction } from '../action/studentinfo';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
-import { display } from '@mui/system';
 import { getStudentGeneralAction } from '../action/user';
-// import { CalendarPicker } from '@mui/x-date-pickers/CalendarPicker';
 
 
 export const StudentInfo = ({
@@ -51,8 +49,8 @@ export const StudentInfo = ({
         initialValues: {
             firstName: student.firstname,
             lastName: student.lastname,
-            gender: student.email,
-            email: student.gender,
+            gender: student.gender,
+            email: student.email,
             mobileNum: "",
             parentName: "",
             parentRelation: "",

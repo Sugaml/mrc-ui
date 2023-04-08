@@ -12,9 +12,12 @@ const signUpUser = (response) => ({
 export const signUp= (dataSignUpRequest) => async (dispatch) => {
   try {
     const response = await postRequest(dataSignUpRequest, "user");
-    console.log('......',response.data)
     dispatch(signUpUser(true));
-    ToastConfig.success("Successfully Signup.")
+    if (response){
+      ToastConfig.success("Successfully signup.You got the email and click verify email link.")
+    }else{
+      ToastConfig.error("Failed signup process.")
+    }
   } catch (error) {
     ToastConfig.error(error.response.data.error)
   }

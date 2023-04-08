@@ -11,7 +11,7 @@ export const VerifyEmail = () => {
   const dispatch = useDispatch();
   React.useEffect(() => {
     dispatch(verifyEmailAction(params.id))
-  }, [params.id])
+  }, [dispatch,params.id])
   const isEmailVerify = useSelector((state) => state.UserInfo.isEmailVerify);
   if (isEmailVerify) {
     return <Navigate to="/signin" />;

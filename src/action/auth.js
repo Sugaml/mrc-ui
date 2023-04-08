@@ -23,7 +23,7 @@ export const auth = (dataLoginRequest) => async (dispatch) => {
 };
 
 export const authLogout = () => async (dispatch) => {
-    dispatch(logout());
+    dispatch(getAuth(""));
 };
 
 
