@@ -86,13 +86,16 @@ export const EnrollForm = () => {
             {activeStep === steps.length ? (
               <React.Fragment>
                 <Typography variant="h5" gutterBottom>
-                  Your data is saved successfully.
+                  Your enrollment form filled up process is completed.Check your email notification.
+                </Typography>
+                <Typography variant="h5" gutterBottom>
+                  Administration will response as soon possible.
+                </Typography>
+                <Typography variant="h5" gutterBottom>
+                 If everything is valid Administration will approve your enrollment form.
                 </Typography>
                 <Typography variant="subtitle1">
                   Thank you.
-                  {/* Your order number is #2001539. We have emailed your order
-                  confirmation, and will send you an update when your order has
-                  shipped. */}
                 </Typography>
               </React.Fragment>
             ) : (

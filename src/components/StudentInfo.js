@@ -236,7 +236,6 @@ export const StudentInfo = ({
                   
                     <Grid item xs={12} sm={6}>
                         <TextField
-                            required
                             id="religion"
                             name="religion"
                             label="Religion"

@@ -48,7 +48,7 @@ export const Payment = () => {
         "eventHandler": {
             onSuccess(payload) {
                 // hit merchant api for initiating verfication
-                console.log(payload);
+                console.log("khalti payload :: ",payload);
                 const paymentVerifyData = {
                     "sid":student.ID,
                     "token": payload.token,
@@ -59,7 +59,7 @@ export const Payment = () => {
             // onError handler is optional
             onError(error) {
                 // handle errors
-                console.log(error);
+                console.log("error in payment :: ",error);
             },
             onClose() {
                 console.log('widget is closing');
