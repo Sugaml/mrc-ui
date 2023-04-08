@@ -42,10 +42,6 @@ const programs = [
     name: 'BIM',
     path: '/menu'
   }
-  , {
-    name: 'BICT',
-    path: '/menu'
-  },
 ];
 
 export const PublicResponsiveAppBar = ({ children }) => {
