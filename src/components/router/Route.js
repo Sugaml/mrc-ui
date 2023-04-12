@@ -19,6 +19,7 @@ import { CourseInformation } from '../CourseInformation';
 import {Payment} from '../Payment';
 import { PaymentHistory } from '../PaymentHistory';
 import { Logout } from '../Logout';
+import { ChangePasswordForm } from '../ChangePassword';
 
 const Router = () => {
   return (
@@ -41,6 +42,7 @@ const Router = () => {
         <Route path='/profile' element={<StudentHomePage/>}/>
         <Route path='/course' element={<CourseInformation/>}/>
         <Route path='/payment' element={<Payment/>}/>
+        <Route path='/setting' element={<ChangePasswordForm/>}/>
         <Route path='/payment-history' element={<PaymentHistory/>}/>
 
         <Route  path='/enroll' element={<EnrollForm />} /> 

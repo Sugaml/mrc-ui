@@ -135,7 +135,7 @@ export const Payment = () => {
                                                                 value={amountPaid}
                                                                 onChange={handleAmountChange}
                                                                 InputProps={{
-                                                                    startAdornment: <Typography>$</Typography>,
+                                                                    startAdornment: <Typography>Rs</Typography>,
                                                                 }}
                                                             />
                                                         </Grid>

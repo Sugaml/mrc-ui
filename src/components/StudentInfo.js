@@ -266,7 +266,7 @@ export const StudentInfo = ({
                         sx={{ mt: 5, ml: 1,float:'right' }}
                         disabled={!formik.values.firstName || !formik.values.lastName || !formik.values.gender ||
                             !formik.values.email || !formik.values.mobileNum || !formik.values.parentName
-                            || !formik.values.parentRelation || !formik.values.religion ||
+                            || !formik.values.parentRelation ||
                             formik.errors.email || formik.errors.mobileNum
                         }
                     >

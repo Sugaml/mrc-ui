@@ -1,50 +1,44 @@
-import React, { useState } from 'react';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TablePagination } from '@mui/material';
+import React from 'react';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Button from '@material-ui/core/Button';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 
-const HomePage = ({ payments }) => {
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+function MyApp() {
+  const [anchorEl, setAnchorEl] = React.useState(null);
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
   };
 
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
+  const handleClose = () => {
+    setAnchorEl(null);
   };
 
   return (
-    <TableContainer component={Paper}>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>Date</TableCell>
-            <TableCell>Description</TableCell>
-            <TableCell>Amount</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {payments.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((payment) => (
-            <TableRow key={payment.id}>
-              <TableCell>{payment.date}</TableCell>
-              <TableCell>{payment.description}</TableCell>
-              <TableCell>{payment.amount}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-      <TablePagination
-        rowsPerPageOptions={[10, 25, 50]}
-        component="div"
-        count={payments.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
-    </TableContainer>
+    <div>
+      <AppBar position="static">
+        <Toolbar>
+          <Button color="inherit">Home</Button>
+          <Button color="inherit">About</Button>
+          <Button color="inherit" onClick={handleClick}>
+            Menu
+          </Button>
+          <Menu
+            anchorEl={anchorEl}
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+          >
+            <MenuItem onClick={handleClose}>Option 1</MenuItem>
+            <MenuItem onClick={handleClose}>Option 2</MenuItem>
+            <MenuItem onClick={handleClose}>Option 3</MenuItem>
+          </Menu>
+        </Toolbar>
+      </AppBar>
+      <p>Content goes here...</p>
+    </div>
   );
-};
+}
 
-export default HomePage;
+export default MyApp;

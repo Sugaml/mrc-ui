@@ -5,6 +5,10 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar';
+import Tooltip from '@mui/material/Tooltip';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getStudentGeneralAction, getUserAction } from '../action/user';
@@ -20,11 +24,31 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 
+const settings = ['Profile', 'Logout'];
 
 export const ResponsiveAppBar = ({ children }) => {
   const drawerWidth = 240;
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+
+  const handleSettingMenu = (handleKeys) => (event) => {
+    setAnchorElUser(null);
+    if (!handleKeys) return
+    if (handleKeys.toLowerCase()==="logout"){
+      dispatch(logout())
+    }
+    navigate("/" + handleKeys.toLowerCase())
+  };
+
 
   const token = useSelector((state) => state.auth.isAuthenticated);
   const user = useSelector((state) => state.UserInfo.user);
@@ -47,20 +71,52 @@ React.useEffect(() => {
             <div>
             <Box sx={{ display: 'flex' }}>
              <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
-               <Toolbar>
-                 <IconButton
-                   size="large"
-                   edge="start"
-                   color="inherit"
-                   aria-label="menu"
-                   sx={{ mr: 2 }}
-                 >
-                   <MenuIcon />
-                 </IconButton>
-                 <Avatar sx={{ bgcolor: '#f50057', mr: 2 }}> {student.firstname}</Avatar>
-                 <Typography variant="h6" noWrap>
-                 {student.firstname + " "+ student.lastname}
-                 </Typography>
+               <Toolbar sx={{display:"flex",justifyContent:'space-between'}}>
+               <Typography
+                variant="h4"
+                noWrap
+                component="a"
+                href="/profile"
+                sx={{
+                  mr: 2,
+                  display: { xs: 'none', md: 'flex' },
+                  fontFamily: 'monospace',
+                  fontWeight: 700,
+                  letterSpacing: '.3rem',
+                  color: 'inherit',
+                  textDecoration: 'none',
+                }}
+              >
+                MRC
+              </Typography>
+                 <Tooltip title="Open settings">
+                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                    <Avatar alt={user.email} src={user.image} />
+                  </IconButton>
+                </Tooltip>
+                <Menu
+                  sx={{ mt: '45px' }}
+                  id="menu-appbar"
+                  anchorEl={anchorElUser}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  open={Boolean(anchorElUser)}
+                  onClose={handleCloseUserMenu}
+                >
+                  {settings.map((setting) => (
+                    <MenuItem key={setting} onClick={handleSettingMenu(setting)} >
+                      <Typography textAlign="center">{setting}</Typography>
+                    </MenuItem>
+                  ))}
+                </Menu>
+               
                </Toolbar>
              </AppBar>
              <Drawer

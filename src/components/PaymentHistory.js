@@ -45,13 +45,14 @@ export const PaymentHistory = () => {
                 <div>
                     {
                        !payments  ? (
-                            <div>
-                                <Box sx={{ flexGrow: 1, p: 3 }}>
-                                    <Typography variant="h5" gutterBottom>
-                                       No Payement History
-                                    </Typography>
-                                </Box>
-                            </div>
+                        <div>
+                        <Backdrop
+                            sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                            open={loading}
+                        >
+                            <CircularProgress color="inherit" />
+                        </Backdrop>
+                    </div>
                         ) : (
                             <div>
                                 <Box sx={{ flexGrow: 1, p: 3 }}>
