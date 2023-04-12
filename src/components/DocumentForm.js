@@ -2,11 +2,10 @@ import * as React from 'react';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import Box from "@material-ui/core/Box";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { studentFileInfoAction } from '../action/studentfile';
-import { Divider } from '@mui/material';
+import { Box, Divider } from '@mui/material';
 
 
 export const DocumentForm = ({

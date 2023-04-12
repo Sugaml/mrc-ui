@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { TextField, Button, Grid, Paper, Typography } from '@material-ui/core';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import { Button, Grid, Paper, TextField, Typography } from '@mui/material';
 
 export const ChangePasswordForm = () => {
   const [oldPassword, setOldPassword] = useState('');
