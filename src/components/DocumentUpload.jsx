@@ -18,20 +18,31 @@ const DocumentUpload = ({
     const studentInfo = useSelector((state) => state.StudentInfo.studentInfo);
     console.log("state loading file", studentInfo)
     const dispatch = useDispatch();
+    
     const [photo, setPhoto] = useState(null);
     const [certificate, setCertificate] = useState(null);
     const [signature, setSignature] = useState(null);
+    const [gradesheet, setGradesheet] = useState(null);
+    const [transcript, setTranscript] = useState(null);
+    const [character, setCharacter] = useState(null);
+
     const [photoURL, setPhotoURL] = useState(null);
     const [certificateURL, setCertificateURL] = useState(null);
+    const [signatureURL, setSignatureURL] = useState(null);
+    const [gradesheetURL, setGradesheetURL] = useState(null);
+    const [transcriptURL, setTranscriptURL] = useState(null);
+    const [characterURL, setCharacterURL] = useState(null);
 
     // State variables to track completion of required fields
     const [isPhotoCompleted, setIsPhotoCompleted] = useState(false);
     const [isCertificateCompleted, setIsCertificateCompleted] = useState(false);
     const [isSignatureCompleted, setIsSignatureCompleted] = useState(false);
+    const [isGradesheetCompleted, setIsGradesheetCompleted] = useState(false);
+    const [isTanscriptCompleted, setIsTranscriptCompleted] = useState(false);
+    const [isCharacterCompleted, setIsCharacterCompleted] = useState(false);
 
     // Function to handle file upload
     const handleUpload = (file, fileType) => {
-
         // Update the state with the file data and set completion status
         switch (fileType) {
             case 'photo':
@@ -46,7 +57,18 @@ const DocumentUpload = ({
                 setSignature(file);
                 setIsSignatureCompleted(true);
                 break;
-            // Handle other file types here
+            case 'gradesheet':
+                setGradesheet(file);
+                setIsGradesheetCompleted(true);
+                break;
+            case 'transcript':
+                setTranscript(file);
+                setIsTranscriptCompleted(true);
+                break;
+            case 'character':
+                setCharacter(file);
+                setIsCharacterCompleted(true);
+                break;
             default:
                 break;
         }
@@ -57,7 +79,6 @@ const DocumentUpload = ({
     const handleSubmit = async () => {
         console.log("Clicked Submit button");
         try {
-            // Upload each file to the server and get the file URLs
             if (photo) {
                 const url = await uploadFile(photo, 'photo');
                 console.log("Return Photo URL :: ", url)
@@ -69,7 +90,26 @@ const DocumentUpload = ({
                 console.log("Return Cert URL :: ", url)
                 setCertificateURL(url);
             }
-            console.log("File URL :: ", photoURL, certificateURL)
+
+            if (signature) {
+                const url = await uploadFile(signature, 'signature');
+                setSignatureURL(url);
+            }
+
+            if (gradesheet) {
+                const url = await uploadFile(signature, 'gardesheet');
+                setGradesheetURL(url);
+            }
+
+            if (transcript) {
+                const url = await uploadFile(transcript, 'transcript');
+                setTranscriptURL(url);
+            }
+
+            if (gradesheet) {
+                const url = await uploadFile(character, 'character');
+                setCharacterURL(url);
+            }
         } catch (error) {
             console.error('Form submission failed:', error);
         }
@@ -81,30 +121,39 @@ const DocumentUpload = ({
         setPhoto(null);
         setCertificate(null);
         setSignature(null);
+        setGradesheet(null)
+        setTranscript(null);
+        setCharacter(null);
+
         setIsPhotoCompleted(false);
         setIsCertificateCompleted(false);
         setIsSignatureCompleted(false);
+        setIsGradesheetCompleted(false);
+        setIsTranscriptCompleted(false);
+        setIsCharacterCompleted(false);
     };
 
     // Check if all required fields are completed
-    const isFormCompleted = isPhotoCompleted && isCertificateCompleted&&isSignatureCompleted;
+    const isFormCompleted = isPhotoCompleted && isCertificateCompleted && isSignatureCompleted && isGradesheetCompleted  && isTanscriptCompleted && isCharacterCompleted;
     // Add additional checks for other required fields
     useEffect(() => {
-        if (photoURL && certificateURL) {
+        if (photoURL && certificateURL && gradesheetURL && signatureURL && transcriptURL && characterURL) {
             // Call the second API with the file URLs
             const data = {
-                see_transcript: photoURL,
+                photo: photoURL,
+                see_transcript: gradesheetURL,
                 see_character: certificateURL,
-                certificate_transcript: "",
-                certificate_character: "",
+                certificate_transcript: transcriptURL,
+                certificate_character: characterURL,
                 certificate_migration: "",
                 citizenship_front: "",
                 citizenship_back: "",
+                signature: signatureURL,
                 student_id: studentInfo.ID,
             };
             dispatch(studentFileInfoAction(data))
         }
-    }, [photoURL, certificateURL]);
+    }, [photoURL, certificateURL, signatureURL, gradesheetURL, transcriptURL, characterURL]);
 
     return (
         <TableContainer component={Paper}>
@@ -126,15 +175,44 @@ const DocumentUpload = ({
                         uploadSizeRange={{ min: 0, max: 10 }} // Provide the desired size range in MB
                         onCompletionChange={setIsPhotoCompleted}
                     />
+
                     <FileRow
-                        name="Certificate"
+                        name="SEE Marksheet/Gradesheet"
+                        required={true}
+                        supportedFormats=".jpg, .png"
+                        onUpload={(file) => handleUpload(file, 'gradesheet')}
+                        uploadSizeRange={{ min: 0, max: 10 }} // Provide the desired size range in MB
+                        onCompletionChange={setIsGradesheetCompleted}
+                    />
+
+                    <FileRow
+                        name="SEE Character"
                         required={true}
                         supportedFormats=".jpg, .png"
                         onUpload={(file) => handleUpload(file, 'certificate')}
                         uploadSizeRange={{ min: 0, max: 10 }} // Provide the desired size range in MB
                         onCompletionChange={setIsCertificateCompleted}
                     />
-                     <FileRow
+
+                    <FileRow
+                        name="Certificate Transcript/Gradesheet"
+                        required={true}
+                        supportedFormats=".jpg, .png"
+                        onUpload={(file) => handleUpload(file, 'transcript')}
+                        uploadSizeRange={{ min: 0, max: 10 }} // Provide the desired size range in MB
+                        onCompletionChange={setIsTranscriptCompleted}
+                    />
+
+                    <FileRow
+                        name="Certificate Character"
+                        required={true}
+                        supportedFormats=".jpg, .png"
+                        onUpload={(file) => handleUpload(file, 'character')}
+                        uploadSizeRange={{ min: 0, max: 10 }} // Provide the desired size range in MB
+                        onCompletionChange={setIsCharacterCompleted}
+                    />
+
+                    <FileRow
                         name="Signature"
                         required={true}
                         supportedFormats=".jpg, .png"
@@ -142,6 +220,7 @@ const DocumentUpload = ({
                         uploadSizeRange={{ min: 0, max: 10 }} // Provide the desired size range in MB
                         onCompletionChange={setIsSignatureCompleted}
                     />
+
                 </TableBody>
             </Table>
             <Grid item sx={{ m: 2, display: 'flex', justifyContent: 'flex-end' }} xs={12}>
