@@ -77,8 +77,7 @@ export const uploadFile = async (file, fileType) => {
 
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
-      xhr.open('POST', `http://localhost:8080/uploads`, true);
-
+      xhr.open('POST', `${process.env.REACT_APP_API}/uploads`, true);
       xhr.onload = function () {
         if (xhr.status === 200) {
           const response = JSON.parse(xhr.responseText);
@@ -87,7 +86,6 @@ export const uploadFile = async (file, fileType) => {
           reject(new Error('Failed to upload the file'));
         }
       };
-
       xhr.onerror = function () {
         reject(new Error('Failed to upload the file'));
       };
