@@ -10,10 +10,10 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { AddressForm } from './AddressForm';
 import { StudentInfo } from './StudentInfo';
-import { DocumentForm } from './DocumentForm';
 import { EducationForm } from './EducationForm';
+import DocumentUpload from './DocumentUpload';
 
-const steps = [ 'General Info', 'Address Info', 'Academic Info'];
+const steps = ['General Section', 'Address Section', 'Academic Section','Document Section'];
 
 function getStepContent(activeStep,setActiveStep, steps, handleBack, handleNext) {
   switch (activeStep) {
@@ -41,14 +41,14 @@ function getStepContent(activeStep,setActiveStep, steps, handleBack, handleNext)
       handleNext={handleNext}
       steps={steps}
       />;
-    // case 3:
-    //   return <DocumentForm
-    //   activeStep={activeStep}
-    //   setActiveStep={setActiveStep}
-    //   handleBack={handleBack}
-    //   handleNext={handleNext}
-    //   steps={steps}
-    //      />;
+    case 3:
+    return <DocumentUpload
+      activeStep={activeStep}
+      setActiveStep={setActiveStep}
+      handleBack={handleBack}
+      handleNext={handleNext}
+      steps={steps}
+      />;
     default:
       throw new Error('Unknown step');
   }

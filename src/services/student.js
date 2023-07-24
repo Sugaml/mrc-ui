@@ -49,6 +49,6 @@ import axios from 'axios';
     return  axios.post(`${process.env.REACT_APP_API}/${url}`, studentEducationInfoData);
   };
 
-  export const postStudentFileInfo =  (studentFileInfoData, url) => {
+  export const postStudentFileInfo =  (url,studentFileInfoData) => {
     return  axios.post(`${process.env.REACT_APP_API}/${url}`, studentFileInfoData);
   };
