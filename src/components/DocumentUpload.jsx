@@ -15,8 +15,9 @@ const DocumentUpload = ({
     const handleNextEducation = () => {
         setActiveStep(activeStep + 1);
     };
+    const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const studentInfo = useSelector((state) => state.StudentInfo.studentInfo);
-    console.log("state loading file", studentInfo)
+    console.log("state loading file",isAuthenticated, studentInfo)
     const dispatch = useDispatch();
     
     const [photo, setPhoto] = useState(null);
@@ -79,36 +80,38 @@ const DocumentUpload = ({
     const handleSubmit = async () => {
         console.log("Clicked Submit button");
         try {
-            if (photo) {
-                const url = await uploadFile(photo, 'photo');
-                console.log("Return Photo URL :: ", url)
-                setPhotoURL(url);
-            }
-
-            if (certificate) {
-                const url = await uploadFile(certificate, 'certificate');
-                console.log("Return Cert URL :: ", url)
-                setCertificateURL(url);
-            }
-
-            if (signature) {
-                const url = await uploadFile(signature, 'signature');
-                setSignatureURL(url);
-            }
-
-            if (gradesheet) {
-                const url = await uploadFile(signature, 'gardesheet');
-                setGradesheetURL(url);
-            }
-
-            if (transcript) {
-                const url = await uploadFile(transcript, 'transcript');
-                setTranscriptURL(url);
-            }
-
-            if (gradesheet) {
-                const url = await uploadFile(character, 'character');
-                setCharacterURL(url);
+            if (isAuthenticated){
+                if (photo) {
+                    const url = await uploadFile(isAuthenticated,photo, 'photo');
+                    console.log("Return Photo URL :: ", url)
+                    setPhotoURL(url);
+                }
+    
+                if (certificate) {
+                    const url = await uploadFile(isAuthenticated,certificate, 'certificate');
+                    console.log("Return Cert URL :: ", url)
+                    setCertificateURL(url);
+                }
+    
+                if (signature) {
+                    const url = await uploadFile(isAuthenticated,signature, 'signature');
+                    setSignatureURL(url);
+                }
+    
+                if (gradesheet) {
+                    const url = await uploadFile(isAuthenticated,signature, 'gardesheet');
+                    setGradesheetURL(url);
+                }
+    
+                if (transcript) {
+                    const url = await uploadFile(isAuthenticated,transcript, 'transcript');
+                    setTranscriptURL(url);
+                }
+    
+                if (gradesheet) {
+                    const url = await uploadFile(isAuthenticated,character, 'character');
+                    setCharacterURL(url);
+                }
             }
         } catch (error) {
             console.error('Form submission failed:', error);

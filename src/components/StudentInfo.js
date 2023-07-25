@@ -29,13 +29,13 @@ export const StudentInfo = ({
         setActiveStep(activeStep + 1);
     };
     const dispatch = useDispatch();
+    const [date,setDate] = useState("");
 
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const studentInfo = useSelector((state) => state.StudentInfo.student);
     const course = useSelector((state) => state.CurrentCourse.course);
     const student = useSelector((state) => state.StudentGeneral.currentStudent);
 
-    const [date,setDate] = useState("");
     const getStudentGeneral = React.useCallback(() => dispatch(getStudentGeneralAction(isAuthenticated)), [dispatch, isAuthenticated]);
 
     React.useEffect(() => {
@@ -45,6 +45,7 @@ export const StudentInfo = ({
     const handleDate = ({ bsDate, adDate }) => {
        setDate({ date: bsDate });
      };
+     
     const formik = useFormik({
         initialValues: {
             firstName: student.firstname,

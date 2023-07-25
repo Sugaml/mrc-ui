@@ -9,11 +9,12 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { useDispatch, useSelector } from "react-redux";
-import { studentAddressInfoAction } from '../action/studentaddress';
+import { getAddress, studentAddressInfoAction } from '../action/studentaddress';
 import * as Yup from 'yup';
 import Proviences from '../json/Proviences';
 import Districts from '../json/Districts';
 import Municipalities from '../json/Municipalities';
+import { getStudentGeneralAction } from '../action/user';
 
 export const AddressForm = (
     {
@@ -23,35 +24,61 @@ export const AddressForm = (
         handleNext,
         steps
     }) => {
+
     const handleNextEducation = () => {
         setActiveStep(activeStep + 1);
     };
-    const [proviences] = React.useState(Proviences)
-    const [districts] = React.useState(Districts)
-    const [municipalities]=React.useState(Municipalities)
 
-    const studentAddressInfo = useSelector((state) => state.StudentAddressInfo.studentAddressInfo);
-    const studentInfo = useSelector((state) => state.StudentInfo.studentInfo);
-    console.log("student log in address ::", studentInfo)
-    console.log("state address loading ", studentAddressInfo)
     const dispatch = useDispatch();
 
-    const formik = useFormik({
-        initialValues: {
-            provience: "",
-            district: "",
-            municipality: "",
-            street: "",
-            wardNum: "",
-            houseNumber: "",
+    const [proviences] = React.useState(Proviences)
+    const [districts] = React.useState(Districts)
+    const [municipalities] = React.useState(Municipalities)
 
-            tprovience: "",
-            tdistrict: "",
-            tmunicipality: "",
-            tstreet: "",
-            twardNum: 0,
-            thouseNumber: "",
-        },
+    const token = useSelector((state) => state.auth.isAuthenticated);
+    const studentInfo = useSelector((state) => state.StudentInfo.student);
+
+    const student = useSelector((state) => state.StudentGeneral.currentStudent);
+    const currentAddress = useSelector((state) => state.CurrentAddress.address);
+
+    const getStudentAddress = React.useCallback(() => dispatch(getAddress(token, student.ID)), [dispatch, token, student]);
+    React.useEffect(() => {
+        getStudentAddress();
+    }, [getStudentAddress]);
+
+    console.log("student log in address ::", student)
+    console.log("address loading ", currentAddress)
+
+    const formik = useFormik({
+        initialValues: currentAddress ? {
+                provience: currentAddress.provience,
+                district: currentAddress.district,
+                municipality: currentAddress.municipality,
+                street: currentAddress.street,
+                wardNum: currentAddress.ward_number,
+                houseNumber: currentAddress.house_number,
+
+                tprovience: currentAddress.tprovience,
+                tdistrict: currentAddress.tdistrict,
+                tmunicipality: currentAddress.tmunicipality,
+                tstreet: currentAddress.tstreet,
+                twardNum: currentAddress.tward_number,
+                thouseNumber: currentAddress.thouse_number,
+            } : {
+                provience: "",
+                district: "",
+                municipality: "",
+                street: "",
+                wardNum: "",
+                houseNumber: "",
+
+                tprovience: "",
+                tdistrict: "",
+                tmunicipality: "",
+                tstreet: "",
+                twardNum: 0,
+                thouseNumber: "",
+            },
 
         validationSchema: Yup.object({
             provience: Yup.string().required("please select provience"),
@@ -81,7 +108,7 @@ export const AddressForm = (
                 "tstreet": formik.values.tstreet,
                 "tward_number": parseInt(formik.values.twardNum.number),
                 "thouse_number": formik.values.thouse_number,
-                "student_id": studentInfo.ID,
+                "student_id": studentInfo?.ID,
             }
             console.log("student address info:", studetAddressInfoData)
             handleNextEducation();
@@ -219,7 +246,7 @@ export const AddressForm = (
                     Temporary Address
                 </Typography>
                 <Grid container spacing={3}>
-                <Grid item xs={12} sm={6}>
+                    <Grid item xs={12} sm={6}>
                         <FormControl fullWidth sx={{ m: 0 }} size="large">
                             <InputLabel id="demo-select-small">Provience</InputLabel>
                             <Select

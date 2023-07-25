@@ -69,7 +69,7 @@ export const getStudentDocument= (token,id) => async (dispatch) => {
     }
 };
 
-export const uploadFile = async (file, fileType) => {
+export const uploadFile = async (token,file, fileType) => {
   try {
     const formData = new FormData();
     formData.append('file', file);
@@ -78,6 +78,10 @@ export const uploadFile = async (file, fileType) => {
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
       xhr.open('POST', `${process.env.REACT_APP_API}/uploads`, true);
+
+      // Add Authorization header
+      xhr.setRequestHeader('Authorization', `basic ${token}`);
+
       xhr.onload = function () {
         if (xhr.status === 200) {
           const response = JSON.parse(xhr.responseText);
