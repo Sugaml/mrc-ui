@@ -57,7 +57,7 @@ export const SignIn=() =>{
     }
   });
 
-if (isAuthenticated) return <Navigate to="/profile" />;
+if (isAuthenticated) return <Navigate to="/dashbaord" />;
 
   return (
     <ThemeProvider theme={theme}>
