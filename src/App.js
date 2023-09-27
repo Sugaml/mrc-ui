@@ -8,8 +8,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import ThemeProvider from './theme';
 import { StyledChart } from './components/chart';
 import ScrollToTop from './components/scroll-to-top';
-import AppRouter from './router/Route';
-import AppRoutes from './router/Routes';
 
 
 function App() {
@@ -20,24 +18,20 @@ function App() {
           <ScrollToTop />
           <StyledChart />
           <Router />
+          <ToastContainer
+          position="top-center"
+          autoClose={4000}
+          hideProgressBar
+          newestOnTop
+          closeOnClick
+          rtl={false}
+          pauseOnVisibilityChange
+          draggable
+          pauseOnHover
+        />
         </ThemeProvider>
       </BrowserRouter>
     </HelmetProvider>
-    // <div className="App">
-    //   {/* <Router /> */}
-    //   <Router/>
-    //   <ToastContainer
-    //       position="top-center"
-    //       autoClose={4000}
-    //       hideProgressBar
-    //       newestOnTop
-    //       closeOnClick
-    //       rtl={false}
-    //       pauseOnVisibilityChange
-    //       draggable
-    //       pauseOnHover
-    //     />
-    // </div>
   );
 }
 

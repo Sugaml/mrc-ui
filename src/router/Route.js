@@ -1,8 +1,7 @@
-import { BrowserRouter, Navigate, Route, Routes,useRoutes } from 'react-router-dom'; // Import necessary components
+import { Navigate,useRoutes } from 'react-router-dom'; // Import necessary components
 import { useSelector } from 'react-redux';
 import Page404 from '../components/404Page';
 import { EnrollForm } from '../components/EnrollForm';
-import { Home } from '../components/Home';
 import { StudentHomePage } from '../components/StudentHomePage';
 import { CourseInformation } from '../components/CourseInformation';
 import {BictCourse} from '../components/BictCourse'
@@ -17,10 +16,10 @@ import LoginPage from '../pages/LoginPage';
 import UserPage from '../pages/UserPage';
 import ProductsPage from '../pages/ProductsPage';
 import BlogPage from '../pages/BlogPage'
-
+import { CourseChoice } from '../components/CourseChoice';
 
 export default function Router() {
-  // Replace this with your actual authentication logic
+  
   // const isAuth = true;
   const isAuth = useSelector((state) => state.auth.isAuthenticated);
 
@@ -37,15 +36,11 @@ export default function Router() {
         { path: 'menu', element: <BictCourse />},
         { path: 'profile', element: <StudentHomePage />},
         { path: 'course', element: <CourseInformation />},
-       
-        // <Route path='/payment' element={<Payment/>}/>
-        // <Route path='/setting' element={<ChangePasswordForm/>}/>
-        // <Route path='/payment-history' element={<PaymentHistory/>}/>
-
-        // <Route  path='/enroll' element={<EnrollForm />} /> 
-        // <Route path='/online' element={<CourseChoice/>}/>
-        // <Route index path='/courses' element={<Course />} />
-        // <Route path='/snack' element={<CustomizedSnackbars />} />
+        { path: 'payment', element: <Payment />},
+        { path: 'setting', element: <ChangePasswordForm />},
+        { path: 'payment-history', element: <PaymentHistory />},
+        { path: 'enroll', element: <EnrollForm />},
+        { path: 'online', element: <CourseChoice />},
       ],
     },
     {
