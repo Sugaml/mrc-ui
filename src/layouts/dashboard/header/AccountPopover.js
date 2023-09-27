@@ -1,7 +1,9 @@
+import * as React from 'react';
 import { useState } from 'react';
 import { Navigate } from "react-router-dom";
 import { useDispatch,useSelector } from "react-redux";
 import { authLogout } from '../../../action/auth';
+import { getStudentGeneralAction } from '../../../action/user';
 // @mui
 import { alpha } from '@mui/material/styles';
 import { Box, Divider, Typography, Stack, MenuItem, Avatar, IconButton, Popover } from '@mui/material';
@@ -32,7 +34,15 @@ export default function AccountPopover() {
   const dispatch = useDispatch();
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
+  const token = useSelector((state) => state.auth.isAuthenticated);
+  const student = useSelector((state) => state.StudentGeneral.currentStudent);
+  const loading = useSelector((state) => state.StudentGeneral.isStudentGeneral);
 
+  const getStudentGeneral = React.useCallback(() => dispatch(getStudentGeneralAction(token)), [dispatch, token]);
+
+  React.useEffect(() => {
+      getStudentGeneral();
+  }, [getStudentGeneral]);
   const handleOpen = (event) => {
     setOpen(event.currentTarget);
   };
@@ -89,10 +99,10 @@ export default function AccountPopover() {
       >
         <Box sx={{ my: 1.5, px: 2.5 }}>
           <Typography variant="subtitle2" noWrap>
-            {account.displayName}
+           {student?student.firstname +" "+ student.lastname:account.displayName}
           </Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
-            {account.email}
+          {student?student.email:account.email}
           </Typography>
         </Box>
 
