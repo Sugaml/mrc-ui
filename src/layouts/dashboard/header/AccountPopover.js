@@ -1,4 +1,7 @@
 import { useState } from 'react';
+import { Navigate } from "react-router-dom";
+import { useDispatch,useSelector } from "react-redux";
+import { authLogout } from '../../../action/auth';
 // @mui
 import { alpha } from '@mui/material/styles';
 import { Box, Divider, Typography, Stack, MenuItem, Avatar, IconButton, Popover } from '@mui/material';
@@ -26,6 +29,9 @@ const MENU_OPTIONS = [
 
 export default function AccountPopover() {
   const [open, setOpen] = useState(null);
+  const dispatch = useDispatch();
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
 
   const handleOpen = (event) => {
     setOpen(event.currentTarget);
@@ -33,6 +39,11 @@ export default function AccountPopover() {
 
   const handleClose = () => {
     setOpen(null);
+  };
+
+  const handleLogout = () => {
+    dispatch(authLogout());
+    if (!isAuthenticated) return <Navigate to="/login" />;
   };
 
   return (
@@ -97,7 +108,7 @@ export default function AccountPopover() {
 
         <Divider sx={{ borderStyle: 'dashed' }} />
 
-        <MenuItem onClick={handleClose} sx={{ m: 1 }}>
+        <MenuItem onClick={handleLogout} sx={{ m: 1 }}>
           Logout
         </MenuItem>
       </Popover>

@@ -42,7 +42,6 @@ const StyledContent = styled('div')(({ theme }) => ({
 
 export default function LoginPage() {
   const mdUp = useResponsive('up', 'md');
-
   return (
     <>
       <Helmet>
