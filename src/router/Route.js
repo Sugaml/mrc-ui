@@ -1,6 +1,5 @@
 import { Navigate,useRoutes } from 'react-router-dom'; // Import necessary components
 import { useSelector } from 'react-redux';
-import Page404 from '../components/404Page';
 import { EnrollForm } from '../components/EnrollForm';
 import { StudentHomePage } from '../components/StudentHomePage';
 import { CourseInformation } from '../components/CourseInformation';
@@ -8,7 +7,6 @@ import {BictCourse} from '../components/BictCourse'
 import { Payment } from '../components/Payment';
 import { PaymentHistory } from '../components/PaymentHistory';
 import { ChangePasswordForm } from '../components/ChangePassword';
-import { SignIn } from '../components/Signin';
 import SimpleLayout from '../layouts/simple';
 import DashboardLayout from '../layouts/dashboard';
 import DashboardAppPage from '../pages/DashboardAppPage';
@@ -17,6 +15,7 @@ import UserPage from '../pages/UserPage';
 import ProductsPage from '../pages/ProductsPage';
 import BlogPage from '../pages/BlogPage'
 import { CourseChoice } from '../components/CourseChoice';
+import Page404 from '../pages/Page404';
 
 export default function Router() {
   
