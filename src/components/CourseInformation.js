@@ -1,11 +1,9 @@
 import * as React from 'react';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
-import Container from '@mui/material/Container';
 import MenuItem from '@mui/material/MenuItem';
 import ListItemText from '@mui/material/ListItemText';
 import MenuList from '@mui/material/MenuList';
@@ -15,7 +13,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getStudentGeneralAction } from '../action/user';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
-import { CourseChoice } from './CourseChoice';
 
 export const CourseInformation = () => {
   const dispatch = useDispatch();

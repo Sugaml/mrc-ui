@@ -1,12 +1,11 @@
 import * as React from 'react';
 import { useState } from 'react';
 
-import { Box, Divider, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Pagination, Typography } from '@mui/material';
+import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Pagination, Typography } from '@mui/material';
 import { useDispatch, useSelector } from "react-redux";
 import { getStudentGeneralAction } from '../action/user';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
-import { CourseChoice } from './CourseChoice';
 import { listTransactionAction } from '../action/transactions';
 
 export const PaymentHistory = () => {

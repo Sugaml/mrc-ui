@@ -36,7 +36,6 @@ export default function AccountPopover() {
 
   const token = useSelector((state) => state.auth.isAuthenticated);
   const student = useSelector((state) => state.StudentGeneral.currentStudent);
-  const loading = useSelector((state) => state.StudentGeneral.isStudentGeneral);
 
   const getStudentGeneral = React.useCallback(() => dispatch(getStudentGeneralAction(token)), [dispatch, token]);
 

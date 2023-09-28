@@ -12,9 +12,6 @@ const DocumentUpload = ({
     handleNext,
     steps
 }) => {
-    const handleNextEducation = () => {
-        setActiveStep(activeStep + 1);
-    };
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
     const studentInfo = useSelector((state) => state.StudentInfo.studentInfo);
     console.log("state loading file",isAuthenticated, studentInfo)

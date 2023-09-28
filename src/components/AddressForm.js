@@ -14,7 +14,6 @@ import * as Yup from 'yup';
 import Proviences from '../json/Proviences';
 import Districts from '../json/Districts';
 import Municipalities from '../json/Municipalities';
-import { getStudentGeneralAction } from '../action/user';
 
 export const AddressForm = (
     {

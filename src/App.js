@@ -1,5 +1,4 @@
 import React from 'react'
-import './App.css'
 import { BrowserRouter } from 'react-router-dom';
 import Router from './router/Route';
 import { ToastContainer } from 'react-toastify';
@@ -20,7 +19,7 @@ function App() {
           <Router />
           <ToastContainer
           position="top-center"
-          autoClose={4000}
+          autoClose={5000}
           hideProgressBar
           newestOnTop
           closeOnClick

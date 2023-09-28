@@ -269,23 +269,23 @@ const semesters = [
     },
 ];
 
-const objectives = [
-    {
-        point: 'To prepare students for higher studies like Masters level program in the area of Education, Information Communication Technology or other related field.',
-    },
-    {
-        point: 'To provide students with a better and extensive learning about Computer Science and Information Communication Technology concepts like Programming, Algorithms, Database Management Systems, Management Information System, Data structures, Computer Graphics, Cyber law, Artificial intelligence and other BICT related subjects.'
-    },
-    {
-        point: 'To provide theoretical knowledge to the students to build up a deeper understanding and familiarize them with the practical tools and techniques used in the development of computer systems software and technology.'
-    },
-    {
-        point: 'To provide theoretical knowledge to the students to build up a deeper understanding and familiarize them with the practical tools and techniques used in the development of computer systems software and technology.'
-    },
-    {
-        point: 'To prepare successful BICT graduates to build their career in their interested field or BICT related field such as a Computer Teacher in Higher Level, Software Application Developer, System Administrator, Web Programmer, Database Administrator, Web Developer, Network Administrator, etc.',
-    },
-]
+// const objectives = [
+//     {
+//         point: 'To prepare students for higher studies like Masters level program in the area of Education, Information Communication Technology or other related field.',
+//     },
+//     {
+//         point: 'To provide students with a better and extensive learning about Computer Science and Information Communication Technology concepts like Programming, Algorithms, Database Management Systems, Management Information System, Data structures, Computer Graphics, Cyber law, Artificial intelligence and other BICT related subjects.'
+//     },
+//     {
+//         point: 'To provide theoretical knowledge to the students to build up a deeper understanding and familiarize them with the practical tools and techniques used in the development of computer systems software and technology.'
+//     },
+//     {
+//         point: 'To provide theoretical knowledge to the students to build up a deeper understanding and familiarize them with the practical tools and techniques used in the development of computer systems software and technology.'
+//     },
+//     {
+//         point: 'To prepare successful BICT graduates to build their career in their interested field or BICT related field such as a Computer Teacher in Higher Level, Software Application Developer, System Administrator, Web Programmer, Database Administrator, Web Developer, Network Administrator, etc.',
+//     },
+// ]
 
 export const BictCourse = () => {
     return (
