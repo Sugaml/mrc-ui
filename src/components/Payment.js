@@ -28,8 +28,10 @@ export const Payment = () => {
     const handleModeChange = (event) => {
         setPaymentMode(event.target.value);
         if (event.target.value === 'full') {
+            console.log("Payment full",student.course.fee)
             setAmountPaid(student.course.fee);
         } else if (event.target.value === 'half') {
+            console.log("Payment full",student.course.fee / 2)
             setAmountPaid(student.course.fee / 2);
         } else {
             setAmountPaid('');
@@ -94,7 +96,7 @@ export const Payment = () => {
                                                 <Grid container spacing={2}>
                                                     <Grid item xs={12} sm={6}>
                                                         <Typography variant="subtitle1">Fee Amount:</Typography>
-                                                        <Typography variant="h6">Rs. {student.course.fee}</Typography>
+                                                        <Typography variant="h6">Rs. {amountPaid}</Typography>
                                                     </Grid>
                                                     <Grid item xs={12} sm={6}>
                                                         <FormControl component="fieldset">
@@ -135,7 +137,7 @@ export const Payment = () => {
                                                                 value={amountPaid}
                                                                 onChange={handleAmountChange}
                                                                 InputProps={{
-                                                                    startAdornment: <Typography>Rs</Typography>,
+                                                                    startAdornment: <Typography></Typography>,
                                                                 }}
                                                             />
                                                         </Grid>
