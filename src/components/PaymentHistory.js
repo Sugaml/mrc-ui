@@ -10,8 +10,8 @@ import { CourseChoice } from './CourseChoice';
 import { listTransactionAction } from '../action/transactions';
 
 export const PaymentHistory = () => {
-    const dispatch = useDispatch();
-    const [page, setPage] = useState(1);
+  const dispatch = useDispatch();
+  const [page, setPage] = useState(1);
   const rowsPerPage = 10;
 
   const handleChangePage = (event, newPage) => {
