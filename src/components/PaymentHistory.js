@@ -10,49 +10,51 @@ import { CourseChoice } from './CourseChoice';
 import { listTransactionAction } from '../action/transactions';
 
 export const PaymentHistory = () => {
-  const dispatch = useDispatch();
-  const [page, setPage] = useState(1);
-  const rowsPerPage = 10;
+    const dispatch = useDispatch();
+    const [page, setPage] = useState(1);
+    const rowsPerPage = 10;
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
+    const handleChangePage = (event, newPage) => {
+        setPage(newPage);
+    };
 
-  const startIndex = (page - 1) * rowsPerPage;
-  const endIndex = startIndex + rowsPerPage;
-  
-  const token = useSelector((state) => state.auth.isAuthenticated);
-  const student = useSelector((state) => state.StudentGeneral.currentStudent);
-  
-  const payments = useSelector((state) => state.Transactions.transactions);
-  const loading = useSelector((state) => state.Transactions.isTransactions);
-  
-  console.log("payments ",student.ID)
-  console.log("payments ",payments)
+    const startIndex = (page - 1) * rowsPerPage;
+    const endIndex = startIndex + rowsPerPage;
 
-  const getStudentGeneral = React.useCallback(() => dispatch(getStudentGeneralAction(token)), [dispatch, token]);
-  const getPayments = React.useCallback(() => dispatch(listTransactionAction(token,student.ID)), [dispatch, token,student.ID]);
-  
-  React.useEffect(() => {
-    getStudentGeneral()
-      getPayments();
-    }, [getStudentGeneral,getPayments]);
+    const token = useSelector((state) => state.auth.isAuthenticated);
+    const student = useSelector((state) => state.StudentGeneral.currentStudent);
+
+    const payments = useSelector((state) => state.Transactions.transactions);
+    const loading = useSelector((state) => state.Transactions.isTransactions);
+
     
+
+    console.log("payments ", student.ID)
+    console.log("payments ", payments)
+
+    const getStudentGeneral = React.useCallback(() => dispatch(getStudentGeneralAction(token)), [dispatch, token]);
+    const getPayments = React.useCallback(() => dispatch(listTransactionAction(token, student.ID)), [dispatch, token, student.ID]);
+
+    React.useEffect(() => {
+        getStudentGeneral()
+        getPayments();
+    }, [getStudentGeneral, getPayments]);
+
 
     return (
         <div>
             {student ? (
                 <div>
                     {
-                       !payments  ? (
-                        <div>
-                        <Backdrop
-                            sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-                            open={loading}
-                        >
-                            <CircularProgress color="inherit" />
-                        </Backdrop>
-                    </div>
+                        !payments ? (
+                            <div>
+                                <Backdrop
+                                    sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                                    open={loading}
+                                >
+                                    <CircularProgress color="inherit" />
+                                </Backdrop>
+                            </div>
                         ) : (
                             <div>
                                 <Box sx={{ flexGrow: 1, p: 3 }}>
@@ -63,17 +65,23 @@ export const PaymentHistory = () => {
                                         <Table>
                                             <TableHead>
                                                 <TableRow>
+                                                    <TableCell>ID</TableCell>
                                                     <TableCell>Date</TableCell>
-                                                    <TableCell>Description</TableCell>
+                                                    <TableCell>Title</TableCell>
                                                     <TableCell>Amount</TableCell>
+                                                    <TableCell>Reference Code</TableCell>
+                                                    <TableCell>Status</TableCell>
                                                 </TableRow>
                                             </TableHead>
                                             <TableBody>
-                                                { payments.data.slice(startIndex, endIndex).map((payment) => (
+                                                {payments.data.slice(startIndex, endIndex).map((payment) => (
                                                     <TableRow key={payment.id}>
-                                                        <TableCell>{payment.CreatedAt}</TableCell>
+                                                         <TableCell>{payment.ID}</TableCell>
+                                                        <TableCell>{new Date(payment.CreatedAt).toLocaleString()}</TableCell>
                                                         <TableCell>{payment.title}</TableCell>
                                                         <TableCell>{payment.amount}</TableCell>
+                                                        <TableCell>{payment.ref_id}</TableCell>
+                                                        <TableCell >{payment.status}</TableCell>
                                                     </TableRow>
                                                 ))}
                                             </TableBody>
