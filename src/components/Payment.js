@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import * as React from 'react';
-import {Grid,Box, Button, Card, CardContent, Divider,Typography} from '@mui/material';
-import {FormControl,FormControlLabel, FormLabel, Radio,RadioGroup, TextField} from '@mui/material';
+import { Grid, Box, Button, Card, CardContent, Divider, Typography } from '@mui/material';
+import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, TextField } from '@mui/material';
 import { useDispatch, useSelector } from "react-redux";
 import { getStudentGeneralAction } from '../action/user';
 import KhaltiCheckout from "khalti-checkout-web";
@@ -13,7 +13,7 @@ export const Payment = () => {
     const dispatch = useDispatch();
 
     const [paymentMode, setPaymentMode] = useState('full');
-    
+
     const token = useSelector((state) => state.auth.isAuthenticated);
     const student = useSelector((state) => state.StudentGeneral.currentStudent);
     const loading = useSelector((state) => state.StudentGeneral.isStudentGeneral);
@@ -28,10 +28,8 @@ export const Payment = () => {
     const handleModeChange = (event) => {
         setPaymentMode(event.target.value);
         if (event.target.value === 'full') {
-            console.log("Payment full",student.course.fee)
             setAmountPaid(student.course.fee);
         } else if (event.target.value === 'half') {
-            console.log("Payment full",student.course.fee / 2)
             setAmountPaid(student.course.fee / 2);
         } else {
             setAmountPaid('');
@@ -43,16 +41,16 @@ export const Payment = () => {
     };
 
     let config = {
-       "publicKey": "test_public_key_b048b45bdccb43ba818968273ffd49c4",
+        "publicKey": "test_public_key_b048b45bdccb43ba818968273ffd49c4",
         "productIdentity": student.course.name,
         "productName": student.course.name,
         "productUrl": "https://mrc.babulal.com.np/",
         "eventHandler": {
             onSuccess(payload) {
                 // hit merchant api for initiating verfication
-                console.log("khalti payload :: ",payload);
+                console.log("khalti payload :: ", payload);
                 const paymentVerifyData = {
-                    "sid":student.ID,
+                    "sid": student.ID,
                     "token": payload.token,
                     "amount": payload.amount,
                 }
@@ -61,7 +59,7 @@ export const Payment = () => {
             // onError handler is optional
             onError(error) {
                 // handle errors
-                console.log("error in payment :: ",error);
+                console.log("error in payment :: ", error);
             },
             onClose() {
                 console.log('widget is closing');
@@ -81,7 +79,7 @@ export const Payment = () => {
     return (
         <div>
             {
-                student ?(
+                student ? (
                     <div>
                         {
                             student.course ? (
@@ -133,6 +131,7 @@ export const Payment = () => {
                                                                 name="amountPaid"
                                                                 label="Amount Paid"
                                                                 variant="outlined"
+                                                                placeholder="100.10"
                                                                 fullWidth
                                                                 value={amountPaid}
                                                                 onChange={handleAmountChange}
@@ -146,9 +145,11 @@ export const Payment = () => {
                                             </CardContent>
                                         </Card>
                                         <Box sx={{ mt: 3 }}>
-                                            <Button variant="contained"  onClick={openPaymentGateway}>
-                                                Pay Now
-                                            </Button>
+                                            <div style={{ display: 'flex', justifyContent: 'center' }}>
+                                                <Button variant="contained" onClick={openPaymentGateway}>
+                                                    Pay Now
+                                                </Button>
+                                            </div>
                                         </Box>
                                     </Box>
                                 </div>
@@ -167,18 +168,18 @@ export const Payment = () => {
                                         </div>
                                     </Box>
                                 </div>
-                        )}
-                        </div>
-                         ) : (
-                        <div>
-                            <Backdrop
-                                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-                                open={loading}
-                            >
-                                <CircularProgress color="inherit" />
-                            </Backdrop>
-                        </div>
-                )}
+                            )}
                     </div>
-                );
+                ) : (
+                    <div>
+                        <Backdrop
+                            sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                            open={loading}
+                        >
+                            <CircularProgress color="inherit" />
+                        </Backdrop>
+                    </div>
+                )}
+        </div>
+    );
 }
